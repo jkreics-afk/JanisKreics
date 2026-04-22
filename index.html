@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jānis Kreics — Construction &amp; Technology</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,200;0,300;0,400;0,500;1,200;1,300;1,400;1,500&family=Karla:wght@300;400;500&family=Space+Mono:wght@400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:       #FAFAF6;
+      --warm:     #F3F0E8;
+      --border:   #E2DDD4;
+      --text:     #1C1A14;
+      --muted:    #8A8375;
+      --accent:   #B8894A;
+      --accent-d: #9A7238;
+      --accent-lo: rgba(184,137,74,.07);
+      --f-serif:  'Cormorant', Georgia, serif;
+      --f-sans:   'Karla', system-ui, sans-serif;
+      --f-mono:   'Space Mono', monospace;
+      --max:      760px;
+      --wide:     1080px;
+      --gap:      clamp(1.25rem, 4vw, 2.5rem);
+      --ease:     cubic-bezier(.16,1,.3,1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--f-sans);
+      font-size: 18px;
+      line-height: 1.7;
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+      cursor: none;
+    }
+    @media (hover: none) {
+      body { cursor: auto; }
+      .cursor-dot, .cursor-ring { display: none; }
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    ul { list-style: none; }
+
+    /* ── CUSTOM CURSOR ── */
+    .cursor-dot {
+      position: fixed;
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%,-50%);
+      will-change: left, top;
+    }
+    .cursor-ring {
+      position: fixed;
+      width: 32px; height: 32px;
+      border: 1px solid rgba(184,137,74,.4);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%,-50%);
+      will-change: left, top;
+      transition: opacity .3s;
+    }
+
+    /* ── SCROLL PROGRESS ── */
+    .scroll-progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 1.5px;
+      background: var(--accent);
+      z-index: 101;
+      width: 0%;
+    }
+
+    /* ── GRAIN ── */
+    .grain {
+      position: fixed;
+      inset: 0;
+      z-index: 997;
+      pointer-events: none;
+      opacity: .032;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 200px 200px;
+    }
+
+    /* ── CONTAINERS ── */
+    .wrap { max-width: var(--wide); margin-inline: auto; padding-inline: var(--gap); }
+
+    /* ── EYEBROW ── */
+    .eyebrow {
+      font-family: var(--f-mono);
+      font-size: .58rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    /* ── PAGE ENTRANCE ── */
+    .pe {
+      opacity: 0;
+      transform: translateY(14px);
+      animation: peIn .95s var(--ease) forwards;
+    }
+    @keyframes peIn { to { opacity: 1; transform: none; } }
+    .pe-1 { animation-delay: .04s; }
+    .pe-2 { animation-delay: .12s; }
+    .pe-3 { animation-delay: .22s; }
+    .pe-4 { animation-delay: .32s; }
+    .pe-5 { animation-delay: .44s; }
+    .pe-6 { animation-delay: .58s; }
+
+    /* ── SCROLL REVEAL ── */
+    .fi {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity .85s var(--ease), transform .85s var(--ease);
+    }
+    .fi.on { opacity: 1; transform: none; }
+    .fi-d1 { transition-delay: .1s; }
+    .fi-d2 { transition-delay: .22s; }
+    .fi-d3 { transition-delay: .34s; }
+
+    /* ══════════ NAV ══════════ */
+    nav {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(250,250,246,.93);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(226,221,212,.55);
+    }
+    .nav-inner {
+      max-width: var(--wide); margin-inline: auto; padding-inline: var(--gap);
+      height: 56px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-name { font-family: var(--f-serif); font-size: 1.05rem; font-weight: 400; letter-spacing: .02em; }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a {
+      font-family: var(--f-mono); font-size: .56rem; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--muted);
+      transition: color .35s var(--ease);
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-toggle {
+      display: none; background: none; border: none; cursor: pointer; padding: .4rem; color: var(--muted);
+    }
+    @media (max-width: 560px) {
+      .nav-links { display: none; }
+      .nav-toggle { display: flex; }
+      .nav-links.open {
+        display: flex; flex-direction: column;
+        position: fixed; top: 56px; left: 0; right: 0;
+        background: var(--bg); border-bottom: 1px solid var(--border);
+        padding: 1.5rem var(--gap) 2rem; gap: 1.25rem;
+      }
+      .nav-links.open a { font-size: .78rem; }
+    }
+
+    /* ══════════ INTRO ══════════ */
+    .intro {
+      padding-block: clamp(4rem, 9vw, 7rem);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    .intro::before {
+      content: '';
+      position: absolute; left: 0; top: 10%; bottom: 10%;
+      width: 2px;
+      background: linear-gradient(to bottom, transparent, var(--accent) 40%, var(--accent) 60%, transparent);
+      opacity: .28;
+    }
+    .intro-inner {
+      display: grid; grid-template-columns: 200px 1fr;
+      gap: clamp(2.5rem, 5vw, 5rem); align-items: start;
+      max-width: var(--wide); margin-inline: auto; padding-inline: var(--gap);
+    }
+    @media (max-width: 620px) {
+      .intro-inner { grid-template-columns: 1fr; }
+      .intro-photo-col { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+    }
+
+    /* Photo */
+    .photo-frame {
+      position: relative; display: inline-block; border-radius: 50%;
+    }
+    .photo-frame::after {
+      content: ''; position: absolute; inset: -5px;
+      border-radius: 50%; border: 1px solid rgba(184,137,74,.2); pointer-events: none;
+    }
+    .intro-photo {
+      width: 180px; height: 180px; border-radius: 50%;
+      object-fit: cover; object-position: top center;
+      display: block; flex-shrink: 0;
+    }
+    @media (max-width: 620px) { .intro-photo { width: 110px; height: 110px; } }
+    .intro-photo-name { display: none; }
+    @media (max-width: 620px) {
+      .intro-photo-name { display: block; }
+      .intro-photo-name .h1-name { font-size: 1.9rem; }
+    }
+
+    /* Name */
+    .h1-name {
+      font-family: var(--f-serif);
+      font-size: clamp(2.8rem, 7vw, 5.2rem);
+      font-weight: 300; line-height: 1.0; letter-spacing: -.025em;
+      margin-bottom: .5rem;
+    }
+    @media (max-width: 620px) { .intro-text .h1-name { display: none; } }
+
+    .intro-tagline {
+      font-family: var(--f-mono); font-size: .6rem;
+      letter-spacing: .2em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 1.75rem;
+    }
+    .intro-bio { font-size: 1.02rem; line-height: 1.85; max-width: 56ch; }
+    .intro-bio p + p { margin-top: 1.1em; }
+    .intro-bio strong { font-weight: 500; }
+    .intro-cta { margin-top: 2rem; display: flex; gap: .85rem; flex-wrap: wrap; }
+
+    .btn-solid {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .75rem 1.6rem; background: var(--accent); color: #fff;
+      font-family: var(--f-mono); font-size: .58rem; letter-spacing: .16em;
+      text-transform: uppercase; border-radius: 2px;
+      transition: background .35s var(--ease), transform .3s var(--ease);
+    }
+    .btn-solid:hover { background: var(--accent-d); transform: translateY(-2px); }
+    .btn-line {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .75rem 1.6rem; border: 1px solid var(--border); color: var(--muted);
+      font-family: var(--f-mono); font-size: .58rem; letter-spacing: .16em;
+      text-transform: uppercase; border-radius: 2px;
+      transition: border-color .35s var(--ease), color .35s var(--ease), transform .3s var(--ease);
+    }
+    .btn-line:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+    /* Stats */
+    .stats-bar {
+      margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--border);
+      display: flex; gap: 0; flex-wrap: wrap;
+    }
+    .stat-item { padding: 0 2.5rem 0 0; margin-right: 2.5rem; border-right: 1px solid var(--border); }
+    .stat-item:last-child { border-right: none; padding-right: 0; margin-right: 0; }
+    .stat-n {
+      font-family: var(--f-serif); font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 200; line-height: 1; letter-spacing: -.03em;
+    }
+    .stat-n em { font-style: normal; color: var(--accent); }
+    .stat-l {
+      font-family: var(--f-mono); font-size: .52rem; letter-spacing: .15em;
+      text-transform: uppercase; color: var(--muted); margin-top: .3rem;
+    }
+    @media (max-width: 500px) {
+      .stats-bar { gap: 1.5rem; }
+      .stat-item { border-right: none; padding-right: 0; margin-right: 0; }
+    }
+
+    /* ══════════ SECTION HEAD w/ WATERMARK ══════════ */
+    .sec-head { position: relative; margin-bottom: 2.5rem; overflow: visible; }
+    .sec-num {
+      position: absolute; top: -.5rem; left: -.2rem;
+      font-family: var(--f-serif); font-size: clamp(5rem, 13vw, 9.5rem);
+      font-weight: 200; line-height: 1; letter-spacing: -.05em;
+      color: var(--border); opacity: .5; pointer-events: none; z-index: 0;
+    }
+    .sec-head > * { position: relative; z-index: 1; }
+
+    .section-heading {
+      font-family: var(--f-serif);
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      font-weight: 300; line-height: 1.1; letter-spacing: -.015em;
+      margin-bottom: .45rem;
+    }
+    .section-heading em { font-style: italic; color: var(--accent); }
+    .section-sub { color: var(--muted); font-size: .93rem; max-width: 52ch; }
+
+    /* ══════════ BLOG ══════════ */
+    #blog { padding-block: clamp(4rem, 8vw, 6.5rem); }
+
+    .post-list { display: flex; flex-direction: column; }
+    .post-item {
+      padding: 2rem 0 2rem 0;
+      border-bottom: 1px solid var(--border);
+      display: grid; grid-template-columns: 1fr auto;
+      gap: 1.5rem; align-items: start;
+      cursor: pointer; position: relative;
+      border-left: 2px solid transparent;
+      transition: background .4s var(--ease), padding-left .4s var(--ease), border-left-color .4s var(--ease);
+    }
+    .post-item:first-child { border-top: 1px solid var(--border); }
+    .post-item:hover { background: var(--accent-lo); padding-left: 1.25rem; border-left-color: var(--accent); }
+    .post-item:hover .post-item-title { color: var(--accent); }
+    .post-item:hover .post-arrow { opacity: 1; transform: translateX(5px); }
+    @media (max-width: 560px) { .post-item { grid-template-columns: 1fr; gap: .75rem; } }
+
+    .post-num {
+      position: absolute; top: 1.2rem; right: 7.5rem;
+      font-family: var(--f-serif); font-size: 4.5rem; font-weight: 200;
+      line-height: 1; letter-spacing: -.05em;
+      color: var(--border); opacity: .4; pointer-events: none;
+    }
+    @media (max-width: 640px) { .post-num { display: none; } }
+
+    .post-item-tags { display: flex; gap: .75rem; margin-bottom: .5rem; flex-wrap: wrap; }
+    .post-item-tag {
+      font-family: var(--f-mono); font-size: .54rem;
+      letter-spacing: .14em; text-transform: uppercase; color: var(--accent);
+    }
+    .post-item-title {
+      font-family: var(--f-serif);
+      font-size: clamp(1.25rem, 2.4vw, 1.75rem);
+      font-weight: 400; line-height: 1.22; letter-spacing: -.01em;
+      margin-bottom: .55rem;
+      transition: color .35s var(--ease);
+    }
+    .post-item-excerpt { font-size: .9rem; color: var(--muted); line-height: 1.75; max-width: 58ch; }
+    .post-item-meta { display: flex; align-items: center; gap: 1.25rem; margin-top: .85rem; flex-wrap: wrap; }
+    .post-item-date { font-family: var(--f-mono); font-size: .54rem; letter-spacing: .12em; color: var(--muted); }
+    .post-item-read { font-family: var(--f-mono); font-size: .54rem; letter-spacing: .08em; color: var(--border); }
+    .post-arrow {
+      font-size: .9rem; color: var(--accent); opacity: 0; display: inline-block;
+      transition: opacity .3s var(--ease), transform .35s var(--ease);
+    }
+
+    .post-item-share {
+      display: flex; flex-direction: column; gap: .5rem;
+      align-items: flex-end; padding-top: .15rem; flex-shrink: 0;
+      position: relative; z-index: 1;
+    }
+    .share-pill {
+      display: inline-flex; align-items: center; gap: .4rem;
+      padding: .38rem .95rem; border: 1px solid var(--border); border-radius: 999px;
+      font-family: var(--f-mono); font-size: .52rem; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--muted);
+      cursor: pointer; background: none; white-space: nowrap;
+      transition: border-color .35s var(--ease), color .35s var(--ease),
+                  background .35s var(--ease), transform .3s var(--ease);
+    }
+    .share-pill:hover { border-color: var(--accent); color: var(--accent); background: rgba(184,137,74,.06); transform: translateY(-1px); }
+    .share-pill svg { width: 10px; height: 10px; fill: currentColor; }
+
+    /* ══════════ ABOUT ══════════ */
+    #about {
+      background: var(--warm);
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      padding-block: clamp(4rem, 8vw, 6.5rem);
+    }
+    .about-body {
+      display: grid; grid-template-columns: 1fr 280px;
+      gap: clamp(3rem, 6vw, 5rem); align-items: start;
+    }
+    @media (max-width: 740px) { .about-body { grid-template-columns: 1fr; } }
+
+    .bio-text { font-size: 1.02rem; line-height: 1.88; }
+    .bio-text p + p { margin-top: 1.3em; }
+    .bio-text strong { font-weight: 500; color: var(--accent); }
+
+    .creds-list { display: flex; flex-direction: column; }
+    .cred-row {
+      padding: .9rem 0; border-bottom: 1px solid var(--border);
+      display: flex; flex-direction: column; gap: .15rem;
+      transition: padding-left .35s var(--ease);
+    }
+    .cred-row:first-child { border-top: 1px solid var(--border); }
+    .cred-row:hover { padding-left: .5rem; }
+    .cred-row-title { font-family: var(--f-serif); font-size: 1.05rem; font-weight: 400; line-height: 1.3; }
+    .cred-row-sub { font-family: var(--f-mono); font-size: .58rem; letter-spacing: .06em; color: var(--muted); }
+
+    .tags-block { margin-top: 1.75rem; }
+    .tags-label { font-family: var(--f-mono); font-size: .54rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin-bottom: .65rem; }
+    .tags { display: flex; flex-wrap: wrap; gap: .4rem; }
+    .tag {
+      font-family: var(--f-mono); font-size: .54rem; letter-spacing: .06em;
+      padding: .28rem .72rem; border: 1px solid var(--border); color: var(--muted);
+      border-radius: 2px; background: var(--bg);
+      cursor: pointer;
+      transition: border-color .3s var(--ease), color .3s var(--ease), transform .3s var(--ease);
+    }
+    .tag:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+
+    /* ══════════ EXPERTISE MODAL ══════════ */
+    .exp-modal {
+      display: none; position: fixed; inset: 0; z-index: 200;
+      background: rgba(28,26,20,.55);
+      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    }
+    .exp-modal.open { display: flex; align-items: center; justify-content: center; animation: mFade .35s var(--ease); }
+    .exp-panel {
+      background: var(--bg); border: 1px solid var(--border);
+      max-width: 540px; width: calc(100% - 2rem);
+      padding: clamp(2rem, 5vw, 3rem);
+      border-radius: 3px; position: relative;
+      box-shadow: 0 24px 64px rgba(28,26,20,.14);
+    }
+    .exp-close {
+      position: absolute; top: 1rem; right: 1rem;
+      background: var(--warm); border: 1px solid var(--border); border-radius: 50%;
+      color: var(--muted); width: 34px; height: 34px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; font-size: .9rem;
+      transition: color .3s var(--ease), border-color .3s var(--ease), transform .4s var(--ease);
+    }
+    .exp-close:hover { color: var(--accent); border-color: var(--accent); transform: rotate(90deg); }
+    .exp-name {
+      font-family: var(--f-serif); font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 300; line-height: 1.1; letter-spacing: -.015em;
+      margin-bottom: 1.25rem; color: var(--text);
+    }
+    .exp-body { font-size: .97rem; line-height: 1.88; color: var(--muted); }
+
+    /* ══════════ CONNECT ══════════ */
+    #connect { padding-block: clamp(4rem, 8vw, 6.5rem); }
+    .connect-body {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: clamp(3rem, 6vw, 5rem); align-items: start;
+    }
+    @media (max-width: 680px) { .connect-body { grid-template-columns: 1fr; } }
+
+    .connect-statement {
+      font-family: var(--f-serif);
+      font-size: clamp(1.45rem, 3vw, 2.3rem);
+      font-weight: 300; line-height: 1.35; letter-spacing: -.01em;
+      margin-bottom: 1.5rem;
+    }
+    .connect-statement em { font-style: italic; color: var(--accent); }
+    .connect-note {
+      font-size: .92rem; color: var(--muted); line-height: 1.78;
+      border-left: 2px solid var(--accent); padding-left: 1.1rem;
+    }
+
+    .social-rows { display: flex; flex-direction: column; }
+    .social-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.4rem 0; border-bottom: 1px solid var(--border);
+      transition: padding-left .4s var(--ease), background .35s var(--ease);
+    }
+    .social-row:first-child { border-top: 1px solid var(--border); }
+    .social-row:hover { padding-left: .6rem; background: var(--accent-lo); }
+    .social-row:hover .social-row-name { color: var(--accent); }
+    .social-row:hover .social-row-arrow { transform: translate(4px,-4px); color: var(--accent); }
+    .social-row:hover .social-row-icon { border-color: var(--accent); }
+    .social-row-left { display: flex; align-items: center; gap: 1rem; }
+    .social-row-icon {
+      width: 36px; height: 36px; border: 1px solid var(--border); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+      transition: border-color .3s var(--ease);
+    }
+    .social-row-icon svg { width: 14px; height: 14px; fill: var(--muted); }
+    .social-row-name { font-family: var(--f-serif); font-size: 1.4rem; font-weight: 400; transition: color .3s var(--ease); }
+    .social-row-handle { font-family: var(--f-mono); font-size: .58rem; letter-spacing: .07em; color: var(--muted); margin-top: .08rem; }
+    .social-row-arrow { color: var(--muted); font-size: 1rem; transition: transform .35s var(--ease), color .3s var(--ease); }
+
+    /* ══════════ FOOTER ══════════ */
+    footer { background: var(--warm); border-top: 1px solid var(--border); overflow: hidden; }
+    .footer-statement {
+      font-family: var(--f-serif);
+      font-size: clamp(3.5rem, 10vw, 7.5rem);
+      font-style: italic; font-weight: 200; line-height: 1;
+      color: var(--border); letter-spacing: -.035em;
+      padding: 3rem var(--gap) .25rem;
+      max-width: var(--wide); margin-inline: auto;
+    }
+    .footer-inner {
+      max-width: var(--wide); margin-inline: auto;
+      padding: 1.25rem var(--gap) 2.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-name { font-family: var(--f-serif); font-size: .95rem; font-weight: 400; color: var(--muted); }
+    .footer-copy { font-family: var(--f-mono); font-size: .52rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+
+    /* ══════════ MODAL ══════════ */
+    .post-modal {
+      display: none; position: fixed; inset: 0; z-index: 200;
+      background: rgba(250,250,246,.97);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      overflow-y: auto; padding: var(--gap);
+    }
+    .post-modal.open { display: block; animation: mFade .4s var(--ease); }
+    @keyframes mFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+    .modal-inner { max-width: 680px; margin: 80px auto 80px; }
+    .modal-close {
+      position: fixed; top: 1.5rem; right: var(--gap);
+      background: var(--warm); border: 1px solid var(--border); border-radius: 50%;
+      color: var(--muted); width: 38px; height: 38px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; font-size: 1rem;
+      transition: color .3s var(--ease), border-color .3s var(--ease), transform .4s var(--ease);
+    }
+    .modal-close:hover { color: var(--accent); border-color: var(--accent); transform: rotate(90deg); }
+    .modal-eyebrow { margin-bottom: 1.25rem; }
+    .modal-title {
+      font-family: var(--f-serif); font-size: clamp(1.7rem, 4vw, 2.9rem);
+      font-weight: 300; line-height: 1.12; letter-spacing: -.015em; margin-bottom: 1.5rem;
+    }
+    .modal-date { font-family: var(--f-mono); font-size: .58rem; letter-spacing: .14em; color: var(--muted); margin-bottom: 2.5rem; text-transform: uppercase; }
+    .modal-body { font-size: 1.05rem; line-height: 1.9; color: var(--muted); }
+    .modal-body p + p { margin-top: 1.4em; }
+    .modal-body h3 { font-family: var(--f-serif); font-size: 1.4rem; font-weight: 400; color: var(--text); margin: 2em 0 .65em; }
+    .modal-share {
+      margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+      display: flex; align-items: center; gap: .65rem; flex-wrap: wrap;
+    }
+    .modal-share-lbl { font-family: var(--f-mono); font-size: .54rem; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+  </style>
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- NAV -->
+<nav class="pe pe-1">
+  <div class="nav-inner">
+    <span class="nav-name">Jānis Kreics</span>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#blog">Writing</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#connect">Connect</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+      <svg width="20" height="14" fill="none" stroke="currentColor" stroke-width="1.5">
+        <line x1="0" y1="1" x2="20" y2="1"/><line x1="0" y1="7" x2="20" y2="7"/><line x1="0" y1="13" x2="20" y2="13"/>
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<!-- INTRO -->
+<section class="intro">
+  <div class="intro-inner">
+
+    <div class="intro-photo-col pe pe-2">
+      <div class="photo-frame">
+        <img src="J%C4%81nis%20Kreics_019b.jpg" alt="Jānis Kreics" class="intro-photo" />
+      </div>
+      <div class="intro-photo-name">
+        <div class="h1-name">Jānis Kreics</div>
+        <div class="intro-tagline">Engineer · Entrepreneur · LEED AP</div>
+      </div>
+    </div>
+
+    <div class="intro-text">
+      <h1 class="h1-name pe pe-2">Jānis Kreics</h1>
+      <div class="intro-tagline pe pe-3">Engineer · Entrepreneur · LEED AP</div>
+      <div class="intro-bio pe pe-4">
+        <p>I believe in saying what's true, not what's easy. In getting the details right. In knowing why you're doing something before you do it. In showing up consistently, even when it's inconvenient.</p>
+        <p>When I'm not building things, I'm reading about people who did. Biographical literature keeps me grounded. Running and team sports take care of the rest.</p>
+      </div>
+      <div class="intro-cta pe pe-5">
+        <a href="#blog" class="btn-solid">Read my writing</a>
+        <a href="#connect" class="btn-line">Connect with me</a>
+      </div>
+      <div class="stats-bar pe pe-6">
+        <div class="stat-item">
+          <div class="stat-n">20<em>+</em></div>
+          <div class="stat-l">Years in Construction</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-n">LEED <em>AP</em></div>
+          <div class="stat-l">Accredited Professional</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-n">B.Eng <em>+</em> MBA</div>
+          <div class="stat-l">Academic Foundation</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- BLOG -->
+<section id="blog">
+  <div class="wrap">
+
+    <div class="sec-head fi">
+      <span class="sec-num">01</span>
+      <div class="eyebrow" style="margin-bottom:.7rem">Writing</div>
+      <h2 class="section-heading">Field notes &amp; <em>dispatches.</em></h2>
+      <p class="section-sub">Essays on construction, technology, and leadership — from someone who has worked in both worlds.</p>
+    </div>
+
+    <div class="post-list">
+
+      <div class="post-item fi fi-d1" onclick="openPost(1)">
+        <span class="post-num">01</span>
+        <div>
+          <div class="post-item-tags"><span class="post-item-tag">BIM</span><span class="post-item-tag">Digital Transformation</span></div>
+          <h3 class="post-item-title">The BIM Revolution: Why Construction's Digital Twin Still Hasn't Arrived</h3>
+          <p class="post-item-excerpt">Building Information Modeling promised to transform how we design, build, and operate structures. Fifteen years later, the gap between that promise and the average job site remains vast. Here's what the software vendors won't tell you.</p>
+          <div class="post-item-meta">
+            <span class="post-item-date">April 2026</span>
+            <span class="post-item-read">5 min read</span>
+            <span class="post-arrow">→</span>
+          </div>
+        </div>
+        <div class="post-item-share" onclick="event.stopPropagation()">
+          <button class="share-pill" onclick="shareLinkedIn(1)">
+            <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>LinkedIn
+          </button>
+          <button class="share-pill" onclick="shareX(1)">
+            <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>Post to X
+          </button>
+        </div>
+      </div>
+
+      <div class="post-item fi fi-d2" onclick="openPost(2)">
+        <span class="post-num">02</span>
+        <div>
+          <div class="post-item-tags"><span class="post-item-tag">Project Management</span><span class="post-item-tag">Leadership</span></div>
+          <h3 class="post-item-title">From Blueprint to Bytes: Managing Digital Transformation on the Job Site</h3>
+          <p class="post-item-excerpt">Rolling out a new platform to a team of site engineers isn't a software problem — it's a change management problem. Here are the patterns that separate successful rollouts from costly failures.</p>
+          <div class="post-item-meta">
+            <span class="post-item-date">March 2026</span>
+            <span class="post-item-read">4 min read</span>
+            <span class="post-arrow">→</span>
+          </div>
+        </div>
+        <div class="post-item-share" onclick="event.stopPropagation()">
+          <button class="share-pill" onclick="shareLinkedIn(2)">
+            <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>LinkedIn
+          </button>
+          <button class="share-pill" onclick="shareX(2)">
+            <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>Post to X
+          </button>
+        </div>
+      </div>
+
+      <div class="post-item fi fi-d3" onclick="openPost(3)">
+        <span class="post-num">03</span>
+        <div>
+          <div class="post-item-tags"><span class="post-item-tag">Insight</span><span class="post-item-tag">Industry</span></div>
+          <h3 class="post-item-title">Five Project Management Lessons Construction Taught Me That Tech Never Could</h3>
+          <p class="post-item-excerpt">Twenty years working between job sites and server rooms has made one thing clear: the construction industry holds lessons in execution, accountability, and real-world constraints that no software methodology has yet captured.</p>
+          <div class="post-item-meta">
+            <span class="post-item-date">February 2026</span>
+            <span class="post-item-read">6 min read</span>
+            <span class="post-arrow">→</span>
+          </div>
+        </div>
+        <div class="post-item-share" onclick="event.stopPropagation()">
+          <button class="share-pill" onclick="shareLinkedIn(3)">
+            <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>LinkedIn
+          </button>
+          <button class="share-pill" onclick="shareX(3)">
+            <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>Post to X
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap">
+
+    <div class="sec-head fi" style="margin-bottom:2.5rem">
+      <span class="sec-num">02</span>
+      <div class="eyebrow" style="margin-bottom:.7rem">About</div>
+      <h2 class="section-heading">The full <em>picture.</em></h2>
+    </div>
+
+    <div class="about-body">
+      <div class="bio-text fi fi-d1">
+        <p>Jānis Kreics is an entrepreneur supplying professional services to the construction industry, operating two companies based in Latvia that specialise in architecture, digital construction, and building design. His career sits at the intersection of sustainable building practice and digital transformation, where technical rigour and business strategy meet.</p>
+        <p>As a <strong>LEED AP</strong> practitioner, he brings environmentally responsible thinking to every project. He currently serves as <strong>BIM Manager</strong> on one of Europe's most significant infrastructure programmes, reshaping how the Baltic states connect to the wider European rail network.</p>
+        <p>His work spans Project Management, Project Controls, Building Information Modelling, and the integration of digital tools into construction workflows, helping teams work smarter, deliver on time and within budget, and reduce environmental impact. An <strong>Engineering degree</strong> combined with an <strong>MBA</strong> gives him fluency across both technical and executive registers that few practitioners bring to the table.</p>
+        <p>Through a competitive international internship programme, he trained with one of the world's leading construction companies. That experience shaped his professional trajectory and continues to inform how he approaches every project today.</p>
+      </div>
+
+      <div class="fi fi-d2">
+        <div class="tags-block">
+          <div class="tags-label">Expertise</div>
+          <div class="tags">
+            <span class="tag" onclick="openExp('Engineering')">Engineering</span>
+            <span class="tag" onclick="openExp('Architecture')">Architecture</span>
+            <span class="tag" onclick="openExp('VDC / BIM')">VDC / BIM</span>
+            <span class="tag" onclick="openExp('Project Management')">Project Management</span>
+            <span class="tag" onclick="openExp('Project Controls')">Project Controls</span>
+            <span class="tag" onclick="openExp('IT Strategy / System Integration')">IT Strategy / System Integration</span>
+            <span class="tag" onclick="openExp('Rail Baltica')">Rail Baltica</span>
+            <span class="tag" onclick="openExp('Heavy Civil Works')">Heavy Civil Works</span>
+            <span class="tag" onclick="openExp('Entrepreneurship')">Entrepreneurship</span>
+            <span class="tag" onclick="openExp('Sustainable Construction')">Sustainable Construction</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONNECT -->
+<section id="connect">
+  <div class="wrap">
+
+    <div class="sec-head fi" style="margin-bottom:2.5rem">
+      <span class="sec-num">03</span>
+      <div class="eyebrow" style="margin-bottom:.7rem">Connect</div>
+      <h2 class="section-heading">Let's build <em>together.</em></h2>
+    </div>
+
+    <div class="connect-body">
+      <div class="fi fi-d1">
+        <p class="connect-statement">Whether you're navigating a <em>digital transformation</em>, planning a complex project, or simply want to exchange ideas — I'm always open to a good conversation.</p>
+        <p class="connect-note">I publish regularly on construction technology, project leadership, and the future of the built environment. Follow along on LinkedIn and X — I'd love to hear from you.</p>
+      </div>
+
+      <div class="social-rows fi fi-d2">
+        <a href="https://www.linkedin.com/in/janis-kreics-leed-ap-2b0ba767/" target="_blank" rel="noopener" class="social-row">
+          <div class="social-row-left">
+            <div class="social-row-icon"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></div>
+            <div><div class="social-row-name">LinkedIn</div><div class="social-row-handle">linkedin.com/in/janis-kreics-leed-ap</div></div>
+          </div>
+          <div class="social-row-arrow">↗</div>
+        </a>
+        <a href="https://x.com/kreics" target="_blank" rel="noopener" class="social-row">
+          <div class="social-row-left">
+            <div class="social-row-icon"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></div>
+            <div><div class="social-row-name">X (Twitter)</div><div class="social-row-handle">@kreics</div></div>
+          </div>
+          <div class="social-row-arrow">↗</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-statement">Jānis Kreics</div>
+  <div class="footer-inner">
+    <div class="footer-name">Jānis Kreics — Construction &amp; Technology</div>
+    <div class="footer-copy">&copy; 2026 · janis-kreics.com</div>
+  </div>
+</footer>
+
+<!-- EXPERTISE MODAL -->
+<div class="exp-modal" id="expModal" onclick="if(event.target===this)closeExp()">
+  <div class="exp-panel">
+    <button class="exp-close" onclick="closeExp()" aria-label="Close">✕</button>
+    <div class="eyebrow" id="expEyebrow" style="margin-bottom:.65rem">Expertise</div>
+    <div class="exp-name" id="expName"></div>
+    <div class="exp-body" id="expBody"></div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="post-modal" id="postModal">
+  <div class="modal-inner">
+    <button class="modal-close" onclick="closePost()" aria-label="Close">✕</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<script>
+  const SITE_URL = window.location.href.split('#')[0];
+
+  const posts = {
+    1: {
+      title: "The BIM Revolution: Why Construction's Digital Twin Still Hasn't Arrived",
+      date: 'April 2026', tags: ['BIM', 'Digital Transformation'],
+      excerpt: "Building Information Modeling promised to transform how we design, build, and operate structures. Fifteen years later, the gap between that promise and the average job site remains vast.",
+      body: `<p>When BIM first appeared on the horizon of the construction industry, the promises were extraordinary. A single model containing every pipe, every beam, every mechanical system — updated in real time, accessible to every stakeholder, eliminating the coordination chaos that had plagued large projects for generations. Architects, engineers, and contractors working from a single source of truth.</p><p>Fifteen years later, the BIM revolution has arrived — for some. For the majority of the industry, it remains somewhere between aspiration and PowerPoint.</p><h3>The Adoption Paradox</h3><p>The software exists. The case studies are compelling. The ROI data, when projects genuinely commit to the methodology, is hard to argue with. And yet, on most mid-size projects I've touched in the past decade, BIM adoption follows a frustratingly familiar arc: enthusiastic launch, partial implementation, gradual retreat to familiar workflows, and a final deliverable model that no one is sure how to use.</p><p>The problem isn't the technology. It's the gap between the people who buy the technology and the people who build with it. A site foreman who has spent thirty years reading 2D drawings doesn't become a BIM operator because his company signed an Autodesk license. Change at that depth requires investment in people that most project budgets and timelines don't accommodate.</p><h3>What Actually Works</h3><p>The projects I've seen achieve genuine BIM value share a few common characteristics: leadership that treats digital adoption as a core deliverable, not a software checkbox; early involvement of field teams in model development; and — critically — simplicity. Not the full-spectrum digital twin promise, but a deliberate, well-scoped use case that the entire team can actually operate.</p><p>The digital twin will arrive. But it will arrive field-first, not vendor-first.</p>`
+    },
+    2: {
+      title: "From Blueprint to Bytes: Managing Digital Transformation on the Job Site",
+      date: 'March 2026', tags: ['Project Management', 'Leadership'],
+      excerpt: "Rolling out a new platform to a team of site engineers isn't a software problem — it's a change management problem.",
+      body: `<p>The most expensive line item in any construction technology rollout isn't the software license. It's the time lost when adoption fails — the weeks of parallel running, the workarounds, the quiet retreat to spreadsheets because the new system "doesn't work for how we operate."</p><p>I've led technology transitions in construction environments ranging from small regional contractors to major infrastructure programs. The ones that worked shared a pattern. The ones that failed shared a different, remarkably consistent pattern.</p><h3>The Mistake Everyone Makes</h3><p>Treating a digital transformation as a technology project. It isn't. It's a people project with technology as the vehicle. When an IT team or a software vendor leads the rollout without deep field partnership, the result is almost always a tool that perfectly solves the problems IT understands and entirely misses the ones that matter on site.</p><p>The first question in any construction technology project should not be "which platform?" It should be "which three people on site, if they believe in this, will bring everyone else along?" Find those people first. Build around them.</p><h3>The Framework That Works</h3><p>Start with one process, not the whole ecosystem. Prove it in a controlled environment. Let the people who were skeptical see the outcome. Then expand. Slow starts that compound outperform ambitious launches that stall every time. Construction moves on trust — trust between people, trust built on demonstrated outcomes. Technology adoption in this industry is no different.</p>`
+    },
+    3: {
+      title: "Five Project Management Lessons Construction Taught Me That Tech Never Could",
+      date: 'February 2026', tags: ['Insight', 'Industry'],
+      excerpt: "Twenty years working between job sites and server rooms has made one thing clear: the construction industry holds lessons in execution that no software methodology has yet captured.",
+      body: `<p>I've worked in rooms where agile was the framework and rooms where the framework was concrete setting in cold weather. Both taught me things. But the lessons I carry most heavily came from the latter.</p><p>Construction is, at its core, a discipline of irreversibility. When you pour a slab in the wrong location, you don't roll back a commit. You live with it, or you demolish it — both expensive. That pressure creates a kind of clarity about planning, communication, and accountability that software projects rarely achieve.</p><h3>1. Constraints are information, not obstacles</h3><p>In construction, every constraint — weather, access, supply lead time, inspector availability — is data that shapes the plan. The best project managers I've worked with treat constraint mapping as the first act of planning, not a footnote. Most software project managers treat constraints as obstacles to route around.</p><h3>2. The person closest to the work knows the most</h3><p>The foreman who has poured three hundred slabs has knowledge no project plan captures. Ignoring that knowledge — in favour of a schedule built in an office — is how projects fail slowly and expensively. The same is true in technology: the person running the support queue knows more about product problems than the roadmap does.</p><h3>3. Accountability without blame is a skill, not a policy</h3><p>Construction sites are high-stakes, high-consequence environments. The cultures that function well have developed a specific kind of accountability: issues are surfaced fast, owned clearly, and resolved without the political navigation that slows most organisations. That directness is something worth importing.</p><h3>4. Float is sacred</h3><p>Schedule float — buffer time built deliberately into a project — is treated as a resource in construction. In software, it's treated as waste to be optimised away. The result is construction projects that absorb shocks, and software projects that cascade on the first unexpected obstacle.</p><h3>5. Handoffs are where projects die</h3><p>The moment work passes between teams — design to engineering, engineering to site, site to commissioning — is where information degrades, assumptions accumulate, and problems that were visible become invisible. This is true in construction. It is equally true in every technology organisation I've worked in. The discipline of handoff management is underrated everywhere.</p>`
+    }
+  };
+
+  function openPost(id) {
+    const p = posts[id];
+    document.getElementById('modalContent').innerHTML = `
+      <div class="modal-eyebrow"><span class="eyebrow">${p.tags.join(' · ')}</span></div>
+      <h2 class="modal-title">${p.title}</h2>
+      <div class="modal-date">${p.date}</div>
+      <div class="modal-body">${p.body}</div>
+      <div class="modal-share">
+        <span class="modal-share-lbl">Share —</span>
+        <button class="share-pill" onclick="shareLinkedIn(${id})"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>Share on LinkedIn</button>
+        <button class="share-pill" onclick="shareX(${id})"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>Post to X</button>
+      </div>`;
+    document.getElementById('postModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closePost() {
+    document.getElementById('postModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('postModal').addEventListener('click', function(e) {
+    if (e.target === this) closePost();
+  });
+
+  function shareLinkedIn(id) {
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(SITE_URL + '#blog'), '_blank', 'width=600,height=500');
+  }
+  function shareX(id) {
+    const p = posts[id];
+    window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent('"' + p.title + '" — ' + p.excerpt.substring(0,100) + '… ' + SITE_URL + '#blog'), '_blank', 'width=600,height=500');
+  }
+
+  /* Expertise modal */
+  const expertise = {
+    'Engineering': 'A full-cycle engineering perspective that bridges design intent with construction reality, rare in practitioners who typically specialise in one or the other. Built through years of both developing design projects and personally overseeing their construction at Būvdizains.',
+    'Architecture': 'End-to-end design leadership across residential and commercial typologies, from concept through regulatory approval and site delivery. Applied daily as principal of Būvdizains, where architecture is treated as the core discipline around which all other building systems are coordinated.',
+    'VDC / BIM': 'The ability to plan and visualise complex construction sequences before a single machine moves, reducing conflicts, improving efficiency, and de-risking delivery. Developed at Skanska on large-scale heavy civil works, where VDC team collaboration with engineers produced construction sequences at a level of detail that local market projects rarely demand.',
+    'Project Management': 'Proven capacity to lead multi-company, cross-border project teams on high-complexity builds. Includes directing the design development of Riga East Clinical University Hospital, 80,000m² across three new buildings, coordinated between two Latvian firms and a Finnish partner.',
+    'Project Controls': 'Structured oversight of cost, schedule, and performance on programmes where a single misaligned decision can compound over years. Currently applied on Rail Baltica, one of Europe\'s largest active infrastructure programmes, covering KPI definition, data collection, and controls system development at ERB Rail.',
+    'IT Strategy / System Integration': 'Translating project controls requirements into integrated digital systems, defining data structures, platform logic, and cross-tool workflows. Developed within the Rail Baltica programme, where information architecture directly supports governance across a multi-billion euro, multi-jurisdiction project.',
+    'Rail Baltica': 'Direct involvement in one of Europe\'s most complex and high-profile infrastructure programmes, delivering the Latvian corridor as part of ERB Rail. Provides firsthand understanding of how projects at this scale are structured, governed, and kept on track across multiple stakeholders and EU funding frameworks.',
+    'Heavy Civil Works': 'Programme-scale construction experience where precision planning is non-negotiable — every machine movement, material allocation, and sequencing decision carries significant cost consequences. Gained at Skanska on projects where the complexity and scale far exceeded anything the local Latvian market produces.',
+    'Entrepreneurship': 'A client-first mindset focused on creating tangible added value, either by solving problems others have not structured a solution for, or by delivering services more efficiently than the market standard. Demonstrated through building and running two construction and design companies simultaneously while maintaining senior roles on international programmes.',
+    'Sustainable Construction': 'The ability to embed sustainability requirements into the design process from the outset — not as an afterthought — with the technical knowledge to achieve certification. Grounded in LEED AP accreditation and applied through design leadership at Būvdizains on projects where environmental performance is a client requirement.'
+  };
+
+  function openExp(name) {
+    document.getElementById('expName').textContent = name;
+    document.getElementById('expBody').textContent = expertise[name];
+    document.getElementById('expModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeExp() {
+    document.getElementById('expModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') { closePost(); closeExp(); } });
+
+  /* Scroll reveal */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } });
+  }, { threshold: 0.07 });
+  document.querySelectorAll('.fi').forEach(el => io.observe(el));
+
+  /* Nav toggle */
+  document.getElementById('navToggle').addEventListener('click', () => {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+  document.querySelectorAll('#navLinks a').forEach(a => {
+    a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
+  });
+
+  /* Scroll progress */
+  window.addEventListener('scroll', () => {
+    const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+    document.getElementById('scrollProgress').style.width = (pct * 100) + '%';
+  }, { passive: true });
+
+  /* Custom cursor */
+  const dot = document.getElementById('cursorDot');
+  const ring = document.getElementById('cursorRing');
+  let rx = window.innerWidth / 2, ry = window.innerHeight / 2;
+  let mx = rx, my = ry;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    dot.style.left = mx + 'px';
+    dot.style.top = my + 'px';
+  });
+  document.addEventListener('mouseleave', () => { dot.style.opacity = '0'; ring.style.opacity = '0'; });
+  document.addEventListener('mouseenter', () => { dot.style.opacity = '1'; ring.style.opacity = '1'; });
+
+  (function animRing() {
+    rx += (mx - rx) * 0.1;
+    ry += (my - ry) * 0.1;
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+    requestAnimationFrame(animRing);
+  })();
+</script>
+</body>
+</html>
