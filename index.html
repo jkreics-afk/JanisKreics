@@ -6,24 +6,35 @@
   <title>Jānis Kreics — Construction &amp; Technology</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg:       #F7F7F5;
-      --surface:  #EFEFED;
-      --border:   #DEDEDE;
+      --bg:       #FFFFFF;
+      --surface:  #F4F4F4;
+      --border:   #E0E0E0;
       --text:     #111111;
       --muted:    #6A6A6A;
       --inv-bg:   #111111;
-      --inv-text: #F7F7F5;
-      --f:        'Jost', system-ui, sans-serif;
+      --inv-text: #FFFFFF;
+      --f:        'Poppins', system-ui, sans-serif;
+      --fh:       'Poppins', system-ui, sans-serif;
       --wide:     1080px;
       --gap:      clamp(1.25rem, 4vw, 2.5rem);
       --ease:     cubic-bezier(.16,1,.3,1);
     }
 
+    [data-theme="dark"] {
+      --bg:       #000000;
+      --surface:  #0D0D0D;
+      --border:   #282828;
+      --text:     #FFFFFF;
+      --muted:    #999999;
+      --inv-bg:   #FFFFFF;
+      --inv-text: #000000;
+    }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; min-height: 100%; }
     body {
       background: var(--bg);
       color: var(--text);
@@ -33,6 +44,7 @@
       font-weight: 300;
       -webkit-font-smoothing: antialiased;
       cursor: none;
+      min-height: 100vh;
     }
     @media (hover: none) {
       body { cursor: auto; }
@@ -64,6 +76,7 @@
       will-change: left, top;
       transition: opacity .3s;
     }
+    [data-theme="dark"] .cursor-ring { border-color: rgba(255,255,255,.25); }
 
     /* ── SCROLL PROGRESS ── */
     .scroll-progress {
@@ -111,10 +124,23 @@
     /* ══════════ NAV ══════════ */
     nav {
       position: sticky; top: 0; z-index: 50;
-      background: rgba(247,247,245,.94);
+      background: rgba(255,255,255,.94);
       backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
+      transition: background .35s;
     }
+    [data-theme="dark"] nav { background: rgba(0,0,0,.94); }
+    .theme-toggle {
+      background: none; border: 1px solid var(--border);
+      cursor: pointer; color: var(--muted);
+      display: flex; align-items: center; justify-content: center;
+      width: 34px; height: 34px; flex-shrink: 0;
+      transition: background .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease);
+    }
+    .theme-toggle:hover { background: var(--text); color: var(--inv-text); border-color: var(--text); }
+    .icon-moon { display: none; }
+    [data-theme="dark"] .icon-sun { display: none; }
+    [data-theme="dark"] .icon-moon { display: block; }
     .nav-inner {
       max-width: var(--wide); margin-inline: auto; padding-inline: var(--gap);
       height: 56px; display: flex; align-items: center; justify-content: space-between;
@@ -157,12 +183,12 @@
       padding-bottom: 2.5rem; position: relative;
     }
     .hero-headline {
-      font-family: var(--f);
-      font-size: clamp(2.8rem, 7vw, 6rem);
-      font-weight: 200; line-height: .96; letter-spacing: -.05em;
+      font-family: var(--fh);
+      font-size: clamp(1.4rem, 3.5vw, 3rem);
+      font-weight: 900; line-height: 1.05; letter-spacing: -.02em;
       margin-top: .65rem;
     }
-    .hero-headline em { font-style: italic; }
+    .hero-headline em { font-style: italic; font-weight: 900; }
 
     .hero-dots {
       position: absolute; top: clamp(2rem,5vw,3.5rem); right: var(--gap);
@@ -181,11 +207,8 @@
     }
 
     /* Photo */
-    .photo-frame { position: relative; display: inline-block; }
-    .photo-frame::after {
-      content: ''; position: absolute; inset: -5px;
-      border: 1px solid rgba(17,17,17,.12); pointer-events: none;
-    }
+    .photo-frame { position: relative; display: inline-block; border-radius: 50%; overflow: hidden; }
+    .photo-frame::after { display: none; }
     .intro-photo {
       width: 180px; height: 180px;
       object-fit: cover; object-position: top center;
@@ -200,8 +223,8 @@
 
     .h1-name {
       font-family: var(--f);
-      font-size: clamp(2.4rem, 5.5vw, 4rem);
-      font-weight: 200; line-height: 1.0; letter-spacing: -.04em;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 600; line-height: 1.1; letter-spacing: -.01em;
       margin-bottom: .5rem;
     }
     @media (max-width: 620px) { .hero-text-col .h1-name { display: none; } }
@@ -265,12 +288,12 @@
     .sec-head > * { position: relative; z-index: 1; }
 
     .section-heading {
-      font-family: var(--f);
-      font-size: clamp(1.9rem, 4vw, 3rem);
-      font-weight: 200; line-height: 1.1; letter-spacing: -.04em;
+      font-family: var(--fh);
+      font-size: clamp(1rem, 2vw, 1.5rem);
+      font-weight: 900; line-height: 1.1; letter-spacing: -.01em;
       margin-bottom: .45rem;
     }
-    .section-heading em { font-style: italic; }
+    .section-heading em { font-style: italic; font-weight: 900; }
     .section-sub { color: var(--muted); font-size: .93rem; max-width: 52ch; font-weight: 300; }
 
     /* ══════════ BLOG ══════════ */
@@ -359,9 +382,9 @@
     @media (max-width: 740px) { .cta-sect-grid { grid-template-columns: 1fr; } }
 
     .cta-sect-title {
-      font-family: var(--f);
-      font-size: clamp(1.7rem, 3.2vw, 2.5rem);
-      font-weight: 300; line-height: 1.12; letter-spacing: -.03em; margin-bottom: 1.5rem;
+      font-family: var(--fh);
+      font-size: clamp(0.9rem, 1.6vw, 1.25rem);
+      font-weight: 900; line-height: 1.12; letter-spacing: -.01em; margin-bottom: 1.5rem;
     }
     .cta-bullets { display: flex; flex-direction: column; gap: 1.15rem; }
     .cta-bullet { font-size: .96rem; line-height: 1.72; display: flex; gap: .75rem; font-weight: 300; }
@@ -445,8 +468,8 @@
     }
     .exp-close:hover { background: var(--text); color: var(--inv-text); border-color: var(--text); transform: rotate(90deg); }
     .exp-name {
-      font-family: var(--f); font-size: clamp(1.5rem, 3vw, 2.2rem);
-      font-weight: 300; line-height: 1.1; letter-spacing: -.03em;
+      font-family: var(--fh); font-size: clamp(0.9rem, 1.5vw, 1.2rem);
+      font-weight: 900; line-height: 1.1; letter-spacing: -.01em;
       margin-bottom: 1.25rem; color: var(--text);
     }
     .exp-body { font-size: .97rem; line-height: 1.88; color: var(--muted); font-weight: 300; }
@@ -460,12 +483,12 @@
     @media (max-width: 680px) { .connect-body { grid-template-columns: 1fr; } }
 
     .connect-statement {
-      font-family: var(--f);
+      font-family: var(--fh);
       font-size: clamp(1.45rem, 3vw, 2.3rem);
-      font-weight: 300; line-height: 1.35; letter-spacing: -.025em;
+      font-weight: 700; line-height: 1.35; letter-spacing: -.01em;
       margin-bottom: 1.5rem;
     }
-    .connect-statement em { font-style: italic; }
+    .connect-statement em { font-style: italic; font-weight: 700; }
     .connect-note {
       font-size: .92rem; color: var(--muted); line-height: 1.78; font-weight: 300;
       border-left: 2px solid var(--text); padding-left: 1.1rem;
@@ -531,10 +554,10 @@
 
     footer .footer-lower { background: var(--surface); overflow: hidden; border-top: 1px solid var(--border); }
     .footer-statement {
-      font-family: var(--f);
-      font-size: clamp(3.5rem, 10vw, 7.5rem);
-      font-style: italic; font-weight: 200; line-height: 1;
-      color: var(--border); letter-spacing: -.06em;
+      font-family: var(--fh);
+      font-size: clamp(1.75rem, 5vw, 3.75rem);
+      font-weight: 900; line-height: 1;
+      color: var(--border); letter-spacing: -.04em;
       padding: 3rem var(--gap) .25rem;
       max-width: var(--wide); margin-inline: auto;
     }
@@ -550,10 +573,11 @@
     /* ══════════ ARTICLE MODAL ══════════ */
     .post-modal {
       display: none; position: fixed; inset: 0; z-index: 200;
-      background: rgba(247,247,245,.97);
+      background: rgba(255,255,255,.97);
       backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
       overflow-y: auto; padding: var(--gap);
     }
+    [data-theme="dark"] .post-modal { background: rgba(0,0,0,.97); }
     .post-modal.open { display: block; animation: mFade .4s var(--ease); }
     @keyframes mFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
     .modal-inner { max-width: 700px; margin: 80px auto 100px; }
@@ -568,8 +592,8 @@
     .modal-close:hover { background: var(--text); color: var(--inv-text); border-color: var(--text); transform: rotate(90deg); }
     .modal-eyebrow { margin-bottom: 1.25rem; }
     .modal-title {
-      font-family: var(--f); font-size: clamp(1.7rem, 4vw, 2.9rem);
-      font-weight: 300; line-height: 1.1; letter-spacing: -.04em; margin-bottom: 1.5rem;
+      font-family: var(--fh); font-size: clamp(1rem, 2vw, 1.5rem);
+      font-weight: 900; line-height: 1.1; letter-spacing: -.01em; margin-bottom: 1.5rem;
     }
     .modal-date {
       font-family: var(--f); font-size: .56rem; letter-spacing: .18em; font-weight: 500;
@@ -639,11 +663,24 @@
       <li><a href="#about">About</a></li>
       <li><a href="#connect">Connect</a></li>
     </ul>
-    <button class="nav-toggle" id="navToggle" aria-label="Menu">
-      <svg width="20" height="14" fill="none" stroke="currentColor" stroke-width="1.5">
-        <line x1="0" y1="1" x2="20" y2="1"/><line x1="0" y1="7" x2="20" y2="7"/><line x1="0" y1="13" x2="20" y2="13"/>
-      </svg>
-    </button>
+    <div style="display:flex;align-items:center;gap:.65rem;">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <svg class="icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+        <svg class="icon-moon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">
+        <svg width="20" height="14" fill="none" stroke="currentColor" stroke-width="1.5">
+          <line x1="0" y1="1" x2="20" y2="1"/><line x1="0" y1="7" x2="20" y2="7"/><line x1="0" y1="13" x2="20" y2="13"/>
+        </svg>
+      </button>
+    </div>
   </div>
 </nav>
 
@@ -656,11 +693,11 @@
       <div class="hero-headline">Engineering the<br><em>future</em> of construction.</div>
       <div class="hero-dots" aria-hidden="true">
         <svg width="80" height="68" viewBox="0 0 80 68" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="4"  cy="4"  r="1.5" fill="#111"/><circle cx="24" cy="4"  r="1.5" fill="#111"/><circle cx="44" cy="4"  r="1.5" fill="#111"/><circle cx="64" cy="4"  r="1.5" fill="#111"/>
-          <circle cx="14" cy="18" r="1.5" fill="#111"/><circle cx="34" cy="18" r="1.5" fill="#111"/><circle cx="54" cy="18" r="1.5" fill="#111"/><circle cx="74" cy="18" r="1.5" fill="#111"/>
-          <circle cx="4"  cy="32" r="1.5" fill="#111"/><circle cx="24" cy="32" r="1.5" fill="#111"/><circle cx="44" cy="32" r="1.5" fill="#111"/><circle cx="64" cy="32" r="1.5" fill="#111"/>
-          <circle cx="14" cy="46" r="1.5" fill="#111"/><circle cx="34" cy="46" r="1.5" fill="#111"/><circle cx="54" cy="46" r="1.5" fill="#111"/><circle cx="74" cy="46" r="1.5" fill="#111"/>
-          <circle cx="4"  cy="60" r="1.5" fill="#111"/><circle cx="24" cy="60" r="1.5" fill="#111"/><circle cx="44" cy="60" r="1.5" fill="#111"/><circle cx="64" cy="60" r="1.5" fill="#111"/>
+          <circle cx="4"  cy="4"  r="1.5" fill="currentColor"/><circle cx="24" cy="4"  r="1.5" fill="currentColor"/><circle cx="44" cy="4"  r="1.5" fill="currentColor"/><circle cx="64" cy="4"  r="1.5" fill="currentColor"/>
+          <circle cx="14" cy="18" r="1.5" fill="currentColor"/><circle cx="34" cy="18" r="1.5" fill="currentColor"/><circle cx="54" cy="18" r="1.5" fill="currentColor"/><circle cx="74" cy="18" r="1.5" fill="currentColor"/>
+          <circle cx="4"  cy="32" r="1.5" fill="currentColor"/><circle cx="24" cy="32" r="1.5" fill="currentColor"/><circle cx="44" cy="32" r="1.5" fill="currentColor"/><circle cx="64" cy="32" r="1.5" fill="currentColor"/>
+          <circle cx="14" cy="46" r="1.5" fill="currentColor"/><circle cx="34" cy="46" r="1.5" fill="currentColor"/><circle cx="54" cy="46" r="1.5" fill="currentColor"/><circle cx="74" cy="46" r="1.5" fill="currentColor"/>
+          <circle cx="4"  cy="60" r="1.5" fill="currentColor"/><circle cx="24" cy="60" r="1.5" fill="currentColor"/><circle cx="44" cy="60" r="1.5" fill="currentColor"/><circle cx="64" cy="60" r="1.5" fill="currentColor"/>
         </svg>
       </div>
     </div>
@@ -1027,6 +1064,21 @@
 
 <script>
   const SITE_URL = window.location.href.split('#')[0];
+
+  /* ── Dark mode ── */
+  if (localStorage.getItem('theme') === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+  document.getElementById('themeToggle').addEventListener('click', () => {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    if (isDark) {
+      document.documentElement.removeAttribute('data-theme');
+      localStorage.removeItem('theme');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      localStorage.setItem('theme', 'dark');
+    }
+  });
 
   /* ── Article modal ── */
   function openPost() {
