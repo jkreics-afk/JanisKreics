@@ -21,16 +21,17 @@
       --wide:     1080px;
       --gap:      clamp(1.25rem, 4vw, 2.5rem);
       --ease:     cubic-bezier(.16,1,.3,1);
+      --nav-h:    56px;
     }
 
     [data-theme="dark"] {
-      --bg:       #000000;
-      --surface:  #0D0D0D;
-      --border:   #282828;
-      --text:     #FFFFFF;
-      --muted:    #999999;
-      --inv-bg:   #FFFFFF;
-      --inv-text: #000000;
+      --bg:       #141414;
+      --surface:  #1C1C1C;
+      --border:   #353535;
+      --text:     #F0F0F0;
+      --muted:    #AAAAAA;
+      --inv-bg:   #F0F0F0;
+      --inv-text: #141414;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -129,7 +130,7 @@
       border-bottom: 1px solid var(--border);
       transition: background .35s;
     }
-    [data-theme="dark"] nav { background: rgba(0,0,0,.94); }
+    [data-theme="dark"] nav { background: rgba(20,20,20,.94); }
     .theme-toggle {
       background: none; border: 1px solid var(--border);
       cursor: pointer; color: var(--muted);
@@ -143,7 +144,7 @@
     [data-theme="dark"] .icon-moon { display: block; }
     .nav-inner {
       max-width: var(--wide); margin-inline: auto; padding-inline: var(--gap);
-      height: 56px; display: flex; align-items: center; justify-content: space-between;
+      height: var(--nav-h); display: flex; align-items: center; justify-content: space-between;
     }
     .nav-name { font-family: var(--f); font-size: .92rem; font-weight: 500; letter-spacing: .05em; }
     .nav-links { display: flex; gap: 2.25rem; }
@@ -159,137 +160,141 @@
       .nav-toggle { display: flex; }
       .nav-links.open {
         display: flex; flex-direction: column;
-        position: fixed; top: 56px; left: 0; right: 0;
+        position: fixed; top: var(--nav-h); left: 0; right: 0;
         background: var(--bg); border-bottom: 1px solid var(--border);
         padding: 1.5rem var(--gap) 2rem; gap: 1.25rem;
       }
       .nav-links.open a { font-size: .78rem; }
     }
 
-    /* ══════════ HERO ══════════ */
-    .hero {
-      background: var(--surface);
-      border-bottom: 1px solid var(--border);
-      position: relative; overflow: hidden;
-    }
-    .hero::before {
-      content: ''; position: absolute; left: 0; top: 8%; bottom: 8%;
-      width: 1px;
-      background: linear-gradient(to bottom, transparent, var(--text) 40%, var(--text) 60%, transparent);
-      opacity: .1;
-    }
-    .hero-top {
-      padding-top: clamp(3rem, 7vw, 5.5rem);
-      padding-bottom: 2.5rem; position: relative;
-    }
-    .hero-headline {
-      font-family: var(--fh);
-      font-size: clamp(1.4rem, 3.5vw, 3rem);
-      font-weight: 900; line-height: 1.05; letter-spacing: -.02em;
-      margin-top: .65rem;
-    }
-    .hero-headline em { font-style: italic; font-weight: 900; }
-
-    .hero-dots {
-      position: absolute; top: clamp(2rem,5vw,3.5rem); right: var(--gap);
-      pointer-events: none; opacity: .2;
-    }
-    @media (max-width: 620px) { .hero-dots { display: none; } }
-
-    .hero-grid {
-      display: grid; grid-template-columns: 200px 1fr;
-      gap: clamp(2.5rem, 5vw, 5rem); align-items: start;
-      padding-bottom: clamp(3.5rem, 7vw, 5.5rem);
-    }
-    @media (max-width: 620px) {
-      .hero-grid { grid-template-columns: 1fr; }
-      .hero-photo-col { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+    /* ══════════ PAGE LAYOUT ══════════ */
+    .page-layout {
+      display: grid;
+      grid-template-columns: 1fr 3fr;
+      align-items: start;
     }
 
-    /* Photo */
-    .photo-frame { position: relative; display: inline-block; border-radius: 50%; overflow: hidden; }
-    .photo-frame::after { display: none; }
-    .intro-photo {
-      width: 180px; height: 180px;
+    /* ══════════ SIDEBAR ══════════ */
+    .sidebar {
+      position: sticky;
+      top: var(--nav-h);
+      height: calc(100vh - var(--nav-h));
+      overflow-y: auto;
+      background: #181818;
+      color: #FFFFFF;
+      padding: 2rem 1.75rem 2.5rem;
+      scrollbar-width: thin;
+      scrollbar-color: #333 #181818;
+      display: flex;
+      flex-direction: column;
+    }
+    .sidebar::-webkit-scrollbar { width: 3px; }
+    .sidebar::-webkit-scrollbar-track { background: #181818; }
+    .sidebar::-webkit-scrollbar-thumb { background: #333; }
+
+    .sidebar-eyebrow {
+      font-size: .5rem; letter-spacing: .24em; font-weight: 500;
+      color: rgba(255,255,255,.4); text-transform: uppercase;
+      margin-bottom: 1.25rem; display: block;
+    }
+
+    .sidebar-photo {
+      width: 150px; height: 150px;
       object-fit: cover; object-position: top center;
-      display: block; flex-shrink: 0;
-    }
-    @media (max-width: 620px) { .intro-photo { width: 110px; height: 110px; } }
-    .intro-photo-name { display: none; }
-    @media (max-width: 620px) {
-      .intro-photo-name { display: block; }
-      .intro-photo-name .h1-name { font-size: 1.9rem; }
+      border-radius: 50%; display: block;
+      margin-bottom: 1.5rem; flex-shrink: 0;
     }
 
-    .h1-name {
+    .sidebar .h1-name {
       font-family: var(--f);
-      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-size: clamp(1.5rem, 2.2vw, 2rem);
       font-weight: 600; line-height: 1.1; letter-spacing: -.01em;
-      margin-bottom: .5rem;
+      color: #FFFFFF; margin-bottom: .4rem;
     }
-    @media (max-width: 620px) { .hero-text-col .h1-name { display: none; } }
 
-    .intro-tagline {
-      font-family: var(--f); font-size: .54rem;
-      letter-spacing: .24em; text-transform: uppercase; font-weight: 500;
-      color: var(--muted); margin-bottom: 1.75rem;
+    .sidebar .intro-tagline {
+      font-family: var(--f); font-size: .5rem;
+      letter-spacing: .22em; text-transform: uppercase; font-weight: 500;
+      color: rgba(255,255,255,.4); margin-bottom: 1.25rem;
     }
-    .intro-bio { font-size: 1.02rem; line-height: 1.85; max-width: 56ch; font-weight: 300; }
-    .intro-bio p + p { margin-top: 1.1em; }
-    .intro-bio strong { font-weight: 600; }
-    .intro-cta { margin-top: 2rem; display: flex; gap: .85rem; flex-wrap: wrap; }
 
-    .btn-solid {
+    .sidebar-headline {
+      font-family: var(--fh);
+      font-size: clamp(1.15rem, 2.5vw, 1.65rem);
+      font-weight: 900; line-height: 1.1; letter-spacing: -.02em;
+      color: #FFFFFF; margin-bottom: 1.5rem;
+    }
+    .sidebar-headline em { font-style: italic; font-weight: 900; color: #FFFFFF; }
+
+    .sidebar .intro-bio {
+      font-size: .9rem; line-height: 1.8; font-weight: 300;
+      color: rgba(255,255,255,.72); margin-bottom: 1.5rem;
+    }
+    .sidebar .intro-bio p + p { margin-top: .9em; }
+    .sidebar .intro-bio strong { font-weight: 600; color: #FFFFFF; }
+
+    .sidebar .intro-cta { display: flex; flex-direction: column; gap: .6rem; margin-bottom: 1.75rem; }
+
+    .sidebar .btn-solid {
       display: inline-flex; align-items: center; gap: .5rem;
-      padding: .78rem 1.6rem; background: var(--text); color: var(--inv-text);
-      font-family: var(--f); font-size: .54rem; letter-spacing: .2em; font-weight: 600;
+      padding: .7rem 1.2rem; background: #FFFFFF; color: #181818;
+      font-family: var(--f); font-size: .5rem; letter-spacing: .18em; font-weight: 600;
       text-transform: uppercase;
       transition: background .35s var(--ease), color .35s var(--ease), outline .35s var(--ease), transform .3s var(--ease);
     }
-    .btn-solid:hover { background: var(--bg); color: var(--text); outline: 1px solid var(--text); transform: translateY(-2px); }
+    .sidebar .btn-solid:hover { background: transparent; color: #FFFFFF; outline: 1px solid #FFFFFF; transform: translateY(-2px); }
 
-    .btn-line {
+    .sidebar .btn-line {
       display: inline-flex; align-items: center; gap: .5rem;
-      padding: .78rem 1.6rem; border: 1px solid var(--border); color: var(--muted);
-      font-family: var(--f); font-size: .54rem; letter-spacing: .2em; font-weight: 600;
+      padding: .7rem 1.2rem; border: 1px solid rgba(255,255,255,.25); color: rgba(255,255,255,.6);
+      font-family: var(--f); font-size: .5rem; letter-spacing: .18em; font-weight: 600;
       text-transform: uppercase;
       transition: background .35s var(--ease), color .35s var(--ease), border-color .35s var(--ease), transform .3s var(--ease);
     }
-    .btn-line:hover { background: var(--text); color: var(--inv-text); border-color: var(--text); transform: translateY(-2px); }
+    .sidebar .btn-line:hover { background: #FFFFFF; color: #181818; border-color: #FFFFFF; transform: translateY(-2px); }
 
-    /* Stats */
-    .stats-bar {
-      margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--border);
-      display: flex; flex-wrap: wrap;
+    .sidebar .stats-bar {
+      padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,.1);
+      display: flex; flex-direction: column; gap: 1.1rem;
+      margin-top: auto;
     }
-    .stat-item { padding: 0 2.5rem 0 0; margin-right: 2.5rem; border-right: 1px solid var(--border); }
-    .stat-item:last-child { border-right: none; padding-right: 0; margin-right: 0; }
-    .stat-n {
-      font-family: var(--f); font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    .sidebar .stat-item { padding: 0; margin: 0; border-right: none; }
+    .sidebar .stat-n {
+      font-family: var(--f); font-size: clamp(1.4rem, 2.5vw, 1.9rem);
       font-weight: 200; line-height: 1; letter-spacing: -.05em;
+      color: #FFFFFF;
     }
-    .stat-l {
-      font-family: var(--f); font-size: .52rem; letter-spacing: .16em;
-      text-transform: uppercase; font-weight: 500; color: var(--muted); margin-top: .3rem;
+    .sidebar .stat-l {
+      font-family: var(--f); font-size: .48rem; letter-spacing: .14em;
+      text-transform: uppercase; font-weight: 500; color: rgba(255,255,255,.4); margin-top: .2rem;
     }
-    @media (max-width: 500px) {
-      .stats-bar { gap: 1.5rem; }
-      .stat-item { border-right: none; padding-right: 0; margin-right: 0; }
+
+    /* ══════════ MAIN CONTENT ══════════ */
+    .main-content {
+      background: var(--bg);
+      min-height: calc(100vh - var(--nav-h));
+    }
+
+    /* ══════════ MOBILE: stack layout ══════════ */
+    @media (max-width: 800px) {
+      .page-layout { grid-template-columns: 1fr; }
+      .sidebar {
+        position: static; height: auto;
+        padding: 2.5rem var(--gap) 2rem;
+      }
+      .sidebar .intro-cta { flex-direction: row; flex-wrap: wrap; }
+      .sidebar .stats-bar { flex-direction: row; flex-wrap: wrap; gap: 1.25rem; }
+      .sidebar .stat-item { padding: 0 1.5rem 0 0; border-right: 1px solid rgba(255,255,255,.12); }
+      .sidebar .stat-item:last-child { border-right: none; padding-right: 0; }
     }
 
     /* ══════════ SECTION HEAD ══════════ */
-    .sec-head { position: relative; margin-bottom: 2.5rem; overflow: visible; }
-    .sec-num {
-      position: absolute; top: -.5rem; left: -.2rem;
-      font-family: var(--f); font-size: clamp(5rem, 13vw, 9.5rem);
-      font-weight: 200; line-height: 1; letter-spacing: -.07em;
-      color: var(--border); opacity: .7; pointer-events: none; z-index: 0;
-    }
+    .sec-head { position: relative; margin-bottom: 2.5rem; }
     .sec-head > * { position: relative; z-index: 1; }
 
     .section-heading {
       font-family: var(--fh);
-      font-size: clamp(1rem, 2vw, 1.5rem);
+      font-size: clamp(1.3rem, 2.6vw, 1.95rem);
       font-weight: 900; line-height: 1.1; letter-spacing: -.01em;
       margin-bottom: .45rem;
     }
@@ -383,7 +388,7 @@
 
     .cta-sect-title {
       font-family: var(--fh);
-      font-size: clamp(0.9rem, 1.6vw, 1.25rem);
+      font-size: clamp(1.17rem, 2.08vw, 1.625rem);
       font-weight: 900; line-height: 1.12; letter-spacing: -.01em; margin-bottom: 1.5rem;
     }
     .cta-bullets { display: flex; flex-direction: column; gap: 1.15rem; }
@@ -406,6 +411,25 @@
       font-family: var(--f); font-size: .52rem; letter-spacing: .1em; font-weight: 500;
       color: var(--muted); margin-top: 1rem;
     }
+
+    /* Standalone btn styles (outside sidebar) */
+    .btn-solid {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .78rem 1.6rem; background: var(--text); color: var(--inv-text);
+      font-family: var(--f); font-size: .54rem; letter-spacing: .2em; font-weight: 600;
+      text-transform: uppercase;
+      transition: background .35s var(--ease), color .35s var(--ease), outline .35s var(--ease), transform .3s var(--ease);
+    }
+    .btn-solid:hover { background: var(--bg); color: var(--text); outline: 1px solid var(--text); transform: translateY(-2px); }
+
+    .btn-line {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .78rem 1.6rem; border: 1px solid var(--border); color: var(--muted);
+      font-family: var(--f); font-size: .54rem; letter-spacing: .2em; font-weight: 600;
+      text-transform: uppercase;
+      transition: background .35s var(--ease), color .35s var(--ease), border-color .35s var(--ease), transform .3s var(--ease);
+    }
+    .btn-line:hover { background: var(--text); color: var(--inv-text); border-color: var(--text); transform: translateY(-2px); }
 
     /* ══════════ ABOUT ══════════ */
     #about {
@@ -468,7 +492,7 @@
     }
     .exp-close:hover { background: var(--text); color: var(--inv-text); border-color: var(--text); transform: rotate(90deg); }
     .exp-name {
-      font-family: var(--fh); font-size: clamp(0.9rem, 1.5vw, 1.2rem);
+      font-family: var(--fh); font-size: clamp(1.17rem, 1.95vw, 1.56rem);
       font-weight: 900; line-height: 1.1; letter-spacing: -.01em;
       margin-bottom: 1.25rem; color: var(--text);
     }
@@ -484,7 +508,7 @@
 
     .connect-statement {
       font-family: var(--fh);
-      font-size: clamp(1.45rem, 3vw, 2.3rem);
+      font-size: clamp(1.885rem, 3.9vw, 2.99rem);
       font-weight: 700; line-height: 1.35; letter-spacing: -.01em;
       margin-bottom: 1.5rem;
     }
@@ -555,7 +579,7 @@
     footer .footer-lower { background: var(--surface); overflow: hidden; border-top: 1px solid var(--border); }
     .footer-statement {
       font-family: var(--fh);
-      font-size: clamp(1.75rem, 5vw, 3.75rem);
+      font-size: clamp(2.275rem, 6.5vw, 4.875rem);
       font-weight: 900; line-height: 1;
       color: var(--border); letter-spacing: -.04em;
       padding: 3rem var(--gap) .25rem;
@@ -577,7 +601,7 @@
       backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
       overflow-y: auto; padding: var(--gap);
     }
-    [data-theme="dark"] .post-modal { background: rgba(0,0,0,.97); }
+    [data-theme="dark"] .post-modal { background: rgba(20,20,20,.97); }
     .post-modal.open { display: block; animation: mFade .4s var(--ease); }
     @keyframes mFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
     .modal-inner { max-width: 700px; margin: 80px auto 100px; }
@@ -592,7 +616,7 @@
     .modal-close:hover { background: var(--text); color: var(--inv-text); border-color: var(--text); transform: rotate(90deg); }
     .modal-eyebrow { margin-bottom: 1.25rem; }
     .modal-title {
-      font-family: var(--fh); font-size: clamp(1rem, 2vw, 1.5rem);
+      font-family: var(--fh); font-size: clamp(1.3rem, 2.6vw, 1.95rem);
       font-weight: 900; line-height: 1.1; letter-spacing: -.01em; margin-bottom: 1.5rem;
     }
     .modal-date {
@@ -613,9 +637,7 @@
       margin: 2rem 0;
     }
     @media (max-width: 600px) { .stakeholder-grid { grid-template-columns: 1fr; } }
-    .stakeholder-card {
-      background: var(--surface); padding: 1.5rem;
-    }
+    .stakeholder-card { background: var(--surface); padding: 1.5rem; }
     .stakeholder-label {
       font-family: var(--f); font-size: .54rem; font-weight: 600;
       letter-spacing: .2em; text-transform: uppercase; color: var(--text);
@@ -628,9 +650,7 @@
       letter-spacing: .16em; text-transform: uppercase; color: var(--text);
       opacity: .5; margin-bottom: .25rem; display: block;
     }
-    .stakeholder-val {
-      font-size: .88rem; line-height: 1.72; color: var(--muted); font-weight: 300;
-    }
+    .stakeholder-val { font-size: .88rem; line-height: 1.72; color: var(--muted); font-weight: 300; }
     .modal-share {
       margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
       display: flex; align-items: center; gap: .65rem; flex-wrap: wrap;
@@ -684,244 +704,220 @@
   </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="wrap">
+<!-- PAGE LAYOUT -->
+<div class="page-layout">
 
-    <div class="hero-top pe pe-1">
-      <span class="eyebrow">Construction &amp; Technology</span>
-      <div class="hero-headline">Engineering the<br><em>future</em> of construction.</div>
-      <div class="hero-dots" aria-hidden="true">
-        <svg width="80" height="68" viewBox="0 0 80 68" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="4"  cy="4"  r="1.5" fill="currentColor"/><circle cx="24" cy="4"  r="1.5" fill="currentColor"/><circle cx="44" cy="4"  r="1.5" fill="currentColor"/><circle cx="64" cy="4"  r="1.5" fill="currentColor"/>
-          <circle cx="14" cy="18" r="1.5" fill="currentColor"/><circle cx="34" cy="18" r="1.5" fill="currentColor"/><circle cx="54" cy="18" r="1.5" fill="currentColor"/><circle cx="74" cy="18" r="1.5" fill="currentColor"/>
-          <circle cx="4"  cy="32" r="1.5" fill="currentColor"/><circle cx="24" cy="32" r="1.5" fill="currentColor"/><circle cx="44" cy="32" r="1.5" fill="currentColor"/><circle cx="64" cy="32" r="1.5" fill="currentColor"/>
-          <circle cx="14" cy="46" r="1.5" fill="currentColor"/><circle cx="34" cy="46" r="1.5" fill="currentColor"/><circle cx="54" cy="46" r="1.5" fill="currentColor"/><circle cx="74" cy="46" r="1.5" fill="currentColor"/>
-          <circle cx="4"  cy="60" r="1.5" fill="currentColor"/><circle cx="24" cy="60" r="1.5" fill="currentColor"/><circle cx="44" cy="60" r="1.5" fill="currentColor"/><circle cx="64" cy="60" r="1.5" fill="currentColor"/>
-        </svg>
+  <!-- LEFT SIDEBAR: sticky, dark, introduction -->
+  <aside class="sidebar pe pe-1">
+    <span class="sidebar-eyebrow">Construction &amp; Technology</span>
+    <img src="J%C4%81nis%20Kreics_019b.jpg" alt="Jānis Kreics" class="sidebar-photo" />
+    <div class="sidebar-headline">Engineering the<br><em>future</em> of construction.</div>
+    <h1 class="h1-name">Jānis Kreics</h1>
+    <div class="intro-tagline">Engineer · Entrepreneur · LEED AP</div>
+    <div class="intro-bio">
+      <p>I believe in saying what's true, not what's easy. In getting the details right. In knowing why you're doing something before you do it. In showing up consistently, even when it's inconvenient.</p>
+      <p>When I'm not building things, I'm reading about people who did. Biographical literature keeps me grounded. Running and team sports take care of the rest.</p>
+    </div>
+    <div class="intro-cta">
+      <a href="#blog" class="btn-solid">Read my writing</a>
+      <a href="#connect" class="btn-line">Connect with me</a>
+    </div>
+    <div class="stats-bar">
+      <div class="stat-item">
+        <div class="stat-n">20+</div>
+        <div class="stat-l">Years in Construction</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-n">LEED AP</div>
+        <div class="stat-l">Accredited Professional</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-n">B.Eng + MBA</div>
+        <div class="stat-l">Academic Foundation</div>
       </div>
     </div>
+  </aside>
 
-    <div class="hero-grid">
+  <!-- RIGHT MAIN CONTENT: light, scrollable -->
+  <main class="main-content">
 
-      <div class="hero-photo-col pe pe-2">
-        <div class="photo-frame">
-          <img src="J%C4%81nis%20Kreics_019b.jpg" alt="Jānis Kreics" class="intro-photo" />
-        </div>
-        <div class="intro-photo-name">
-          <h1 class="h1-name">Jānis Kreics</h1>
-          <div class="intro-tagline">Engineer · Entrepreneur · LEED AP</div>
-        </div>
-      </div>
+    <!-- BLOG -->
+    <section id="blog">
+      <div class="wrap">
 
-      <div class="hero-text-col">
-        <h1 class="h1-name pe pe-2">Jānis Kreics</h1>
-        <div class="intro-tagline pe pe-3">Engineer · Entrepreneur · LEED AP</div>
-        <div class="intro-bio pe pe-4">
-          <p>I believe in saying what's true, not what's easy. In getting the details right. In knowing why you're doing something before you do it. In showing up consistently, even when it's inconvenient.</p>
-          <p>When I'm not building things, I'm reading about people who did. Biographical literature keeps me grounded. Running and team sports take care of the rest.</p>
-        </div>
-        <div class="intro-cta pe pe-5">
-          <a href="#blog" class="btn-solid">Read my writing</a>
-          <a href="#connect" class="btn-line">Connect with me</a>
-        </div>
-        <div class="stats-bar pe pe-6">
-          <div class="stat-item">
-            <div class="stat-n">20+</div>
-            <div class="stat-l">Years in Construction</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-n">LEED AP</div>
-            <div class="stat-l">Accredited Professional</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-n">B.Eng + MBA</div>
-            <div class="stat-l">Academic Foundation</div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- BLOG -->
-<section id="blog">
-  <div class="wrap">
-
-    <div class="sec-head fi">
-      <span class="sec-num">01</span>
-      <div class="eyebrow" style="margin-bottom:.7rem">Writing</div>
-      <h2 class="section-heading">Field notes &amp; <em>dispatches.</em></h2>
-      <p class="section-sub">Essays on construction, technology, and leadership — from someone who has worked in both worlds.</p>
-    </div>
-
-    <div class="post-list">
-      <div class="post-item fi fi-d1" onclick="openPost()">
-        <div class="post-item-tags">
-          <span class="post-item-tag">Opinion</span>
-          <span class="post-item-tag">Construction &amp; Real Estate</span>
-        </div>
-        <h3 class="post-item-title">Everyone Wants a Successful Project. But Not the Same One.</h3>
-        <p class="post-item-excerpt">In real estate development, three parties sit at the same table. They share the same timeline, the same building, and often the same meeting room. But they are not playing the same game.</p>
-        <div class="post-item-meta">
-          <span class="post-item-date">April 2026</span>
-          <span class="post-item-read">7 min read</span>
-          <span class="post-arrow">→</span>
-        </div>
-        <div class="post-item-share" onclick="event.stopPropagation()">
-          <button class="share-pill" onclick="shareLinkedIn()">
-            <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>LinkedIn
-          </button>
-          <button class="share-pill" onclick="shareX()">
-            <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>Post to X
-          </button>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- CTA SECTION -->
-<section class="cta-sect">
-  <div class="wrap">
-    <div class="cta-sect-grid">
-
-      <div class="fi">
-        <h2 class="cta-sect-title">Stay ahead in<br>construction technology:</h2>
-        <ul class="cta-bullets">
-          <li class="cta-bullet"><span><strong>Practical insights on BIM and digital transformation.</strong> <em>Drawing from 20+ years of field experience — not just theory.</em></span></li>
-          <li class="cta-bullet"><span><strong>Lessons from Europe's largest infrastructure programme.</strong> <em>Firsthand account of what works at scale on Rail Baltica.</em></span></li>
-          <li class="cta-bullet"><span><strong>The intersection of construction and business strategy.</strong> <em>From an engineer with an MBA who has worked at both levels.</em></span></li>
-        </ul>
-      </div>
-
-      <div class="fi fi-d1">
-        <div class="cta-box">
-          <h4 class="cta-box-title">Follow my thinking on construction &amp; technology</h4>
-          <p class="cta-box-desc">I publish regularly on BIM, project leadership, and the future of the built environment. Follow along — I'd love to hear from you.</p>
-          <div class="cta-box-btns">
-            <a href="https://www.linkedin.com/in/janis-kreics-leed-ap-2b0ba767/" target="_blank" rel="noopener" class="btn-solid">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-              Follow on LinkedIn
-            </a>
-            <a href="https://x.com/kreics" target="_blank" rel="noopener" class="btn-line">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-              Follow on X
-            </a>
-          </div>
-          <p class="cta-box-note">You can unsubscribe or unfollow any time.</p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section id="about">
-  <div class="wrap">
-
-    <div class="sec-head fi" style="margin-bottom:2.5rem">
-      <span class="sec-num">02</span>
-      <div class="eyebrow" style="margin-bottom:.7rem">About</div>
-      <h2 class="section-heading">The full <em>picture.</em></h2>
-    </div>
-
-    <div class="about-body">
-      <div class="bio-text fi fi-d1">
-        <p>Jānis Kreics is an entrepreneur supplying professional services to the construction industry, operating two companies based in Latvia that specialise in architecture, digital construction, and building design. His career sits at the intersection of sustainable building practice and digital transformation, where technical rigour and business strategy meet.</p>
-        <p>As a <strong>LEED AP</strong> practitioner, he brings environmentally responsible thinking to every project. He currently serves as <strong>BIM Manager</strong> on one of Europe's most significant infrastructure programmes, reshaping how the Baltic states connect to the wider European rail network.</p>
-        <p>His work spans Project Management, Project Controls, Building Information Modelling, and the integration of digital tools into construction workflows, helping teams work smarter, deliver on time and within budget, and reduce environmental impact. An <strong>Engineering degree</strong> combined with an <strong>MBA</strong> gives him fluency across both technical and executive registers that few practitioners bring to the table.</p>
-        <p>Through a competitive international internship programme, he trained with one of the world's leading construction companies. That experience shaped his professional trajectory and continues to inform how he approaches every project today.</p>
-      </div>
-
-      <div class="fi fi-d2">
-        <div class="creds-list">
-          <div class="cred-row">
-            <div class="cred-row-title">LEED Accredited Professional</div>
-            <div class="cred-row-sub">Green Building Certification · USGBC</div>
-          </div>
-          <div class="cred-row">
-            <div class="cred-row-title">BIM Manager</div>
-            <div class="cred-row-sub">Rail Baltica · ERB Rail</div>
-          </div>
-          <div class="cred-row">
-            <div class="cred-row-title">Bachelor of Engineering</div>
-            <div class="cred-row-sub">Civil Engineering</div>
-          </div>
-          <div class="cred-row">
-            <div class="cred-row-title">Master of Business Administration</div>
-            <div class="cred-row-sub">Business Strategy</div>
-          </div>
-          <div class="cred-row">
-            <div class="cred-row-title">International Training Programme</div>
-            <div class="cred-row-sub">Skanska · Global Construction</div>
-          </div>
+        <div class="sec-head fi">
+          <div class="eyebrow" style="margin-bottom:.7rem">Writing</div>
+          <h2 class="section-heading">Field notes &amp; <em>dispatches.</em></h2>
+          <p class="section-sub">Essays on construction, technology, and leadership — from someone who has worked in both worlds.</p>
         </div>
 
-        <div class="tags-block">
-          <div class="tags-label">Expertise</div>
-          <div class="tags">
-            <span class="tag" onclick="openExp('Engineering')">Engineering</span>
-            <span class="tag" onclick="openExp('Architecture')">Architecture</span>
-            <span class="tag" onclick="openExp('VDC / BIM')">VDC / BIM</span>
-            <span class="tag" onclick="openExp('Project Management')">Project Management</span>
-            <span class="tag" onclick="openExp('Project Controls')">Project Controls</span>
-            <span class="tag" onclick="openExp('IT Strategy / System Integration')">IT Strategy / System Integration</span>
-            <span class="tag" onclick="openExp('Rail Baltica')">Rail Baltica</span>
-            <span class="tag" onclick="openExp('Heavy Civil Works')">Heavy Civil Works</span>
-            <span class="tag" onclick="openExp('Entrepreneurship')">Entrepreneurship</span>
-            <span class="tag" onclick="openExp('Sustainable Construction')">Sustainable Construction</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONNECT -->
-<section id="connect">
-  <div class="wrap">
-
-    <div class="sec-head fi" style="margin-bottom:2.5rem">
-      <span class="sec-num">03</span>
-      <div class="eyebrow" style="margin-bottom:.7rem">Connect</div>
-      <h2 class="section-heading">Let's build <em>together.</em></h2>
-    </div>
-
-    <div class="connect-body">
-      <div class="fi fi-d1">
-        <p class="connect-statement">Whether you're navigating a <em>digital transformation</em>, planning a complex project, or simply want to exchange ideas — I'm always open to a good conversation.</p>
-        <p class="connect-note">I publish regularly on construction technology, project leadership, and the future of the built environment. Follow along on LinkedIn and X — I'd love to hear from you.</p>
-      </div>
-
-      <div class="social-rows fi fi-d2">
-        <a href="https://www.linkedin.com/in/janis-kreics-leed-ap-2b0ba767/" target="_blank" rel="noopener" class="social-row">
-          <div class="social-row-left">
-            <div class="social-row-icon"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></div>
-            <div>
-              <div class="social-row-name">LinkedIn</div>
-              <div class="social-row-handle">linkedin.com/in/janis-kreics-leed-ap</div>
+        <div class="post-list">
+          <div class="post-item fi fi-d1" onclick="openPost()">
+            <div class="post-item-tags">
+              <span class="post-item-tag">Opinion</span>
+              <span class="post-item-tag">Construction &amp; Real Estate</span>
+            </div>
+            <h3 class="post-item-title">Everyone Wants a Successful Project. But Not the Same One.</h3>
+            <p class="post-item-excerpt">In real estate development, three parties sit at the same table. They share the same timeline, the same building, and often the same meeting room. But they are not playing the same game.</p>
+            <div class="post-item-meta">
+              <span class="post-item-date">April 2026</span>
+              <span class="post-item-read">7 min read</span>
+              <span class="post-arrow">→</span>
+            </div>
+            <div class="post-item-share" onclick="event.stopPropagation()">
+              <button class="share-pill" onclick="shareLinkedIn()">
+                <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>LinkedIn
+              </button>
+              <button class="share-pill" onclick="shareX()">
+                <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>Post to X
+              </button>
             </div>
           </div>
-          <div class="social-row-arrow">↗</div>
-        </a>
-        <a href="https://x.com/kreics" target="_blank" rel="noopener" class="social-row">
-          <div class="social-row-left">
-            <div class="social-row-icon"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></div>
-            <div>
-              <div class="social-row-name">X (Twitter)</div>
-              <div class="social-row-handle">@kreics</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="cta-sect">
+      <div class="wrap">
+        <div class="cta-sect-grid">
+
+          <div class="fi">
+            <h2 class="cta-sect-title">Stay ahead in<br>construction technology:</h2>
+            <ul class="cta-bullets">
+              <li class="cta-bullet"><span><strong>Practical insights on BIM and digital transformation.</strong> <em>Drawing from 20+ years of field experience — not just theory.</em></span></li>
+              <li class="cta-bullet"><span><strong>Lessons from Europe's largest infrastructure programme.</strong> <em>Firsthand account of what works at scale on Rail Baltica.</em></span></li>
+              <li class="cta-bullet"><span><strong>The intersection of construction and business strategy.</strong> <em>From an engineer with an MBA who has worked at both levels.</em></span></li>
+            </ul>
+          </div>
+
+          <div class="fi fi-d1">
+            <div class="cta-box">
+              <h4 class="cta-box-title">Follow my thinking on construction &amp; technology</h4>
+              <p class="cta-box-desc">I publish regularly on BIM, project leadership, and the future of the built environment. Follow along — I'd love to hear from you.</p>
+              <div class="cta-box-btns">
+                <a href="https://www.linkedin.com/in/janis-kreics-leed-ap-2b0ba767/" target="_blank" rel="noopener" class="btn-solid">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+                  Follow on LinkedIn
+                </a>
+                <a href="https://x.com/kreics" target="_blank" rel="noopener" class="btn-line">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                  Follow on X
+                </a>
+              </div>
+              <p class="cta-box-note">You can unsubscribe or unfollow any time.</p>
             </div>
           </div>
-          <div class="social-row-arrow">↗</div>
-        </a>
+
+        </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="wrap">
+
+        <div class="sec-head fi" style="margin-bottom:2.5rem">
+          <div class="eyebrow" style="margin-bottom:.7rem">About</div>
+          <h2 class="section-heading">The full <em>picture.</em></h2>
+        </div>
+
+        <div class="about-body">
+          <div class="bio-text fi fi-d1">
+            <p>Jānis Kreics is an entrepreneur supplying professional services to the construction industry, operating two companies based in Latvia that specialise in architecture, digital construction, and building design. His career sits at the intersection of sustainable building practice and digital transformation, where technical rigour and business strategy meet.</p>
+            <p>As a <strong>LEED AP</strong> practitioner, he brings environmentally responsible thinking to every project. He currently serves as <strong>BIM Manager</strong> on one of Europe's most significant infrastructure programmes, reshaping how the Baltic states connect to the wider European rail network.</p>
+            <p>His work spans Project Management, Project Controls, Building Information Modelling, and the integration of digital tools into construction workflows, helping teams work smarter, deliver on time and within budget, and reduce environmental impact. An <strong>Engineering degree</strong> combined with an <strong>MBA</strong> gives him fluency across both technical and executive registers that few practitioners bring to the table.</p>
+            <p>Through a competitive international internship programme, he trained with one of the world's leading construction companies. That experience shaped his professional trajectory and continues to inform how he approaches every project today.</p>
+          </div>
+
+          <div class="fi fi-d2">
+            <div class="creds-list">
+              <div class="cred-row">
+                <div class="cred-row-title">LEED Accredited Professional</div>
+                <div class="cred-row-sub">Green Building Certification · USGBC</div>
+              </div>
+              <div class="cred-row">
+                <div class="cred-row-title">BIM Manager</div>
+                <div class="cred-row-sub">Rail Baltica · ERB Rail</div>
+              </div>
+              <div class="cred-row">
+                <div class="cred-row-title">Bachelor of Engineering</div>
+                <div class="cred-row-sub">Civil Engineering</div>
+              </div>
+              <div class="cred-row">
+                <div class="cred-row-title">Master of Business Administration</div>
+                <div class="cred-row-sub">Business Strategy</div>
+              </div>
+              <div class="cred-row">
+                <div class="cred-row-title">International Training Programme</div>
+                <div class="cred-row-sub">Skanska · Global Construction</div>
+              </div>
+            </div>
+
+            <div class="tags-block">
+              <div class="tags-label">Expertise</div>
+              <div class="tags">
+                <span class="tag" onclick="openExp('Engineering')">Engineering</span>
+                <span class="tag" onclick="openExp('Architecture')">Architecture</span>
+                <span class="tag" onclick="openExp('VDC / BIM')">VDC / BIM</span>
+                <span class="tag" onclick="openExp('Project Management')">Project Management</span>
+                <span class="tag" onclick="openExp('Project Controls')">Project Controls</span>
+                <span class="tag" onclick="openExp('IT Strategy / System Integration')">IT Strategy / System Integration</span>
+                <span class="tag" onclick="openExp('Rail Baltica')">Rail Baltica</span>
+                <span class="tag" onclick="openExp('Heavy Civil Works')">Heavy Civil Works</span>
+                <span class="tag" onclick="openExp('Entrepreneurship')">Entrepreneurship</span>
+                <span class="tag" onclick="openExp('Sustainable Construction')">Sustainable Construction</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONNECT -->
+    <section id="connect">
+      <div class="wrap">
+
+        <div class="sec-head fi" style="margin-bottom:2.5rem">
+          <div class="eyebrow" style="margin-bottom:.7rem">Connect</div>
+          <h2 class="section-heading">Let's build <em>together.</em></h2>
+        </div>
+
+        <div class="connect-body">
+          <div class="fi fi-d1">
+            <p class="connect-statement">Whether you're navigating a <em>digital transformation</em>, planning a complex project, or simply want to exchange ideas — I'm always open to a good conversation.</p>
+            <p class="connect-note">I publish regularly on construction technology, project leadership, and the future of the built environment. Follow along on LinkedIn and X — I'd love to hear from you.</p>
+          </div>
+
+          <div class="social-rows fi fi-d2">
+            <a href="https://www.linkedin.com/in/janis-kreics-leed-ap-2b0ba767/" target="_blank" rel="noopener" class="social-row">
+              <div class="social-row-left">
+                <div class="social-row-icon"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></div>
+                <div>
+                  <div class="social-row-name">LinkedIn</div>
+                  <div class="social-row-handle">linkedin.com/in/janis-kreics-leed-ap</div>
+                </div>
+              </div>
+              <div class="social-row-arrow">↗</div>
+            </a>
+            <a href="https://x.com/kreics" target="_blank" rel="noopener" class="social-row">
+              <div class="social-row-left">
+                <div class="social-row-icon"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></div>
+                <div>
+                  <div class="social-row-name">X (Twitter)</div>
+                  <div class="social-row-handle">@kreics</div>
+                </div>
+              </div>
+              <div class="social-row-arrow">↗</div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
 
 <!-- FOOTER -->
 <footer>
