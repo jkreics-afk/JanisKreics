@@ -6,21 +6,17 @@
   <title>Jānis Kreics — Construction &amp; Technology</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,200;0,300;0,400;0,500;1,200;1,300;1,400;1,500&family=Karla:wght@300;400;500&family=Space+Mono:wght@400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg:       #FAFAF6;
-      --warm:     #F3F0E8;
-      --border:   #E2DDD4;
-      --text:     #1C1A14;
-      --muted:    #8A8375;
-      --accent:   #B8894A;
-      --accent-d: #9A7238;
-      --accent-lo: rgba(184,137,74,.07);
-      --f-serif:  'Cormorant', Georgia, serif;
-      --f-sans:   'Karla', system-ui, sans-serif;
-      --f-mono:   'Space Mono', monospace;
-      --max:      760px;
+      --bg:       #F7F7F5;
+      --surface:  #EFEFED;
+      --border:   #DEDEDE;
+      --text:     #111111;
+      --muted:    #6A6A6A;
+      --inv-bg:   #111111;
+      --inv-text: #F7F7F5;
+      --f:        'Jost', system-ui, sans-serif;
       --wide:     1080px;
       --gap:      clamp(1.25rem, 4vw, 2.5rem);
       --ease:     cubic-bezier(.16,1,.3,1);
@@ -31,7 +27,7 @@
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: var(--f-sans);
+      font-family: var(--f);
       font-size: 18px;
       line-height: 1.7;
       font-weight: 300;
@@ -50,7 +46,7 @@
     .cursor-dot {
       position: fixed;
       width: 6px; height: 6px;
-      background: var(--accent);
+      background: var(--text);
       border-radius: 50%;
       pointer-events: none;
       z-index: 9999;
@@ -60,7 +56,7 @@
     .cursor-ring {
       position: fixed;
       width: 32px; height: 32px;
-      border: 1px solid rgba(184,137,74,.4);
+      border: 1px solid rgba(17,17,17,.25);
       border-radius: 50%;
       pointer-events: none;
       z-index: 9998;
@@ -71,58 +67,42 @@
 
     /* ── SCROLL PROGRESS ── */
     .scroll-progress {
-      position: fixed;
-      top: 0; left: 0;
-      height: 1.5px;
-      background: var(--accent);
-      z-index: 101;
-      width: 0%;
+      position: fixed; top: 0; left: 0;
+      height: 1.5px; background: var(--text);
+      z-index: 101; width: 0%;
+      transition: width .1s linear;
     }
 
     /* ── GRAIN ── */
     .grain {
-      position: fixed;
-      inset: 0;
-      z-index: 997;
-      pointer-events: none;
-      opacity: .032;
+      position: fixed; inset: 0; z-index: 997;
+      pointer-events: none; opacity: .022;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
-      background-repeat: repeat;
-      background-size: 200px 200px;
+      background-repeat: repeat; background-size: 200px 200px;
     }
 
-    /* ── CONTAINERS ── */
+    /* ── CONTAINER ── */
     .wrap { max-width: var(--wide); margin-inline: auto; padding-inline: var(--gap); }
 
     /* ── EYEBROW ── */
     .eyebrow {
-      font-family: var(--f-mono);
-      font-size: .58rem;
-      letter-spacing: .22em;
-      text-transform: uppercase;
-      color: var(--accent);
+      font-family: var(--f); font-size: .54rem;
+      letter-spacing: .26em; text-transform: uppercase;
+      font-weight: 500; color: var(--muted);
     }
 
     /* ── PAGE ENTRANCE ── */
-    .pe {
-      opacity: 0;
-      transform: translateY(14px);
-      animation: peIn .95s var(--ease) forwards;
-    }
+    .pe { opacity: 0; transform: translateY(14px); animation: peIn .95s var(--ease) forwards; }
     @keyframes peIn { to { opacity: 1; transform: none; } }
     .pe-1 { animation-delay: .04s; }
-    .pe-2 { animation-delay: .12s; }
-    .pe-3 { animation-delay: .22s; }
-    .pe-4 { animation-delay: .32s; }
-    .pe-5 { animation-delay: .44s; }
-    .pe-6 { animation-delay: .58s; }
+    .pe-2 { animation-delay: .14s; }
+    .pe-3 { animation-delay: .24s; }
+    .pe-4 { animation-delay: .36s; }
+    .pe-5 { animation-delay: .50s; }
+    .pe-6 { animation-delay: .64s; }
 
     /* ── SCROLL REVEAL ── */
-    .fi {
-      opacity: 0;
-      transform: translateY(22px);
-      transition: opacity .85s var(--ease), transform .85s var(--ease);
-    }
+    .fi { opacity: 0; transform: translateY(22px); transition: opacity .85s var(--ease), transform .85s var(--ease); }
     .fi.on { opacity: 1; transform: none; }
     .fi-d1 { transition-delay: .1s; }
     .fi-d2 { transition-delay: .22s; }
@@ -131,27 +111,23 @@
     /* ══════════ NAV ══════════ */
     nav {
       position: sticky; top: 0; z-index: 50;
-      background: rgba(250,250,246,.93);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(226,221,212,.55);
+      background: rgba(247,247,245,.94);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
     }
     .nav-inner {
       max-width: var(--wide); margin-inline: auto; padding-inline: var(--gap);
-      height: 56px;
-      display: flex; align-items: center; justify-content: space-between;
+      height: 56px; display: flex; align-items: center; justify-content: space-between;
     }
-    .nav-name { font-family: var(--f-serif); font-size: 1.05rem; font-weight: 400; letter-spacing: .02em; }
-    .nav-links { display: flex; gap: 2rem; }
+    .nav-name { font-family: var(--f); font-size: .92rem; font-weight: 500; letter-spacing: .05em; }
+    .nav-links { display: flex; gap: 2.25rem; }
     .nav-links a {
-      font-family: var(--f-mono); font-size: .56rem; letter-spacing: .18em;
-      text-transform: uppercase; color: var(--muted);
-      transition: color .35s var(--ease);
+      font-family: var(--f); font-size: .54rem; letter-spacing: .22em;
+      text-transform: uppercase; font-weight: 500; color: var(--muted);
+      transition: color .3s var(--ease);
     }
-    .nav-links a:hover { color: var(--accent); }
-    .nav-toggle {
-      display: none; background: none; border: none; cursor: pointer; padding: .4rem; color: var(--muted);
-    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: .4rem; color: var(--muted); }
     @media (max-width: 560px) {
       .nav-links { display: none; }
       .nav-toggle { display: flex; }
@@ -164,39 +140,54 @@
       .nav-links.open a { font-size: .78rem; }
     }
 
-    /* ══════════ INTRO ══════════ */
-    .intro {
-      padding-block: clamp(4rem, 9vw, 7rem);
+    /* ══════════ HERO ══════════ */
+    .hero {
+      background: var(--surface);
       border-bottom: 1px solid var(--border);
-      position: relative;
+      position: relative; overflow: hidden;
     }
-    .intro::before {
-      content: '';
-      position: absolute; left: 0; top: 10%; bottom: 10%;
-      width: 2px;
-      background: linear-gradient(to bottom, transparent, var(--accent) 40%, var(--accent) 60%, transparent);
-      opacity: .28;
+    .hero::before {
+      content: ''; position: absolute; left: 0; top: 8%; bottom: 8%;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--text) 40%, var(--text) 60%, transparent);
+      opacity: .1;
     }
-    .intro-inner {
+    .hero-top {
+      padding-top: clamp(3rem, 7vw, 5.5rem);
+      padding-bottom: 2.5rem; position: relative;
+    }
+    .hero-headline {
+      font-family: var(--f);
+      font-size: clamp(2.8rem, 7vw, 6rem);
+      font-weight: 200; line-height: .96; letter-spacing: -.05em;
+      margin-top: .65rem;
+    }
+    .hero-headline em { font-style: italic; }
+
+    .hero-dots {
+      position: absolute; top: clamp(2rem,5vw,3.5rem); right: var(--gap);
+      pointer-events: none; opacity: .2;
+    }
+    @media (max-width: 620px) { .hero-dots { display: none; } }
+
+    .hero-grid {
       display: grid; grid-template-columns: 200px 1fr;
       gap: clamp(2.5rem, 5vw, 5rem); align-items: start;
-      max-width: var(--wide); margin-inline: auto; padding-inline: var(--gap);
+      padding-bottom: clamp(3.5rem, 7vw, 5.5rem);
     }
     @media (max-width: 620px) {
-      .intro-inner { grid-template-columns: 1fr; }
-      .intro-photo-col { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-photo-col { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
     }
 
     /* Photo */
-    .photo-frame {
-      position: relative; display: inline-block; border-radius: 50%;
-    }
+    .photo-frame { position: relative; display: inline-block; }
     .photo-frame::after {
       content: ''; position: absolute; inset: -5px;
-      border-radius: 50%; border: 1px solid rgba(184,137,74,.2); pointer-events: none;
+      border: 1px solid rgba(17,17,17,.12); pointer-events: none;
     }
     .intro-photo {
-      width: 180px; height: 180px; border-radius: 50%;
+      width: 180px; height: 180px;
       object-fit: cover; object-position: top center;
       display: block; flex-shrink: 0;
     }
@@ -207,150 +198,195 @@
       .intro-photo-name .h1-name { font-size: 1.9rem; }
     }
 
-    /* Name */
     .h1-name {
-      font-family: var(--f-serif);
-      font-size: clamp(2.8rem, 7vw, 5.2rem);
-      font-weight: 300; line-height: 1.0; letter-spacing: -.025em;
+      font-family: var(--f);
+      font-size: clamp(2.4rem, 5.5vw, 4rem);
+      font-weight: 200; line-height: 1.0; letter-spacing: -.04em;
       margin-bottom: .5rem;
     }
-    @media (max-width: 620px) { .intro-text .h1-name { display: none; } }
+    @media (max-width: 620px) { .hero-text-col .h1-name { display: none; } }
 
     .intro-tagline {
-      font-family: var(--f-mono); font-size: .6rem;
-      letter-spacing: .2em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 1.75rem;
+      font-family: var(--f); font-size: .54rem;
+      letter-spacing: .24em; text-transform: uppercase; font-weight: 500;
+      color: var(--muted); margin-bottom: 1.75rem;
     }
-    .intro-bio { font-size: 1.02rem; line-height: 1.85; max-width: 56ch; }
+    .intro-bio { font-size: 1.02rem; line-height: 1.85; max-width: 56ch; font-weight: 300; }
     .intro-bio p + p { margin-top: 1.1em; }
-    .intro-bio strong { font-weight: 500; }
+    .intro-bio strong { font-weight: 600; }
     .intro-cta { margin-top: 2rem; display: flex; gap: .85rem; flex-wrap: wrap; }
 
     .btn-solid {
       display: inline-flex; align-items: center; gap: .5rem;
-      padding: .75rem 1.6rem; background: var(--accent); color: #fff;
-      font-family: var(--f-mono); font-size: .58rem; letter-spacing: .16em;
-      text-transform: uppercase; border-radius: 2px;
-      transition: background .35s var(--ease), transform .3s var(--ease);
+      padding: .78rem 1.6rem; background: var(--text); color: var(--inv-text);
+      font-family: var(--f); font-size: .54rem; letter-spacing: .2em; font-weight: 600;
+      text-transform: uppercase;
+      transition: background .35s var(--ease), color .35s var(--ease), outline .35s var(--ease), transform .3s var(--ease);
     }
-    .btn-solid:hover { background: var(--accent-d); transform: translateY(-2px); }
+    .btn-solid:hover { background: var(--bg); color: var(--text); outline: 1px solid var(--text); transform: translateY(-2px); }
+
     .btn-line {
       display: inline-flex; align-items: center; gap: .5rem;
-      padding: .75rem 1.6rem; border: 1px solid var(--border); color: var(--muted);
-      font-family: var(--f-mono); font-size: .58rem; letter-spacing: .16em;
-      text-transform: uppercase; border-radius: 2px;
-      transition: border-color .35s var(--ease), color .35s var(--ease), transform .3s var(--ease);
+      padding: .78rem 1.6rem; border: 1px solid var(--border); color: var(--muted);
+      font-family: var(--f); font-size: .54rem; letter-spacing: .2em; font-weight: 600;
+      text-transform: uppercase;
+      transition: background .35s var(--ease), color .35s var(--ease), border-color .35s var(--ease), transform .3s var(--ease);
     }
-    .btn-line:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+    .btn-line:hover { background: var(--text); color: var(--inv-text); border-color: var(--text); transform: translateY(-2px); }
 
     /* Stats */
     .stats-bar {
       margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--border);
-      display: flex; gap: 0; flex-wrap: wrap;
+      display: flex; flex-wrap: wrap;
     }
     .stat-item { padding: 0 2.5rem 0 0; margin-right: 2.5rem; border-right: 1px solid var(--border); }
     .stat-item:last-child { border-right: none; padding-right: 0; margin-right: 0; }
     .stat-n {
-      font-family: var(--f-serif); font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-      font-weight: 200; line-height: 1; letter-spacing: -.03em;
+      font-family: var(--f); font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 200; line-height: 1; letter-spacing: -.05em;
     }
-    .stat-n em { font-style: normal; color: var(--accent); }
     .stat-l {
-      font-family: var(--f-mono); font-size: .52rem; letter-spacing: .15em;
-      text-transform: uppercase; color: var(--muted); margin-top: .3rem;
+      font-family: var(--f); font-size: .52rem; letter-spacing: .16em;
+      text-transform: uppercase; font-weight: 500; color: var(--muted); margin-top: .3rem;
     }
     @media (max-width: 500px) {
       .stats-bar { gap: 1.5rem; }
       .stat-item { border-right: none; padding-right: 0; margin-right: 0; }
     }
 
-    /* ══════════ SECTION HEAD w/ WATERMARK ══════════ */
+    /* ══════════ SECTION HEAD ══════════ */
     .sec-head { position: relative; margin-bottom: 2.5rem; overflow: visible; }
     .sec-num {
       position: absolute; top: -.5rem; left: -.2rem;
-      font-family: var(--f-serif); font-size: clamp(5rem, 13vw, 9.5rem);
-      font-weight: 200; line-height: 1; letter-spacing: -.05em;
-      color: var(--border); opacity: .5; pointer-events: none; z-index: 0;
+      font-family: var(--f); font-size: clamp(5rem, 13vw, 9.5rem);
+      font-weight: 200; line-height: 1; letter-spacing: -.07em;
+      color: var(--border); opacity: .7; pointer-events: none; z-index: 0;
     }
     .sec-head > * { position: relative; z-index: 1; }
 
     .section-heading {
-      font-family: var(--f-serif);
+      font-family: var(--f);
       font-size: clamp(1.9rem, 4vw, 3rem);
-      font-weight: 300; line-height: 1.1; letter-spacing: -.015em;
+      font-weight: 200; line-height: 1.1; letter-spacing: -.04em;
       margin-bottom: .45rem;
     }
-    .section-heading em { font-style: italic; color: var(--accent); }
-    .section-sub { color: var(--muted); font-size: .93rem; max-width: 52ch; }
+    .section-heading em { font-style: italic; }
+    .section-sub { color: var(--muted); font-size: .93rem; max-width: 52ch; font-weight: 300; }
 
     /* ══════════ BLOG ══════════ */
     #blog { padding-block: clamp(4rem, 8vw, 6.5rem); }
 
     .post-list { display: flex; flex-direction: column; }
     .post-item {
-      padding: 2rem 0 2rem 0;
+      padding: 2.5rem 0;
       border-bottom: 1px solid var(--border);
-      display: grid; grid-template-columns: 1fr auto;
-      gap: 1.5rem; align-items: start;
       cursor: pointer; position: relative;
       border-left: 2px solid transparent;
-      transition: background .4s var(--ease), padding-left .4s var(--ease), border-left-color .4s var(--ease);
+      transition: background .4s var(--ease), padding-inline .4s var(--ease), border-left-color .4s var(--ease);
     }
     .post-item:first-child { border-top: 1px solid var(--border); }
-    .post-item:hover { background: var(--accent-lo); padding-left: 1.25rem; border-left-color: var(--accent); }
-    .post-item:hover .post-item-title { color: var(--accent); }
-    .post-item:hover .post-arrow { opacity: 1; transform: translateX(5px); }
-    @media (max-width: 560px) { .post-item { grid-template-columns: 1fr; gap: .75rem; } }
-
-    .post-num {
-      position: absolute; top: 1.2rem; right: 7.5rem;
-      font-family: var(--f-serif); font-size: 4.5rem; font-weight: 200;
-      line-height: 1; letter-spacing: -.05em;
-      color: var(--border); opacity: .4; pointer-events: none;
+    .post-item:hover {
+      background: var(--inv-bg);
+      padding-inline: 1.5rem;
+      border-left-color: transparent;
     }
-    @media (max-width: 640px) { .post-num { display: none; } }
+    .post-item:hover .post-item-title,
+    .post-item:hover .post-item-excerpt,
+    .post-item:hover .post-item-date,
+    .post-item:hover .post-item-read,
+    .post-item:hover .post-item-tag { color: var(--inv-text); }
+    .post-item:hover .post-arrow { opacity: 1; transform: translateX(5px); color: var(--inv-text); }
 
-    .post-item-tags { display: flex; gap: .75rem; margin-bottom: .5rem; flex-wrap: wrap; }
+    .post-item-tags { display: flex; gap: .75rem; margin-bottom: .65rem; flex-wrap: wrap; }
     .post-item-tag {
-      font-family: var(--f-mono); font-size: .54rem;
-      letter-spacing: .14em; text-transform: uppercase; color: var(--accent);
-    }
-    .post-item-title {
-      font-family: var(--f-serif);
-      font-size: clamp(1.25rem, 2.4vw, 1.75rem);
-      font-weight: 400; line-height: 1.22; letter-spacing: -.01em;
-      margin-bottom: .55rem;
+      font-family: var(--f); font-size: .54rem;
+      letter-spacing: .18em; text-transform: uppercase; font-weight: 500; color: var(--muted);
       transition: color .35s var(--ease);
     }
-    .post-item-excerpt { font-size: .9rem; color: var(--muted); line-height: 1.75; max-width: 58ch; }
-    .post-item-meta { display: flex; align-items: center; gap: 1.25rem; margin-top: .85rem; flex-wrap: wrap; }
-    .post-item-date { font-family: var(--f-mono); font-size: .54rem; letter-spacing: .12em; color: var(--muted); }
-    .post-item-read { font-family: var(--f-mono); font-size: .54rem; letter-spacing: .08em; color: var(--border); }
+    .post-item-title {
+      font-family: var(--f);
+      font-size: clamp(1.35rem, 2.8vw, 2.1rem);
+      font-weight: 300; line-height: 1.2; letter-spacing: -.03em;
+      margin-bottom: .75rem;
+      transition: color .35s var(--ease);
+    }
+    .post-item-excerpt {
+      font-size: .95rem; color: var(--muted); line-height: 1.78;
+      max-width: 64ch; font-weight: 300;
+      transition: color .35s var(--ease);
+    }
+    .post-item-meta { display: flex; align-items: center; gap: 1.25rem; margin-top: 1rem; flex-wrap: wrap; }
+    .post-item-date {
+      font-family: var(--f); font-size: .54rem; letter-spacing: .14em;
+      font-weight: 500; color: var(--muted); transition: color .35s var(--ease);
+    }
+    .post-item-read {
+      font-family: var(--f); font-size: .54rem; letter-spacing: .08em;
+      color: var(--border); transition: color .35s var(--ease);
+    }
     .post-arrow {
-      font-size: .9rem; color: var(--accent); opacity: 0; display: inline-block;
-      transition: opacity .3s var(--ease), transform .35s var(--ease);
+      font-size: .9rem; color: var(--text); opacity: 0; display: inline-block;
+      transition: opacity .3s var(--ease), transform .35s var(--ease), color .35s var(--ease);
     }
 
     .post-item-share {
-      display: flex; flex-direction: column; gap: .5rem;
-      align-items: flex-end; padding-top: .15rem; flex-shrink: 0;
-      position: relative; z-index: 1;
+      display: flex; gap: .6rem; flex-wrap: wrap;
+      margin-top: 1.25rem; position: relative; z-index: 1;
     }
     .share-pill {
       display: inline-flex; align-items: center; gap: .4rem;
-      padding: .38rem .95rem; border: 1px solid var(--border); border-radius: 999px;
-      font-family: var(--f-mono); font-size: .52rem; letter-spacing: .1em;
+      padding: .38rem .95rem; border: 1px solid var(--border);
+      font-family: var(--f); font-size: .52rem; letter-spacing: .12em; font-weight: 500;
       text-transform: uppercase; color: var(--muted);
       cursor: pointer; background: none; white-space: nowrap;
-      transition: border-color .35s var(--ease), color .35s var(--ease),
-                  background .35s var(--ease), transform .3s var(--ease);
+      transition: background .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease), transform .3s var(--ease);
     }
-    .share-pill:hover { border-color: var(--accent); color: var(--accent); background: rgba(184,137,74,.06); transform: translateY(-1px); }
+    .share-pill:hover { background: var(--text); color: var(--inv-text); border-color: var(--text); transform: translateY(-1px); }
+    .post-item:hover .share-pill { border-color: rgba(247,247,245,.25); color: rgba(247,247,245,.6); background: transparent; }
+    .post-item:hover .share-pill:hover { background: var(--bg); color: var(--text); border-color: var(--bg); }
     .share-pill svg { width: 10px; height: 10px; fill: currentColor; }
+
+    /* ══════════ CTA SECTION ══════════ */
+    .cta-sect {
+      background: var(--surface);
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      padding-block: clamp(4rem, 8vw, 7rem);
+    }
+    .cta-sect-grid {
+      display: grid; grid-template-columns: 3fr 2fr;
+      gap: clamp(3rem, 6vw, 6rem); align-items: start;
+    }
+    @media (max-width: 740px) { .cta-sect-grid { grid-template-columns: 1fr; } }
+
+    .cta-sect-title {
+      font-family: var(--f);
+      font-size: clamp(1.7rem, 3.2vw, 2.5rem);
+      font-weight: 300; line-height: 1.12; letter-spacing: -.03em; margin-bottom: 1.5rem;
+    }
+    .cta-bullets { display: flex; flex-direction: column; gap: 1.15rem; }
+    .cta-bullet { font-size: .96rem; line-height: 1.72; display: flex; gap: .75rem; font-weight: 300; }
+    .cta-bullet::before { content: '—'; flex-shrink: 0; margin-top: .05em; font-weight: 300; }
+    .cta-bullet strong { font-weight: 600; }
+    .cta-bullet em { font-style: italic; color: var(--muted); }
+
+    .cta-box {
+      background: var(--bg); border: 1px solid var(--border);
+      padding: clamp(1.5rem, 3vw, 2.25rem); position: relative;
+    }
+    .cta-box-title {
+      font-family: var(--f); font-size: 1.2rem;
+      font-weight: 400; margin-bottom: .9rem; line-height: 1.25; letter-spacing: -.02em;
+    }
+    .cta-box-desc { font-size: .9rem; color: var(--muted); line-height: 1.75; margin-bottom: 1.5rem; font-weight: 300; }
+    .cta-box-btns { display: flex; flex-direction: column; gap: .65rem; }
+    .cta-box-note {
+      font-family: var(--f); font-size: .52rem; letter-spacing: .1em; font-weight: 500;
+      color: var(--muted); margin-top: 1rem;
+    }
 
     /* ══════════ ABOUT ══════════ */
     #about {
-      background: var(--warm);
+      background: var(--bg);
       border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
       padding-block: clamp(4rem, 8vw, 6.5rem);
     }
@@ -360,62 +396,60 @@
     }
     @media (max-width: 740px) { .about-body { grid-template-columns: 1fr; } }
 
-    .bio-text { font-size: 1.02rem; line-height: 1.88; }
+    .bio-text { font-size: 1.02rem; line-height: 1.88; font-weight: 300; }
     .bio-text p + p { margin-top: 1.3em; }
-    .bio-text strong { font-weight: 500; color: var(--accent); }
+    .bio-text strong { font-weight: 600; }
 
-    .creds-list { display: flex; flex-direction: column; }
+    .creds-list { display: flex; flex-direction: column; margin-bottom: 2rem; }
     .cred-row {
       padding: .9rem 0; border-bottom: 1px solid var(--border);
       display: flex; flex-direction: column; gap: .15rem;
-      transition: padding-left .35s var(--ease);
+      transition: padding-left .35s var(--ease), background .35s var(--ease);
     }
     .cred-row:first-child { border-top: 1px solid var(--border); }
-    .cred-row:hover { padding-left: .5rem; }
-    .cred-row-title { font-family: var(--f-serif); font-size: 1.05rem; font-weight: 400; line-height: 1.3; }
-    .cred-row-sub { font-family: var(--f-mono); font-size: .58rem; letter-spacing: .06em; color: var(--muted); }
+    .cred-row:hover { padding-left: .5rem; background: var(--surface); }
+    .cred-row-title { font-family: var(--f); font-size: 1rem; font-weight: 400; line-height: 1.3; letter-spacing: -.01em; }
+    .cred-row-sub { font-family: var(--f); font-size: .56rem; letter-spacing: .1em; font-weight: 500; color: var(--muted); }
 
-    .tags-block { margin-top: 1.75rem; }
-    .tags-label { font-family: var(--f-mono); font-size: .54rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin-bottom: .65rem; }
+    .tags-block { margin-top: 0; }
+    .tags-label { font-family: var(--f); font-size: .54rem; letter-spacing: .22em; text-transform: uppercase; font-weight: 500; color: var(--muted); margin-bottom: .65rem; }
     .tags { display: flex; flex-wrap: wrap; gap: .4rem; }
     .tag {
-      font-family: var(--f-mono); font-size: .54rem; letter-spacing: .06em;
-      padding: .28rem .72rem; border: 1px solid var(--border); color: var(--muted);
-      border-radius: 2px; background: var(--bg);
-      cursor: pointer;
-      transition: border-color .3s var(--ease), color .3s var(--ease), transform .3s var(--ease);
+      font-family: var(--f); font-size: .54rem; letter-spacing: .06em; font-weight: 400;
+      padding: .3rem .75rem; border: 1px solid var(--border); color: var(--muted);
+      background: var(--surface); cursor: pointer;
+      transition: background .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease), transform .3s var(--ease);
     }
-    .tag:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+    .tag:hover { background: var(--text); color: var(--inv-text); border-color: var(--text); transform: translateY(-1px); }
 
     /* ══════════ EXPERTISE MODAL ══════════ */
     .exp-modal {
       display: none; position: fixed; inset: 0; z-index: 200;
-      background: rgba(28,26,20,.55);
+      background: rgba(17,17,17,.55);
       backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
     }
     .exp-modal.open { display: flex; align-items: center; justify-content: center; animation: mFade .35s var(--ease); }
     .exp-panel {
       background: var(--bg); border: 1px solid var(--border);
       max-width: 540px; width: calc(100% - 2rem);
-      padding: clamp(2rem, 5vw, 3rem);
-      border-radius: 3px; position: relative;
-      box-shadow: 0 24px 64px rgba(28,26,20,.14);
+      padding: clamp(2rem, 5vw, 3rem); position: relative;
+      box-shadow: 0 24px 64px rgba(17,17,17,.12);
     }
     .exp-close {
       position: absolute; top: 1rem; right: 1rem;
-      background: var(--warm); border: 1px solid var(--border); border-radius: 50%;
+      background: var(--surface); border: 1px solid var(--border);
       color: var(--muted); width: 34px; height: 34px;
       display: flex; align-items: center; justify-content: center;
-      cursor: pointer; font-size: .9rem;
-      transition: color .3s var(--ease), border-color .3s var(--ease), transform .4s var(--ease);
+      cursor: pointer; font-size: .85rem; font-family: var(--f);
+      transition: background .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease), transform .4s var(--ease);
     }
-    .exp-close:hover { color: var(--accent); border-color: var(--accent); transform: rotate(90deg); }
+    .exp-close:hover { background: var(--text); color: var(--inv-text); border-color: var(--text); transform: rotate(90deg); }
     .exp-name {
-      font-family: var(--f-serif); font-size: clamp(1.5rem, 3vw, 2.2rem);
-      font-weight: 300; line-height: 1.1; letter-spacing: -.015em;
+      font-family: var(--f); font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 300; line-height: 1.1; letter-spacing: -.03em;
       margin-bottom: 1.25rem; color: var(--text);
     }
-    .exp-body { font-size: .97rem; line-height: 1.88; color: var(--muted); }
+    .exp-body { font-size: .97rem; line-height: 1.88; color: var(--muted); font-weight: 300; }
 
     /* ══════════ CONNECT ══════════ */
     #connect { padding-block: clamp(4rem, 8vw, 6.5rem); }
@@ -426,46 +460,81 @@
     @media (max-width: 680px) { .connect-body { grid-template-columns: 1fr; } }
 
     .connect-statement {
-      font-family: var(--f-serif);
+      font-family: var(--f);
       font-size: clamp(1.45rem, 3vw, 2.3rem);
-      font-weight: 300; line-height: 1.35; letter-spacing: -.01em;
+      font-weight: 300; line-height: 1.35; letter-spacing: -.025em;
       margin-bottom: 1.5rem;
     }
-    .connect-statement em { font-style: italic; color: var(--accent); }
+    .connect-statement em { font-style: italic; }
     .connect-note {
-      font-size: .92rem; color: var(--muted); line-height: 1.78;
-      border-left: 2px solid var(--accent); padding-left: 1.1rem;
+      font-size: .92rem; color: var(--muted); line-height: 1.78; font-weight: 300;
+      border-left: 2px solid var(--text); padding-left: 1.1rem;
     }
 
     .social-rows { display: flex; flex-direction: column; }
     .social-row {
       display: flex; align-items: center; justify-content: space-between;
       padding: 1.4rem 0; border-bottom: 1px solid var(--border);
-      transition: padding-left .4s var(--ease), background .35s var(--ease);
+      transition: padding-inline .4s var(--ease), background .35s var(--ease);
     }
     .social-row:first-child { border-top: 1px solid var(--border); }
-    .social-row:hover { padding-left: .6rem; background: var(--accent-lo); }
-    .social-row:hover .social-row-name { color: var(--accent); }
-    .social-row:hover .social-row-arrow { transform: translate(4px,-4px); color: var(--accent); }
-    .social-row:hover .social-row-icon { border-color: var(--accent); }
+    .social-row:hover { padding-inline: .75rem; background: var(--inv-bg); }
+    .social-row:hover .social-row-name,
+    .social-row:hover .social-row-handle,
+    .social-row:hover .social-row-arrow { color: var(--inv-text); }
+    .social-row:hover .social-row-icon { border-color: rgba(247,247,245,.25); }
+    .social-row:hover .social-row-icon svg { fill: var(--inv-text); }
     .social-row-left { display: flex; align-items: center; gap: 1rem; }
     .social-row-icon {
-      width: 36px; height: 36px; border: 1px solid var(--border); border-radius: 50%;
+      width: 36px; height: 36px; border: 1px solid var(--border);
       display: flex; align-items: center; justify-content: center; flex-shrink: 0;
       transition: border-color .3s var(--ease);
     }
-    .social-row-icon svg { width: 14px; height: 14px; fill: var(--muted); }
-    .social-row-name { font-family: var(--f-serif); font-size: 1.4rem; font-weight: 400; transition: color .3s var(--ease); }
-    .social-row-handle { font-family: var(--f-mono); font-size: .58rem; letter-spacing: .07em; color: var(--muted); margin-top: .08rem; }
-    .social-row-arrow { color: var(--muted); font-size: 1rem; transition: transform .35s var(--ease), color .3s var(--ease); }
+    .social-row-icon svg { width: 14px; height: 14px; fill: var(--muted); transition: fill .3s var(--ease); }
+    .social-row-name { font-family: var(--f); font-size: 1.3rem; font-weight: 300; letter-spacing: -.02em; transition: color .3s var(--ease); }
+    .social-row-handle { font-family: var(--f); font-size: .56rem; letter-spacing: .07em; font-weight: 400; color: var(--muted); margin-top: .06rem; transition: color .3s var(--ease); }
+    .social-row-arrow { color: var(--muted); font-size: 1rem; transition: color .3s var(--ease); }
 
     /* ══════════ FOOTER ══════════ */
-    footer { background: var(--warm); border-top: 1px solid var(--border); overflow: hidden; }
+    .footer-feat { background: var(--surface); border-top: 1px solid var(--border); }
+    .footer-feat-grid {
+      max-width: var(--wide); margin-inline: auto;
+      display: grid; grid-template-columns: repeat(4, 1fr);
+    }
+    @media (max-width: 640px) { .footer-feat-grid { grid-template-columns: repeat(2, 1fr); } }
+    .footer-feat-item {
+      padding: 1.75rem var(--gap);
+      border-right: 1px solid var(--border);
+      display: flex; flex-direction: column; gap: .25rem;
+      transition: background .3s var(--ease), padding-left .35s var(--ease);
+      text-decoration: none; color: inherit;
+    }
+    .footer-feat-item:last-child { border-right: none; }
+    @media (max-width: 640px) {
+      .footer-feat-item:nth-child(2n) { border-right: none; }
+      .footer-feat-item:nth-child(n+3) { border-top: 1px solid var(--border); }
+    }
+    .footer-feat-item:hover { background: var(--inv-bg); padding-left: calc(var(--gap) + .6rem); }
+    .footer-feat-item:hover .footer-feat-name,
+    .footer-feat-item:hover .footer-feat-cat,
+    .footer-feat-item:hover .footer-feat-arrow { color: var(--inv-text); }
+    .footer-feat-cat {
+      font-family: var(--f); font-size: .5rem;
+      letter-spacing: .22em; text-transform: uppercase; font-weight: 500; color: var(--muted);
+      transition: color .3s var(--ease);
+    }
+    .footer-feat-name {
+      font-family: var(--f); font-size: 1.1rem; font-weight: 400;
+      letter-spacing: -.01em; transition: color .3s var(--ease);
+    }
+    .footer-feat-arrow { font-size: .75rem; color: var(--muted); margin-top: .15rem; transition: color .3s var(--ease); }
+
+    footer .footer-lower { background: var(--surface); overflow: hidden; border-top: 1px solid var(--border); }
     .footer-statement {
-      font-family: var(--f-serif);
+      font-family: var(--f);
       font-size: clamp(3.5rem, 10vw, 7.5rem);
       font-style: italic; font-weight: 200; line-height: 1;
-      color: var(--border); letter-spacing: -.035em;
+      color: var(--border); letter-spacing: -.06em;
       padding: 3rem var(--gap) .25rem;
       max-width: var(--wide); margin-inline: auto;
     }
@@ -475,48 +544,83 @@
       display: flex; align-items: center; justify-content: space-between;
       flex-wrap: wrap; gap: 1rem;
     }
-    .footer-name { font-family: var(--f-serif); font-size: .95rem; font-weight: 400; color: var(--muted); }
-    .footer-copy { font-family: var(--f-mono); font-size: .52rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+    .footer-name { font-family: var(--f); font-size: .9rem; font-weight: 400; color: var(--muted); }
+    .footer-copy { font-family: var(--f); font-size: .52rem; letter-spacing: .16em; text-transform: uppercase; font-weight: 500; color: var(--muted); }
 
-    /* ══════════ MODAL ══════════ */
+    /* ══════════ ARTICLE MODAL ══════════ */
     .post-modal {
       display: none; position: fixed; inset: 0; z-index: 200;
-      background: rgba(250,250,246,.97);
+      background: rgba(247,247,245,.97);
       backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
       overflow-y: auto; padding: var(--gap);
     }
     .post-modal.open { display: block; animation: mFade .4s var(--ease); }
     @keyframes mFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
-    .modal-inner { max-width: 680px; margin: 80px auto 80px; }
+    .modal-inner { max-width: 700px; margin: 80px auto 100px; }
     .modal-close {
       position: fixed; top: 1.5rem; right: var(--gap);
-      background: var(--warm); border: 1px solid var(--border); border-radius: 50%;
+      background: var(--surface); border: 1px solid var(--border);
       color: var(--muted); width: 38px; height: 38px;
       display: flex; align-items: center; justify-content: center;
-      cursor: pointer; font-size: 1rem;
-      transition: color .3s var(--ease), border-color .3s var(--ease), transform .4s var(--ease);
+      cursor: pointer; font-size: .9rem; font-family: var(--f);
+      transition: background .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease), transform .4s var(--ease);
     }
-    .modal-close:hover { color: var(--accent); border-color: var(--accent); transform: rotate(90deg); }
+    .modal-close:hover { background: var(--text); color: var(--inv-text); border-color: var(--text); transform: rotate(90deg); }
     .modal-eyebrow { margin-bottom: 1.25rem; }
     .modal-title {
-      font-family: var(--f-serif); font-size: clamp(1.7rem, 4vw, 2.9rem);
-      font-weight: 300; line-height: 1.12; letter-spacing: -.015em; margin-bottom: 1.5rem;
+      font-family: var(--f); font-size: clamp(1.7rem, 4vw, 2.9rem);
+      font-weight: 300; line-height: 1.1; letter-spacing: -.04em; margin-bottom: 1.5rem;
     }
-    .modal-date { font-family: var(--f-mono); font-size: .58rem; letter-spacing: .14em; color: var(--muted); margin-bottom: 2.5rem; text-transform: uppercase; }
-    .modal-body { font-size: 1.05rem; line-height: 1.9; color: var(--muted); }
+    .modal-date {
+      font-family: var(--f); font-size: .56rem; letter-spacing: .18em; font-weight: 500;
+      color: var(--muted); margin-bottom: 2.5rem; text-transform: uppercase;
+    }
+    .modal-body { font-size: 1.05rem; line-height: 1.9; color: var(--muted); font-weight: 300; }
     .modal-body p + p { margin-top: 1.4em; }
-    .modal-body h3 { font-family: var(--f-serif); font-size: 1.4rem; font-weight: 400; color: var(--text); margin: 2em 0 .65em; }
+    .modal-body h3 {
+      font-family: var(--f); font-size: .72rem; font-weight: 600;
+      letter-spacing: .2em; text-transform: uppercase;
+      color: var(--text); margin: 3em 0 1em;
+      padding-bottom: .65rem; border-bottom: 1px solid var(--border);
+    }
+    .stakeholder-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--border);
+      margin: 2rem 0;
+    }
+    @media (max-width: 600px) { .stakeholder-grid { grid-template-columns: 1fr; } }
+    .stakeholder-card {
+      background: var(--surface); padding: 1.5rem;
+    }
+    .stakeholder-label {
+      font-family: var(--f); font-size: .54rem; font-weight: 600;
+      letter-spacing: .2em; text-transform: uppercase; color: var(--text);
+      margin-bottom: 1.1rem; display: block;
+    }
+    .stakeholder-row { margin-bottom: .9rem; }
+    .stakeholder-row:last-child { margin-bottom: 0; }
+    .stakeholder-key {
+      font-family: var(--f); font-size: .52rem; font-weight: 600;
+      letter-spacing: .16em; text-transform: uppercase; color: var(--text);
+      opacity: .5; margin-bottom: .25rem; display: block;
+    }
+    .stakeholder-val {
+      font-size: .88rem; line-height: 1.72; color: var(--muted); font-weight: 300;
+    }
     .modal-share {
       margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
       display: flex; align-items: center; gap: .65rem; flex-wrap: wrap;
     }
-    .modal-share-lbl { font-family: var(--f-mono); font-size: .54rem; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
+    .modal-share-lbl {
+      font-family: var(--f); font-size: .54rem; letter-spacing: .2em;
+      text-transform: uppercase; font-weight: 500; color: var(--muted);
+    }
 
     /* ── SCROLLBAR ── */
     ::-webkit-scrollbar { width: 3px; }
     ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
-    ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+    ::-webkit-scrollbar-thumb { background: var(--border); }
+    ::-webkit-scrollbar-thumb:hover { background: var(--text); }
   </style>
 </head>
 <body>
@@ -527,10 +631,10 @@
 <div class="scroll-progress" id="scrollProgress"></div>
 
 <!-- NAV -->
-<nav class="pe pe-1">
+<nav>
   <div class="nav-inner">
-    <span class="nav-name">Jānis Kreics</span>
-    <ul class="nav-links" id="navLinks">
+    <span class="nav-name pe pe-1">Jānis Kreics</span>
+    <ul class="nav-links pe pe-1" id="navLinks">
       <li><a href="#blog">Writing</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#connect">Connect</a></li>
@@ -543,47 +647,64 @@
   </div>
 </nav>
 
-<!-- INTRO -->
-<section class="intro">
-  <div class="intro-inner">
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
 
-    <div class="intro-photo-col pe pe-2">
-      <div class="photo-frame">
-        <img src="J%C4%81nis%20Kreics_019b.jpg" alt="Jānis Kreics" class="intro-photo" />
-      </div>
-      <div class="intro-photo-name">
-        <div class="h1-name">Jānis Kreics</div>
-        <div class="intro-tagline">Engineer · Entrepreneur · LEED AP</div>
+    <div class="hero-top pe pe-1">
+      <span class="eyebrow">Construction &amp; Technology</span>
+      <div class="hero-headline">Engineering the<br><em>future</em> of construction.</div>
+      <div class="hero-dots" aria-hidden="true">
+        <svg width="80" height="68" viewBox="0 0 80 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="4"  cy="4"  r="1.5" fill="#111"/><circle cx="24" cy="4"  r="1.5" fill="#111"/><circle cx="44" cy="4"  r="1.5" fill="#111"/><circle cx="64" cy="4"  r="1.5" fill="#111"/>
+          <circle cx="14" cy="18" r="1.5" fill="#111"/><circle cx="34" cy="18" r="1.5" fill="#111"/><circle cx="54" cy="18" r="1.5" fill="#111"/><circle cx="74" cy="18" r="1.5" fill="#111"/>
+          <circle cx="4"  cy="32" r="1.5" fill="#111"/><circle cx="24" cy="32" r="1.5" fill="#111"/><circle cx="44" cy="32" r="1.5" fill="#111"/><circle cx="64" cy="32" r="1.5" fill="#111"/>
+          <circle cx="14" cy="46" r="1.5" fill="#111"/><circle cx="34" cy="46" r="1.5" fill="#111"/><circle cx="54" cy="46" r="1.5" fill="#111"/><circle cx="74" cy="46" r="1.5" fill="#111"/>
+          <circle cx="4"  cy="60" r="1.5" fill="#111"/><circle cx="24" cy="60" r="1.5" fill="#111"/><circle cx="44" cy="60" r="1.5" fill="#111"/><circle cx="64" cy="60" r="1.5" fill="#111"/>
+        </svg>
       </div>
     </div>
 
-    <div class="intro-text">
-      <h1 class="h1-name pe pe-2">Jānis Kreics</h1>
-      <div class="intro-tagline pe pe-3">Engineer · Entrepreneur · LEED AP</div>
-      <div class="intro-bio pe pe-4">
-        <p>I believe in saying what's true, not what's easy. In getting the details right. In knowing why you're doing something before you do it. In showing up consistently, even when it's inconvenient.</p>
-        <p>When I'm not building things, I'm reading about people who did. Biographical literature keeps me grounded. Running and team sports take care of the rest.</p>
-      </div>
-      <div class="intro-cta pe pe-5">
-        <a href="#blog" class="btn-solid">Read my writing</a>
-        <a href="#connect" class="btn-line">Connect with me</a>
-      </div>
-      <div class="stats-bar pe pe-6">
-        <div class="stat-item">
-          <div class="stat-n">20<em>+</em></div>
-          <div class="stat-l">Years in Construction</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-n">LEED <em>AP</em></div>
-          <div class="stat-l">Accredited Professional</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-n">B.Eng <em>+</em> MBA</div>
-          <div class="stat-l">Academic Foundation</div>
-        </div>
-      </div>
-    </div>
+    <div class="hero-grid">
 
+      <div class="hero-photo-col pe pe-2">
+        <div class="photo-frame">
+          <img src="J%C4%81nis%20Kreics_019b.jpg" alt="Jānis Kreics" class="intro-photo" />
+        </div>
+        <div class="intro-photo-name">
+          <h1 class="h1-name">Jānis Kreics</h1>
+          <div class="intro-tagline">Engineer · Entrepreneur · LEED AP</div>
+        </div>
+      </div>
+
+      <div class="hero-text-col">
+        <h1 class="h1-name pe pe-2">Jānis Kreics</h1>
+        <div class="intro-tagline pe pe-3">Engineer · Entrepreneur · LEED AP</div>
+        <div class="intro-bio pe pe-4">
+          <p>I believe in saying what's true, not what's easy. In getting the details right. In knowing why you're doing something before you do it. In showing up consistently, even when it's inconvenient.</p>
+          <p>When I'm not building things, I'm reading about people who did. Biographical literature keeps me grounded. Running and team sports take care of the rest.</p>
+        </div>
+        <div class="intro-cta pe pe-5">
+          <a href="#blog" class="btn-solid">Read my writing</a>
+          <a href="#connect" class="btn-line">Connect with me</a>
+        </div>
+        <div class="stats-bar pe pe-6">
+          <div class="stat-item">
+            <div class="stat-n">20+</div>
+            <div class="stat-l">Years in Construction</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-n">LEED AP</div>
+            <div class="stat-l">Accredited Professional</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-n">B.Eng + MBA</div>
+            <div class="stat-l">Academic Foundation</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>
 
@@ -599,70 +720,61 @@
     </div>
 
     <div class="post-list">
-
-      <div class="post-item fi fi-d1" onclick="openPost(1)">
-        <span class="post-num">01</span>
-        <div>
-          <div class="post-item-tags"><span class="post-item-tag">BIM</span><span class="post-item-tag">Digital Transformation</span></div>
-          <h3 class="post-item-title">The BIM Revolution: Why Construction's Digital Twin Still Hasn't Arrived</h3>
-          <p class="post-item-excerpt">Building Information Modeling promised to transform how we design, build, and operate structures. Fifteen years later, the gap between that promise and the average job site remains vast. Here's what the software vendors won't tell you.</p>
-          <div class="post-item-meta">
-            <span class="post-item-date">April 2026</span>
-            <span class="post-item-read">5 min read</span>
-            <span class="post-arrow">→</span>
-          </div>
+      <div class="post-item fi fi-d1" onclick="openPost()">
+        <div class="post-item-tags">
+          <span class="post-item-tag">Opinion</span>
+          <span class="post-item-tag">Construction &amp; Real Estate</span>
+        </div>
+        <h3 class="post-item-title">Everyone Wants a Successful Project. But Not the Same One.</h3>
+        <p class="post-item-excerpt">In real estate development, three parties sit at the same table. They share the same timeline, the same building, and often the same meeting room. But they are not playing the same game.</p>
+        <div class="post-item-meta">
+          <span class="post-item-date">April 2026</span>
+          <span class="post-item-read">7 min read</span>
+          <span class="post-arrow">→</span>
         </div>
         <div class="post-item-share" onclick="event.stopPropagation()">
-          <button class="share-pill" onclick="shareLinkedIn(1)">
+          <button class="share-pill" onclick="shareLinkedIn()">
             <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>LinkedIn
           </button>
-          <button class="share-pill" onclick="shareX(1)">
+          <button class="share-pill" onclick="shareX()">
             <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>Post to X
           </button>
         </div>
       </div>
+    </div>
 
-      <div class="post-item fi fi-d2" onclick="openPost(2)">
-        <span class="post-num">02</span>
-        <div>
-          <div class="post-item-tags"><span class="post-item-tag">Project Management</span><span class="post-item-tag">Leadership</span></div>
-          <h3 class="post-item-title">From Blueprint to Bytes: Managing Digital Transformation on the Job Site</h3>
-          <p class="post-item-excerpt">Rolling out a new platform to a team of site engineers isn't a software problem — it's a change management problem. Here are the patterns that separate successful rollouts from costly failures.</p>
-          <div class="post-item-meta">
-            <span class="post-item-date">March 2026</span>
-            <span class="post-item-read">4 min read</span>
-            <span class="post-arrow">→</span>
-          </div>
-        </div>
-        <div class="post-item-share" onclick="event.stopPropagation()">
-          <button class="share-pill" onclick="shareLinkedIn(2)">
-            <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>LinkedIn
-          </button>
-          <button class="share-pill" onclick="shareX(2)">
-            <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>Post to X
-          </button>
-        </div>
+  </div>
+</section>
+
+<!-- CTA SECTION -->
+<section class="cta-sect">
+  <div class="wrap">
+    <div class="cta-sect-grid">
+
+      <div class="fi">
+        <h2 class="cta-sect-title">Stay ahead in<br>construction technology:</h2>
+        <ul class="cta-bullets">
+          <li class="cta-bullet"><span><strong>Practical insights on BIM and digital transformation.</strong> <em>Drawing from 20+ years of field experience — not just theory.</em></span></li>
+          <li class="cta-bullet"><span><strong>Lessons from Europe's largest infrastructure programme.</strong> <em>Firsthand account of what works at scale on Rail Baltica.</em></span></li>
+          <li class="cta-bullet"><span><strong>The intersection of construction and business strategy.</strong> <em>From an engineer with an MBA who has worked at both levels.</em></span></li>
+        </ul>
       </div>
 
-      <div class="post-item fi fi-d3" onclick="openPost(3)">
-        <span class="post-num">03</span>
-        <div>
-          <div class="post-item-tags"><span class="post-item-tag">Insight</span><span class="post-item-tag">Industry</span></div>
-          <h3 class="post-item-title">Five Project Management Lessons Construction Taught Me That Tech Never Could</h3>
-          <p class="post-item-excerpt">Twenty years working between job sites and server rooms has made one thing clear: the construction industry holds lessons in execution, accountability, and real-world constraints that no software methodology has yet captured.</p>
-          <div class="post-item-meta">
-            <span class="post-item-date">February 2026</span>
-            <span class="post-item-read">6 min read</span>
-            <span class="post-arrow">→</span>
+      <div class="fi fi-d1">
+        <div class="cta-box">
+          <h4 class="cta-box-title">Follow my thinking on construction &amp; technology</h4>
+          <p class="cta-box-desc">I publish regularly on BIM, project leadership, and the future of the built environment. Follow along — I'd love to hear from you.</p>
+          <div class="cta-box-btns">
+            <a href="https://www.linkedin.com/in/janis-kreics-leed-ap-2b0ba767/" target="_blank" rel="noopener" class="btn-solid">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+              Follow on LinkedIn
+            </a>
+            <a href="https://x.com/kreics" target="_blank" rel="noopener" class="btn-line">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              Follow on X
+            </a>
           </div>
-        </div>
-        <div class="post-item-share" onclick="event.stopPropagation()">
-          <button class="share-pill" onclick="shareLinkedIn(3)">
-            <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>LinkedIn
-          </button>
-          <button class="share-pill" onclick="shareX(3)">
-            <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>Post to X
-          </button>
+          <p class="cta-box-note">You can unsubscribe or unfollow any time.</p>
         </div>
       </div>
 
@@ -689,6 +801,29 @@
       </div>
 
       <div class="fi fi-d2">
+        <div class="creds-list">
+          <div class="cred-row">
+            <div class="cred-row-title">LEED Accredited Professional</div>
+            <div class="cred-row-sub">Green Building Certification · USGBC</div>
+          </div>
+          <div class="cred-row">
+            <div class="cred-row-title">BIM Manager</div>
+            <div class="cred-row-sub">Rail Baltica · ERB Rail</div>
+          </div>
+          <div class="cred-row">
+            <div class="cred-row-title">Bachelor of Engineering</div>
+            <div class="cred-row-sub">Civil Engineering</div>
+          </div>
+          <div class="cred-row">
+            <div class="cred-row-title">Master of Business Administration</div>
+            <div class="cred-row-sub">Business Strategy</div>
+          </div>
+          <div class="cred-row">
+            <div class="cred-row-title">International Training Programme</div>
+            <div class="cred-row-sub">Skanska · Global Construction</div>
+          </div>
+        </div>
+
         <div class="tags-block">
           <div class="tags-label">Expertise</div>
           <div class="tags">
@@ -729,14 +864,20 @@
         <a href="https://www.linkedin.com/in/janis-kreics-leed-ap-2b0ba767/" target="_blank" rel="noopener" class="social-row">
           <div class="social-row-left">
             <div class="social-row-icon"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></div>
-            <div><div class="social-row-name">LinkedIn</div><div class="social-row-handle">linkedin.com/in/janis-kreics-leed-ap</div></div>
+            <div>
+              <div class="social-row-name">LinkedIn</div>
+              <div class="social-row-handle">linkedin.com/in/janis-kreics-leed-ap</div>
+            </div>
           </div>
           <div class="social-row-arrow">↗</div>
         </a>
         <a href="https://x.com/kreics" target="_blank" rel="noopener" class="social-row">
           <div class="social-row-left">
             <div class="social-row-icon"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></div>
-            <div><div class="social-row-name">X (Twitter)</div><div class="social-row-handle">@kreics</div></div>
+            <div>
+              <div class="social-row-name">X (Twitter)</div>
+              <div class="social-row-handle">@kreics</div>
+            </div>
           </div>
           <div class="social-row-arrow">↗</div>
         </a>
@@ -747,10 +888,36 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-statement">Jānis Kreics</div>
-  <div class="footer-inner">
-    <div class="footer-name">Jānis Kreics — Construction &amp; Technology</div>
-    <div class="footer-copy">&copy; 2026 · janis-kreics.com</div>
+  <div class="footer-feat">
+    <div class="footer-feat-grid">
+      <div class="footer-feat-item">
+        <span class="footer-feat-cat">Infrastructure</span>
+        <span class="footer-feat-name">Rail Baltica</span>
+        <span class="footer-feat-arrow">→</span>
+      </div>
+      <div class="footer-feat-item">
+        <span class="footer-feat-cat">Architecture</span>
+        <span class="footer-feat-name">Būvdizains</span>
+        <span class="footer-feat-arrow">→</span>
+      </div>
+      <div class="footer-feat-item">
+        <span class="footer-feat-cat">Certification</span>
+        <span class="footer-feat-name">LEED AP</span>
+        <span class="footer-feat-arrow">→</span>
+      </div>
+      <a href="#blog" class="footer-feat-item">
+        <span class="footer-feat-cat">Writing</span>
+        <span class="footer-feat-name">Field Notes</span>
+        <span class="footer-feat-arrow">→</span>
+      </a>
+    </div>
+  </div>
+  <div class="footer-lower">
+    <div class="footer-statement">Jānis Kreics</div>
+    <div class="footer-inner">
+      <div class="footer-name">Jānis Kreics — Construction &amp; Technology</div>
+      <div class="footer-copy">&copy; 2026 · janis-kreics.com</div>
+    </div>
   </div>
 </footer>
 
@@ -764,72 +931,126 @@
   </div>
 </div>
 
-<!-- MODAL -->
+<!-- ARTICLE MODAL -->
 <div class="post-modal" id="postModal">
   <div class="modal-inner">
     <button class="modal-close" onclick="closePost()" aria-label="Close">✕</button>
-    <div id="modalContent"></div>
+    <div class="modal-eyebrow"><span class="eyebrow">Opinion · Construction &amp; Real Estate</span></div>
+    <h2 class="modal-title">Everyone Wants a Successful Project. But Not the Same One.</h2>
+    <div class="modal-date">April 2026 · 7 min read</div>
+    <div class="modal-body">
+      <p>In real estate development, three parties sit at the same table. They share the same timeline, the same building, and often the same meeting room. But they are not playing the same game.</p>
+      <p>Projects rarely collapse completely. In my experience, that is actually the exception. What happens far more often is quieter and, in a way, more interesting: the project gets delivered, the building goes up, and somewhere in the process one or two parties walk away feeling like they lost. Nobody talks about it publicly. But it happens on almost every project.</p>
+      <p>Why? Because the three core stakeholders in any real estate development — let's call them Stakeholder A, B, and C — come to the table with fundamentally different definitions of what "success" means. And since nobody puts that on the agenda in week one, the gap quietly drives decisions, creates tension, and ultimately shapes who ends the project satisfied and who does not.</p>
+      <p>I want to break down how each party thinks about the three things that matter most: time, budget, and quality. Then I want to talk about where common ground actually exists, and where each party needs to be honest about what they are really being asked to give up.</p>
+
+      <h3>The Three Players — Different Seats, Different Scorecards</h3>
+
+      <div class="stakeholder-grid">
+        <div class="stakeholder-card">
+          <span class="stakeholder-label">Stakeholder A</span>
+          <div class="stakeholder-row">
+            <span class="stakeholder-key">Time</span>
+            <div class="stakeholder-val">Delivery on schedule is everything. A delay is not just a construction problem — it is a financial event. Financing costs run. Market windows close. Commitments to future tenants or buyers are at risk.</div>
+          </div>
+          <div class="stakeholder-row">
+            <span class="stakeholder-key">Budget</span>
+            <div class="stakeholder-val">The budget was set based on a return model. Every euro over that number comes directly out of margin. The goal is not to be cheap — it is to not exceed the number already justified to someone above.</div>
+          </div>
+          <div class="stakeholder-row">
+            <span class="stakeholder-key">Quality</span>
+            <div class="stakeholder-val">Quality matters, but it is defined by the end user and the market position. Overbuilding is as much of a problem as underbuilding. The question is always: quality relative to what?</div>
+          </div>
+        </div>
+        <div class="stakeholder-card">
+          <span class="stakeholder-label">Stakeholder B</span>
+          <div class="stakeholder-row">
+            <span class="stakeholder-key">Time</span>
+            <div class="stakeholder-val">Enough time to do the work properly. Compressed timelines mean errors, redrawn details, and change orders downstream. A well-paced design phase saves everyone time in construction — but this argument is always harder to make than it should be.</div>
+          </div>
+          <div class="stakeholder-row">
+            <span class="stakeholder-key">Budget</span>
+            <div class="stakeholder-val">The fee is fixed early and rarely reflects what the project actually becomes. Scope creep, revision cycles, and last-minute value engineering all eat into it. The real goal is to protect the original agreement while still delivering something worth putting in a portfolio.</div>
+          </div>
+          <div class="stakeholder-row">
+            <span class="stakeholder-key">Quality</span>
+            <div class="stakeholder-val">This is where the identity is. Quality is not just functional — it is reputational. A cut that compromises the design is not a neutral business decision. It is a mark on something they signed.</div>
+          </div>
+        </div>
+        <div class="stakeholder-card">
+          <span class="stakeholder-label">Stakeholder C</span>
+          <div class="stakeholder-row">
+            <span class="stakeholder-key">Time</span>
+            <div class="stakeholder-val">Time is money in the most literal sense. Every week on site has a cost. The goal is to sequence work efficiently, minimize idle time, and avoid situations where incomplete design decisions stop progress on the ground.</div>
+          </div>
+          <div class="stakeholder-row">
+            <span class="stakeholder-key">Budget</span>
+            <div class="stakeholder-val">Margin protection. The tender price already had risk priced in. Anything that changes scope, adds complexity, or requires rework is a direct hit. The goal is to deliver within the agreed envelope and recover where possible.</div>
+          </div>
+          <div class="stakeholder-row">
+            <span class="stakeholder-key">Quality</span>
+            <div class="stakeholder-val">Quality means compliance. Meeting the specification, passing inspections, and handing over a building the client accepts. Going beyond the spec is not a goal — it is a risk, because it might not be recognized or compensated.</div>
+          </div>
+        </div>
+      </div>
+
+      <h3>Common Ground — Where Alignment Actually Exists</h3>
+      <p>There is more common ground than it might look like from the above. All three parties want the project to reach completion. Failure — real failure, where the building does not get built — is bad for everyone. Nobody wants that.</p>
+      <p>All three parties also benefit from clear information. Ambiguity is the shared enemy. Unclear drawings cause rework. Unclear scope causes disputes. Unclear expectations cause disappointed clients. Every party at the table has an interest in the information being correct and available when it is needed.</p>
+      <p>And perhaps most importantly: all three parties have their reputation tied to this project. A is associated with the asset. B's name is on the design. C delivered the building. Nobody wants a reference site they have to explain.</p>
+      <p>The problem is not that common ground does not exist. The problem is that nobody maps it out at the start — so when pressure builds, each party defaults to protecting their own scorecard instead of the shared one.</p>
+
+      <h3>The Hard Part — Where Compromise Actually Has to Happen</h3>
+      <p>This is where most conversations stop being comfortable. Compromise sounds reasonable in the abstract. In practice, it means someone gives something up — and that needs to be said clearly.</p>
+      <p><strong>Stakeholder A</strong> has to decide early what the actual priority order is. Time, budget, and quality are three variables. In any real project, you can optimize for two of them. The project that tries to hold all three rigid simultaneously is the project that ends in disputes. A needs to communicate the real hierarchy — not the official one, the real one — and commit to it.</p>
+      <p><strong>Stakeholder B</strong> has to accept that not every design decision carries equal weight. Some elements are load-bearing for the project's identity and quality. Others are preferences. Knowing the difference, and saying it out loud, is what separates a consultant who is genuinely collaborative from one who is simply defending the drawings. The ability to distinguish between a design compromise and a design failure is a professional skill.</p>
+      <p><strong>Stakeholder C</strong> has to be transparent earlier. The contractor who surfaces a problem in week two of construction rather than week twelve is protecting everyone. There is a culture in construction where problems get managed quietly until they cannot be — and that culture is expensive. Being the party that raises the uncomfortable issue early is not a weakness. It is the thing that earns trust on future projects.</p>
+
+      <h3>The Reveal — So, Who Is Who?</h3>
+      <p>You already have an opinion. Each stakeholder above maps to a specific role in the industry. Which of them is the Client / Developer? Which is the Designer / Consultant? Which is the Contractor?</p>
+      <p>And more interestingly — which stakeholder do you identify with most? Which one do you think causes the most friction when goals are never discussed openly?</p>
+      <p>Leave a comment.</p>
+    </div>
+    <div class="modal-share">
+      <span class="modal-share-lbl">Share —</span>
+      <button class="share-pill" onclick="shareLinkedIn()">
+        <svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        Share on LinkedIn
+      </button>
+      <button class="share-pill" onclick="shareX()">
+        <svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        Post to X
+      </button>
+    </div>
   </div>
 </div>
 
 <script>
   const SITE_URL = window.location.href.split('#')[0];
 
-  const posts = {
-    1: {
-      title: "The BIM Revolution: Why Construction's Digital Twin Still Hasn't Arrived",
-      date: 'April 2026', tags: ['BIM', 'Digital Transformation'],
-      excerpt: "Building Information Modeling promised to transform how we design, build, and operate structures. Fifteen years later, the gap between that promise and the average job site remains vast.",
-      body: `<p>When BIM first appeared on the horizon of the construction industry, the promises were extraordinary. A single model containing every pipe, every beam, every mechanical system — updated in real time, accessible to every stakeholder, eliminating the coordination chaos that had plagued large projects for generations. Architects, engineers, and contractors working from a single source of truth.</p><p>Fifteen years later, the BIM revolution has arrived — for some. For the majority of the industry, it remains somewhere between aspiration and PowerPoint.</p><h3>The Adoption Paradox</h3><p>The software exists. The case studies are compelling. The ROI data, when projects genuinely commit to the methodology, is hard to argue with. And yet, on most mid-size projects I've touched in the past decade, BIM adoption follows a frustratingly familiar arc: enthusiastic launch, partial implementation, gradual retreat to familiar workflows, and a final deliverable model that no one is sure how to use.</p><p>The problem isn't the technology. It's the gap between the people who buy the technology and the people who build with it. A site foreman who has spent thirty years reading 2D drawings doesn't become a BIM operator because his company signed an Autodesk license. Change at that depth requires investment in people that most project budgets and timelines don't accommodate.</p><h3>What Actually Works</h3><p>The projects I've seen achieve genuine BIM value share a few common characteristics: leadership that treats digital adoption as a core deliverable, not a software checkbox; early involvement of field teams in model development; and — critically — simplicity. Not the full-spectrum digital twin promise, but a deliberate, well-scoped use case that the entire team can actually operate.</p><p>The digital twin will arrive. But it will arrive field-first, not vendor-first.</p>`
-    },
-    2: {
-      title: "From Blueprint to Bytes: Managing Digital Transformation on the Job Site",
-      date: 'March 2026', tags: ['Project Management', 'Leadership'],
-      excerpt: "Rolling out a new platform to a team of site engineers isn't a software problem — it's a change management problem.",
-      body: `<p>The most expensive line item in any construction technology rollout isn't the software license. It's the time lost when adoption fails — the weeks of parallel running, the workarounds, the quiet retreat to spreadsheets because the new system "doesn't work for how we operate."</p><p>I've led technology transitions in construction environments ranging from small regional contractors to major infrastructure programs. The ones that worked shared a pattern. The ones that failed shared a different, remarkably consistent pattern.</p><h3>The Mistake Everyone Makes</h3><p>Treating a digital transformation as a technology project. It isn't. It's a people project with technology as the vehicle. When an IT team or a software vendor leads the rollout without deep field partnership, the result is almost always a tool that perfectly solves the problems IT understands and entirely misses the ones that matter on site.</p><p>The first question in any construction technology project should not be "which platform?" It should be "which three people on site, if they believe in this, will bring everyone else along?" Find those people first. Build around them.</p><h3>The Framework That Works</h3><p>Start with one process, not the whole ecosystem. Prove it in a controlled environment. Let the people who were skeptical see the outcome. Then expand. Slow starts that compound outperform ambitious launches that stall every time. Construction moves on trust — trust between people, trust built on demonstrated outcomes. Technology adoption in this industry is no different.</p>`
-    },
-    3: {
-      title: "Five Project Management Lessons Construction Taught Me That Tech Never Could",
-      date: 'February 2026', tags: ['Insight', 'Industry'],
-      excerpt: "Twenty years working between job sites and server rooms has made one thing clear: the construction industry holds lessons in execution that no software methodology has yet captured.",
-      body: `<p>I've worked in rooms where agile was the framework and rooms where the framework was concrete setting in cold weather. Both taught me things. But the lessons I carry most heavily came from the latter.</p><p>Construction is, at its core, a discipline of irreversibility. When you pour a slab in the wrong location, you don't roll back a commit. You live with it, or you demolish it — both expensive. That pressure creates a kind of clarity about planning, communication, and accountability that software projects rarely achieve.</p><h3>1. Constraints are information, not obstacles</h3><p>In construction, every constraint — weather, access, supply lead time, inspector availability — is data that shapes the plan. The best project managers I've worked with treat constraint mapping as the first act of planning, not a footnote. Most software project managers treat constraints as obstacles to route around.</p><h3>2. The person closest to the work knows the most</h3><p>The foreman who has poured three hundred slabs has knowledge no project plan captures. Ignoring that knowledge — in favour of a schedule built in an office — is how projects fail slowly and expensively. The same is true in technology: the person running the support queue knows more about product problems than the roadmap does.</p><h3>3. Accountability without blame is a skill, not a policy</h3><p>Construction sites are high-stakes, high-consequence environments. The cultures that function well have developed a specific kind of accountability: issues are surfaced fast, owned clearly, and resolved without the political navigation that slows most organisations. That directness is something worth importing.</p><h3>4. Float is sacred</h3><p>Schedule float — buffer time built deliberately into a project — is treated as a resource in construction. In software, it's treated as waste to be optimised away. The result is construction projects that absorb shocks, and software projects that cascade on the first unexpected obstacle.</p><h3>5. Handoffs are where projects die</h3><p>The moment work passes between teams — design to engineering, engineering to site, site to commissioning — is where information degrades, assumptions accumulate, and problems that were visible become invisible. This is true in construction. It is equally true in every technology organisation I've worked in. The discipline of handoff management is underrated everywhere.</p>`
-    }
-  };
-
-  function openPost(id) {
-    const p = posts[id];
-    document.getElementById('modalContent').innerHTML = `
-      <div class="modal-eyebrow"><span class="eyebrow">${p.tags.join(' · ')}</span></div>
-      <h2 class="modal-title">${p.title}</h2>
-      <div class="modal-date">${p.date}</div>
-      <div class="modal-body">${p.body}</div>
-      <div class="modal-share">
-        <span class="modal-share-lbl">Share —</span>
-        <button class="share-pill" onclick="shareLinkedIn(${id})"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>Share on LinkedIn</button>
-        <button class="share-pill" onclick="shareX(${id})"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>Post to X</button>
-      </div>`;
+  /* ── Article modal ── */
+  function openPost() {
     document.getElementById('postModal').classList.add('open');
     document.body.style.overflow = 'hidden';
   }
-
   function closePost() {
     document.getElementById('postModal').classList.remove('open');
     document.body.style.overflow = '';
   }
-
   document.getElementById('postModal').addEventListener('click', function(e) {
     if (e.target === this) closePost();
   });
 
-  function shareLinkedIn(id) {
+  /* ── Share ── */
+  function shareLinkedIn() {
     window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(SITE_URL + '#blog'), '_blank', 'width=600,height=500');
   }
-  function shareX(id) {
-    const p = posts[id];
-    window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent('"' + p.title + '" — ' + p.excerpt.substring(0,100) + '… ' + SITE_URL + '#blog'), '_blank', 'width=600,height=500');
+  function shareX() {
+    const text = '"Everyone Wants a Successful Project. But Not the Same One." — In real estate development, three parties sit at the same table. But they are not playing the same game.';
+    window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text + ' ' + SITE_URL + '#blog'), '_blank', 'width=600,height=500');
   }
 
-  /* Expertise modal */
+  /* ── Expertise modal ── */
   const expertise = {
     'Engineering': 'A full-cycle engineering perspective that bridges design intent with construction reality, rare in practitioners who typically specialise in one or the other. Built through years of both developing design projects and personally overseeing their construction at Būvdizains.',
     'Architecture': 'End-to-end design leadership across residential and commercial typologies, from concept through regulatory approval and site delivery. Applied daily as principal of Būvdizains, where architecture is treated as the core discipline around which all other building systems are coordinated.',
@@ -853,15 +1074,18 @@
     document.getElementById('expModal').classList.remove('open');
     document.body.style.overflow = '';
   }
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') { closePost(); closeExp(); } });
 
-  /* Scroll reveal */
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { closePost(); closeExp(); }
+  });
+
+  /* ── Scroll reveal ── */
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } });
   }, { threshold: 0.07 });
   document.querySelectorAll('.fi').forEach(el => io.observe(el));
 
-  /* Nav toggle */
+  /* ── Nav toggle ── */
   document.getElementById('navToggle').addEventListener('click', () => {
     document.getElementById('navLinks').classList.toggle('open');
   });
@@ -869,14 +1093,14 @@
     a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
   });
 
-  /* Scroll progress */
+  /* ── Scroll progress ── */
   window.addEventListener('scroll', () => {
     const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
     document.getElementById('scrollProgress').style.width = (pct * 100) + '%';
   }, { passive: true });
 
-  /* Custom cursor */
-  const dot = document.getElementById('cursorDot');
+  /* ── Custom cursor ── */
+  const dot  = document.getElementById('cursorDot');
   const ring = document.getElementById('cursorRing');
   let rx = window.innerWidth / 2, ry = window.innerHeight / 2;
   let mx = rx, my = ry;
@@ -884,7 +1108,7 @@
   document.addEventListener('mousemove', e => {
     mx = e.clientX; my = e.clientY;
     dot.style.left = mx + 'px';
-    dot.style.top = my + 'px';
+    dot.style.top  = my + 'px';
   });
   document.addEventListener('mouseleave', () => { dot.style.opacity = '0'; ring.style.opacity = '0'; });
   document.addEventListener('mouseenter', () => { dot.style.opacity = '1'; ring.style.opacity = '1'; });
@@ -893,7 +1117,7 @@
     rx += (mx - rx) * 0.1;
     ry += (my - ry) * 0.1;
     ring.style.left = rx + 'px';
-    ring.style.top = ry + 'px';
+    ring.style.top  = ry + 'px';
     requestAnimationFrame(animRing);
   })();
 </script>
