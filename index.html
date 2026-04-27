@@ -1,12 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!DOCTYPE html><html lang="en"><head>
+
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jānis Kreics — Construction &amp; Technology</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900;1,300;1,400;1,600;1,700&amp;display=swap" rel="stylesheet">
   <style>
     :root {
       --bg:       #FFFFFF;
@@ -149,7 +149,7 @@
     .nav-name { font-family: var(--f); font-size: .92rem; font-weight: 500; letter-spacing: .05em; }
     .nav-links { display: flex; gap: 2.25rem; }
     .nav-links a {
-      font-family: var(--f); font-size: .54rem; letter-spacing: .22em;
+      font-family: var(--f); font-size: 1.08rem; letter-spacing: .22em;
       text-transform: uppercase; font-weight: 500; color: var(--muted);
       transition: color .3s var(--ease);
     }
@@ -219,12 +219,12 @@
     }
 
     .sidebar-headline {
-      font-family: var(--fh);
+      font-family: var(--f);
       font-size: clamp(1.15rem, 2.5vw, 1.65rem);
-      font-weight: 900; line-height: 1.1; letter-spacing: -.02em;
+      font-weight: 900; font-style: italic; line-height: 1.1; letter-spacing: -.02em;
       color: #FFFFFF; margin-bottom: 1.5rem;
     }
-    .sidebar-headline em { font-style: italic; font-weight: 900; color: #FFFFFF; }
+    .sidebar-headline em { font-family: var(--f); font-style: italic; font-weight: 900; color: #FFFFFF; }
 
     .sidebar .intro-bio {
       font-size: .9rem; line-height: 1.8; font-weight: 300;
@@ -246,12 +246,12 @@
 
     .sidebar .btn-line {
       display: inline-flex; align-items: center; gap: .5rem;
-      padding: .7rem 1.2rem; border: 1px solid rgba(255,255,255,.25); color: rgba(255,255,255,.6);
+      padding: .7rem 1.2rem; background: #FFFFFF; color: #181818; border: 1px solid #FFFFFF;
       font-family: var(--f); font-size: .5rem; letter-spacing: .18em; font-weight: 600;
       text-transform: uppercase;
       transition: background .35s var(--ease), color .35s var(--ease), border-color .35s var(--ease), transform .3s var(--ease);
     }
-    .sidebar .btn-line:hover { background: #FFFFFF; color: #181818; border-color: #FFFFFF; transform: translateY(-2px); }
+    .sidebar .btn-line:hover { background: transparent; color: #FFFFFF; border-color: rgba(255,255,255,.5); transform: translateY(-2px); }
 
     .sidebar .stats-bar {
       padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,.1);
@@ -293,12 +293,12 @@
     .sec-head > * { position: relative; z-index: 1; }
 
     .section-heading {
-      font-family: var(--fh);
+      font-family: var(--f);
       font-size: clamp(1.3rem, 2.6vw, 1.95rem);
       font-weight: 900; line-height: 1.1; letter-spacing: -.01em;
       margin-bottom: .45rem;
     }
-    .section-heading em { font-style: italic; font-weight: 900; }
+    .section-heading em { font-family: var(--f); font-style: normal; font-weight: 900; }
     .section-sub { color: var(--muted); font-size: .93rem; max-width: 52ch; font-weight: 300; }
 
     /* ══════════ BLOG ══════════ */
@@ -508,8 +508,8 @@
 
     .connect-statement {
       font-family: var(--fh);
-      font-size: clamp(1.885rem, 3.9vw, 2.99rem);
-      font-weight: 700; line-height: 1.35; letter-spacing: -.01em;
+      font-size: clamp(.94rem, 1.95vw, 1.5rem);
+      font-weight: 700; line-height: 1.45; letter-spacing: -.01em;
       margin-bottom: 1.5rem;
     }
     .connect-statement em { font-style: italic; font-weight: 700; }
@@ -626,7 +626,7 @@
     .modal-body { font-size: 1.05rem; line-height: 1.9; color: var(--muted); font-weight: 300; }
     .modal-body p + p { margin-top: 1.4em; }
     .modal-body h3 {
-      font-family: var(--f); font-size: .72rem; font-weight: 600;
+      font-family: var(--f); font-size: .94rem; font-weight: 600;
       letter-spacing: .2em; text-transform: uppercase;
       color: var(--text); margin: 3em 0 1em;
       padding-bottom: .65rem; border-bottom: 1px solid var(--border);
@@ -639,7 +639,7 @@
     @media (max-width: 600px) { .stakeholder-grid { grid-template-columns: 1fr; } }
     .stakeholder-card { background: var(--surface); padding: 1.5rem; }
     .stakeholder-label {
-      font-family: var(--f); font-size: .54rem; font-weight: 600;
+      font-family: var(--f); font-size: .7rem; font-weight: 600;
       letter-spacing: .2em; text-transform: uppercase; color: var(--text);
       margin-bottom: 1.1rem; display: block;
     }
@@ -686,18 +686,18 @@
     <div style="display:flex;align-items:center;gap:.65rem;">
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
         <svg class="icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
-          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-          <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
-          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          <circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
         </svg>
         <svg class="icon-moon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
         </svg>
       </button>
       <button class="nav-toggle" id="navToggle" aria-label="Menu">
         <svg width="20" height="14" fill="none" stroke="currentColor" stroke-width="1.5">
-          <line x1="0" y1="1" x2="20" y2="1"/><line x1="0" y1="7" x2="20" y2="7"/><line x1="0" y1="13" x2="20" y2="13"/>
+          <line x1="0" y1="1" x2="20" y2="1"></line><line x1="0" y1="7" x2="20" y2="7"></line><line x1="0" y1="13" x2="20" y2="13"></line>
         </svg>
       </button>
     </div>
@@ -710,8 +710,8 @@
   <!-- LEFT SIDEBAR: sticky, dark, introduction -->
   <aside class="sidebar pe pe-1">
     <span class="sidebar-eyebrow">Construction &amp; Technology</span>
-    <img src="J%C4%81nis%20Kreics_019b.jpg" alt="Jānis Kreics" class="sidebar-photo" />
-    <div class="sidebar-headline">Engineering the<br><em>future</em> of construction.</div>
+    <img src="J%C4%81nis%20Kreics_019b.jpg" alt="Jānis Kreics" class="sidebar-photo">
+    <div class="sidebar-headline">The future is<br>built by the <em>curious.</em></div>
     <h1 class="h1-name">Jānis Kreics</h1>
     <div class="intro-tagline">Engineer · Entrepreneur · LEED AP</div>
     <div class="intro-bio">
@@ -745,14 +745,14 @@
     <section id="blog">
       <div class="wrap">
 
-        <div class="sec-head fi">
+        <div class="sec-head fi on">
           <div class="eyebrow" style="margin-bottom:.7rem">Writing</div>
           <h2 class="section-heading">Field notes &amp; <em>dispatches.</em></h2>
           <p class="section-sub">Essays on construction, technology, and leadership — from someone who has worked in both worlds.</p>
         </div>
 
         <div class="post-list">
-          <div class="post-item fi fi-d1" onclick="openPost()">
+          <div class="post-item fi fi-d1 on" onclick="openPost()">
             <div class="post-item-tags">
               <span class="post-item-tag">Opinion</span>
               <span class="post-item-tag">Construction &amp; Real Estate</span>
@@ -766,10 +766,10 @@
             </div>
             <div class="post-item-share" onclick="event.stopPropagation()">
               <button class="share-pill" onclick="shareLinkedIn()">
-                <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>LinkedIn
+                <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"></path><circle cx="4" cy="4" r="2"></circle></svg>LinkedIn
               </button>
               <button class="share-pill" onclick="shareX()">
-                <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>Post to X
+                <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>Post to X
               </button>
             </div>
           </div>
@@ -783,7 +783,7 @@
       <div class="wrap">
         <div class="cta-sect-grid">
 
-          <div class="fi">
+          <div class="fi on">
             <h2 class="cta-sect-title">Stay ahead in<br>construction technology:</h2>
             <ul class="cta-bullets">
               <li class="cta-bullet"><span><strong>Practical insights on BIM and digital transformation.</strong> <em>Drawing from 20+ years of field experience — not just theory.</em></span></li>
@@ -798,11 +798,11 @@
               <p class="cta-box-desc">I publish regularly on BIM, project leadership, and the future of the built environment. Follow along — I'd love to hear from you.</p>
               <div class="cta-box-btns">
                 <a href="https://www.linkedin.com/in/janis-kreics-leed-ap-2b0ba767/" target="_blank" rel="noopener" class="btn-solid">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"></path><circle cx="4" cy="4" r="2"></circle></svg>
                   Follow on LinkedIn
                 </a>
-                <a href="https://x.com/kreics" target="_blank" rel="noopener" class="btn-line">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                <a href="https://x.com/kreics" target="_blank" rel="noopener" class="btn-solid">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
                   Follow on X
                 </a>
               </div>
@@ -826,36 +826,13 @@
         <div class="about-body">
           <div class="bio-text fi fi-d1">
             <p>Jānis Kreics is an entrepreneur supplying professional services to the construction industry, operating two companies based in Latvia that specialise in architecture, digital construction, and building design. His career sits at the intersection of sustainable building practice and digital transformation, where technical rigour and business strategy meet.</p>
-            <p>As a <strong>LEED AP</strong> practitioner, he brings environmentally responsible thinking to every project. He currently serves as <strong>BIM Manager</strong> on one of Europe's most significant infrastructure programmes, reshaping how the Baltic states connect to the wider European rail network.</p>
-            <p>His work spans Project Management, Project Controls, Building Information Modelling, and the integration of digital tools into construction workflows, helping teams work smarter, deliver on time and within budget, and reduce environmental impact. An <strong>Engineering degree</strong> combined with an <strong>MBA</strong> gives him fluency across both technical and executive registers that few practitioners bring to the table.</p>
+            <p>As a LEED AP practitioner, he brings environmentally responsible thinking to every project. He currently serves as BIM Manager on one of Europe's most significant infrastructure programmes, reshaping how the Baltic states connect to the wider European rail network.</p>
+            <p>His work spans Project Management, Project Controls, Building Information Modelling, and the integration of digital tools into construction workflows, helping teams work smarter, deliver on time and within budget, and reduce environmental impact. An Engineering degree combined with an MBA gives him fluency across both technical and executive registers that few practitioners bring to the table.</p>
             <p>Through a competitive international internship programme, he trained with one of the world's leading construction companies. That experience shaped his professional trajectory and continues to inform how he approaches every project today.</p>
           </div>
 
           <div class="fi fi-d2">
-            <div class="creds-list">
-              <div class="cred-row">
-                <div class="cred-row-title">LEED Accredited Professional</div>
-                <div class="cred-row-sub">Green Building Certification · USGBC</div>
-              </div>
-              <div class="cred-row">
-                <div class="cred-row-title">BIM Manager</div>
-                <div class="cred-row-sub">Rail Baltica · ERB Rail</div>
-              </div>
-              <div class="cred-row">
-                <div class="cred-row-title">Bachelor of Engineering</div>
-                <div class="cred-row-sub">Civil Engineering</div>
-              </div>
-              <div class="cred-row">
-                <div class="cred-row-title">Master of Business Administration</div>
-                <div class="cred-row-sub">Business Strategy</div>
-              </div>
-              <div class="cred-row">
-                <div class="cred-row-title">International Training Programme</div>
-                <div class="cred-row-sub">Skanska · Global Construction</div>
-              </div>
-            </div>
-
-            <div class="tags-block">
+            <div class="tags-block" style="margin-bottom: 2rem;">
               <div class="tags-label">Expertise</div>
               <div class="tags">
                 <span class="tag" onclick="openExp('Engineering')">Engineering</span>
@@ -869,6 +846,9 @@
                 <span class="tag" onclick="openExp('Entrepreneurship')">Entrepreneurship</span>
                 <span class="tag" onclick="openExp('Sustainable Construction')">Sustainable Construction</span>
               </div>
+            </div>
+
+            <div class="creds-list">
             </div>
           </div>
         </div>
@@ -893,7 +873,7 @@
           <div class="social-rows fi fi-d2">
             <a href="https://www.linkedin.com/in/janis-kreics-leed-ap-2b0ba767/" target="_blank" rel="noopener" class="social-row">
               <div class="social-row-left">
-                <div class="social-row-icon"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></div>
+                <div class="social-row-icon"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"></path><circle cx="4" cy="4" r="2"></circle></svg></div>
                 <div>
                   <div class="social-row-name">LinkedIn</div>
                   <div class="social-row-handle">linkedin.com/in/janis-kreics-leed-ap</div>
@@ -903,7 +883,7 @@
             </a>
             <a href="https://x.com/kreics" target="_blank" rel="noopener" class="social-row">
               <div class="social-row-left">
-                <div class="social-row-icon"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></div>
+                <div class="social-row-icon"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg></div>
                 <div>
                   <div class="social-row-name">X (Twitter)</div>
                   <div class="social-row-handle">@kreics</div>
@@ -921,35 +901,10 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-feat">
-    <div class="footer-feat-grid">
-      <div class="footer-feat-item">
-        <span class="footer-feat-cat">Infrastructure</span>
-        <span class="footer-feat-name">Rail Baltica</span>
-        <span class="footer-feat-arrow">→</span>
-      </div>
-      <div class="footer-feat-item">
-        <span class="footer-feat-cat">Architecture</span>
-        <span class="footer-feat-name">Būvdizains</span>
-        <span class="footer-feat-arrow">→</span>
-      </div>
-      <div class="footer-feat-item">
-        <span class="footer-feat-cat">Certification</span>
-        <span class="footer-feat-name">LEED AP</span>
-        <span class="footer-feat-arrow">→</span>
-      </div>
-      <a href="#blog" class="footer-feat-item">
-        <span class="footer-feat-cat">Writing</span>
-        <span class="footer-feat-name">Field Notes</span>
-        <span class="footer-feat-arrow">→</span>
-      </a>
-    </div>
-  </div>
   <div class="footer-lower">
-    <div class="footer-statement">Jānis Kreics</div>
     <div class="footer-inner">
       <div class="footer-name">Jānis Kreics — Construction &amp; Technology</div>
-      <div class="footer-copy">&copy; 2026 · janis-kreics.com</div>
+      <div class="footer-copy">© 2026 · janis-kreics.com</div>
     </div>
   </div>
 </footer>
@@ -1047,11 +1002,11 @@
     <div class="modal-share">
       <span class="modal-share-lbl">Share —</span>
       <button class="share-pill" onclick="shareLinkedIn()">
-        <svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        <svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"></path><circle cx="4" cy="4" r="2"></circle></svg>
         Share on LinkedIn
       </button>
       <button class="share-pill" onclick="shareX()">
-        <svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        <svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
         Post to X
       </button>
     </div>
@@ -1169,5 +1124,7 @@
     requestAnimationFrame(animRing);
   })();
 </script>
+
+
 </body>
 </html>
