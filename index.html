@@ -348,7 +348,7 @@
     }
     .post-item-excerpt {
       font-size: .95rem; color: var(--muted); line-height: 1.78;
-      max-width: 64ch; font-weight: 300;
+      width: 950px; max-width: 100%; font-weight: 300;
       transition: color .35s var(--ease);
     }
     .post-item-meta { display: flex; align-items: center; gap: 1.25rem; margin-top: 1rem; flex-wrap: wrap; }
@@ -679,7 +679,7 @@
 
 <div class="grain" aria-hidden="true"></div>
 <div class="cursor-dot" id="cursorDot"></div>
-<div class="cursor-ring" id="cursorRing"></div>
+<div class="cursor-ring" id="cursorRing" style="left: 824px; top: 453px;"></div>
 <div class="scroll-progress" id="scrollProgress"></div>
 
 <!-- NAV -->
@@ -756,11 +756,7 @@
         <div class="sec-head fi on">
           <div class="eyebrow" style="margin-bottom:.7rem">Writing</div>
           <h2 class="section-heading">Field notes &amp; <em>dispatches.</em></h2>
-          <p class="section-sub">Essays on construction, technology, and leadership - from someone who has worked in both worlds.
-
-
-
-I write about things that matter in this industry - and sometimes things that make people uncomfortable. Not every piece ends with a neat solution. Some end with a question, because I believe the best answers come from the people actually doing the work. Everything here is open for debate. That's the point.</p>
+          <p class="section-sub" style="width: 950px; max-width: 100%;">Essays on construction, technology, and leadership - from someone who has worked in both worlds.<br><br>I write about things that matter in this industry - and sometimes things that make people uncomfortable. Not every piece ends with a neat solution. Some end with a question, because I believe the best answers come from the people actually doing the work. Everything here is open for debate. That's the point.</p>
         </div>
 
         <div class="post-list">
@@ -941,8 +937,8 @@ I write about things that matter in this industry - and sometimes things that ma
     <div class="modal-body">
       <p>In real estate development, three parties sit at the same table. They share the same timeline, the same building, and often the same meeting room. But they are not playing the same game.</p>
       <p>Projects rarely collapse completely. In my experience, that is actually the exception. What happens far more often is quieter and, in a way, more interesting: the project gets delivered, the building goes up, and somewhere in the process one or two parties walk away feeling like they lost. Nobody talks about it publicly. But it happens on almost every project.</p>
-      <p>Why? Because the three core stakeholders in any real estate development - let's call them Stakeholder A, B, and C come to the table with fundamentally different definitions of what "success" means. And since nobody puts that on the agenda in week one, the gap quietly drives decisions, creates tension, and ultimately shapes who ends the project satisfied and who does not.</p>
-      <p>I want to break down how each party thinks about the three things that matter most: time, budget, and quality. Then I want to talk about where common ground actually exists, and where each party needs to be honest about what they are really being asked to give up.</p>
+      <p>Why? Because the three core stakeholders in any real estate development (call them Stakeholder A, B, and C) come to the table with fundamentally different ideas of what "success" means. And since nobody puts that on the agenda in week one, the gap quietly drives decisions, creates tension, and shapes who ends the project satisfied and who does not.</p>
+      <p>Here is how each party thinks about the three things that matter most: time, budget, and quality. Then I want to look at where common ground actually exists, and where each party needs to be honest about what they are being asked to give up.</p>
 
       <h3>The Three Players — Different Seats, Different Scorecards</h3>
 
@@ -951,11 +947,11 @@ I write about things that matter in this industry - and sometimes things that ma
           <span class="stakeholder-label">Stakeholder A</span>
           <div class="stakeholder-row">
             <span class="stakeholder-key">Time</span>
-            <div class="stakeholder-val">Delivery on schedule is everything. A delay is not just a construction problem - it is a financial event. Financing costs run. Market windows close. Commitments to future tenants or buyers are at risk.</div>
+            <div class="stakeholder-val">Delivery on schedule is everything. A delay is not just a construction problem, it is a financial event. Financing costs run. Market windows close. Commitments to future tenants or buyers are at risk.</div>
           </div>
           <div class="stakeholder-row">
             <span class="stakeholder-key">Budget</span>
-            <div class="stakeholder-val">The budget was set based on a return model. Every euro over that number comes directly out of margin. The goal is not to be cheap - it is to not exceed the number already justified to someone above.</div>
+            <div class="stakeholder-val">The budget was set based on a return model. Every euro over that number comes directly out of margin. The goal is not to be cheap, it is to not exceed the number that was already justified to someone above.</div>
           </div>
           <div class="stakeholder-row">
             <span class="stakeholder-key">Quality</span>
@@ -966,7 +962,7 @@ I write about things that matter in this industry - and sometimes things that ma
           <span class="stakeholder-label">Stakeholder B</span>
           <div class="stakeholder-row">
             <span class="stakeholder-key">Time</span>
-            <div class="stakeholder-val">Enough time to do the work properly. Compressed timelines mean errors, redrawn details, and change orders downstream. A well-paced design phase saves everyone time in construction - but this argument is always harder to make than it should be.</div>
+            <div class="stakeholder-val">Enough time to do the work properly. Compressed timelines mean errors, redrawn details, and change orders downstream. A well-paced design phase saves everyone time in construction, but this argument is always harder to make than it should be.</div>
           </div>
           <div class="stakeholder-row">
             <span class="stakeholder-key">Budget</span>
@@ -974,7 +970,7 @@ I write about things that matter in this industry - and sometimes things that ma
           </div>
           <div class="stakeholder-row">
             <span class="stakeholder-key">Quality</span>
-            <div class="stakeholder-val">This is where the identity is. Quality is not just functional - it is reputational. A cut that compromises the design is not a neutral business decision. It is a mark on something they signed.</div>
+            <div class="stakeholder-val">This is where identity lives. Quality is not just functional, it is reputational. A cut that compromises the design is not a neutral business decision. It is a mark on something they signed.</div>
           </div>
         </div>
         <div class="stakeholder-card">
@@ -985,32 +981,30 @@ I write about things that matter in this industry - and sometimes things that ma
           </div>
           <div class="stakeholder-row">
             <span class="stakeholder-key">Budget</span>
-            <div class="stakeholder-val">Margin protection. The tender price already had risk priced in. Anything that changes scope, adds complexity, or requires rework is a direct hit. The goal is to deliver within the agreed envelope and recover where possible.</div>
+            <div class="stakeholder-val">Margin protection. The tender price already had risk priced in. Anything that changes the scope, adds complexity, or requires rework is a direct hit. The goal is to deliver within the agreed envelope and recover where possible.</div>
           </div>
           <div class="stakeholder-row">
             <span class="stakeholder-key">Quality</span>
-            <div class="stakeholder-val">Quality means compliance. Meeting the specification, passing inspections, and handing over a building the client accepts. Going beyond the spec is not a goal - it is a risk, because it might not be recognized or compensated.</div>
+            <div class="stakeholder-val">Quality means compliance. Meeting the specification, passing inspections, and handing over a building the client accepts. Going beyond the spec is not a goal, it is a risk, because it might not be recognized or compensated.</div>
           </div>
         </div>
       </div>
 
       <h3>Common Ground — Where Alignment Actually Exists</h3>
-      <p>There is more common ground than it might look like from the above. All three parties want the project to reach completion. Failure - real failure, where the building does not get built, is bad for everyone. Nobody wants that.</p>
+      <p>There is more common ground than it might seem. All three parties want the project to reach completion. Failure, real failure, where the building does not get built, is bad for everyone. Nobody wants that.</p>
       <p>All three parties also benefit from clear information. Ambiguity is the shared enemy. Unclear drawings cause rework. Unclear scope causes disputes. Unclear expectations cause disappointed clients. Every party at the table has an interest in the information being correct and available when it is needed.</p>
       <p>And perhaps most importantly: all three parties have their reputation tied to this project. A is associated with the asset. B's name is on the design. C delivered the building. Nobody wants a reference site they have to explain.</p>
       <p>The problem is not that common ground does not exist. The problem is that nobody maps it out at the start, so when pressure builds, each party defaults to protecting their own scorecard instead of the shared one.</p>
 
-      <h3>THE HARD PAR - WHERE COMPROMISE ACTUALLY HAS TO HAPPEN</h3>
-      <p>This is where most conversations stop being comfortable. Compromise sounds reasonable in the abstract. In practice, it means someone gives something up, and that needs to be said clearly.</p>
-      <p><strong>Stakeholder A</strong> has to decide early what the actual priority order is. Time, budget, and quality are three variables. In any real project, you can optimize for two of them. The project that tries to hold all three rigid simultaneously is the project that ends in disputes. A needs to communicate the real hierarchy, not the official one, the real one, and commit to it.</p>
+      <h3>The Hard Part — Where Compromise Actually Has to Happen</h3>
+      <p>This is where most conversations stop being comfortable. Compromise sounds reasonable in theory. In practice, it means someone gives something up, and that needs to be said clearly.</p>
+      <p><strong>Stakeholder A</strong> has to decide early what the actual priority order is. Time, budget, and quality are three variables. In any real project, you can optimize for two of them. The project that tries to hold all three rigid at once is the one that ends in disputes. A needs to communicate the real hierarchy, not the official one, and commit to it.</p>
       <p><strong>Stakeholder B</strong> has to accept that not every design decision carries equal weight. Some elements are load-bearing for the project's identity and quality. Others are preferences. Knowing the difference, and saying it out loud, is what separates a consultant who is genuinely collaborative from one who is simply defending the drawings. The ability to distinguish between a design compromise and a design failure is a professional skill.</p>
-      <p><strong>Stakeholder C</strong> has to be transparent earlier. The contractor who surfaces a problem in week two of construction, rather than in week twelve, is protecting everyone. There is a culture in construction where problems get managed quietly until they cannot be, and that culture is expensive. Being the party that raises the uncomfortable issue early is not a weakness. It is the thing that earns trust for future projects.</p>
+      <p><strong>Stakeholder C</strong> has to be transparent earlier. The contractor who surfaces a problem in week two of construction rather than week twelve is protecting everyone. There is a culture in construction where problems get managed quietly until they cannot be, and that culture is expensive. Being the party that raises the uncomfortable issue early is not a weakness. It is what earns trust on future projects.</p>
 
-      <h3>THE REVEAL - SO, WHO IS WHO?</h3>
+      <h3>The Reveal — So, Who Is Who?</h3>
       <p>You already have an opinion. Each stakeholder above maps to a specific role in the industry. Which of them is the Client / Developer? Which is the Designer / Consultant? Which is the Contractor?</p>
-      <p>And more interestingly - which stakeholder do you identify with most? Which one do you think causes the most friction when goals are never discussed openly?</p>
-      <p>
-</p>
+      <p>And more interestingly, which stakeholder do you identify with most? Which one do you think causes the most friction when goals are never discussed openly?</p>
     </div>
     <div class="modal-share">
       <span class="modal-share-lbl">Share —</span>
