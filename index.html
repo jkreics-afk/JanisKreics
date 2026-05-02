@@ -3,10 +3,50 @@
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jānis Kreics - Construction &amp; Technology</title>
+  <title>Jānis Kreics — Construction &amp; Technology</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Jānis Kreics is an engineer, entrepreneur, and LEED AP practitioner based in Latvia. BIM Manager on Rail Baltica. Writing on construction, technology, and leadership.">
+  <meta name="author" content="Jānis Kreics">
+  <link rel="canonical" href="https://janiskreics.com/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://janiskreics.com/">
+  <meta property="og:title" content="Jānis Kreics — Construction &amp; Technology">
+  <meta property="og:description" content="Engineer, entrepreneur, and LEED AP practitioner. BIM Manager on Rail Baltica. Writing on construction, technology, and leadership.">
+  <meta property="og:image" content="https://janiskreics.com/janis-kreics-og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:site_name" content="Jānis Kreics">
+
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@kreics">
+  <meta name="twitter:creator" content="@kreics">
+  <meta name="twitter:title" content="Jānis Kreics — Construction &amp; Technology">
+  <meta name="twitter:description" content="Engineer, entrepreneur, and LEED AP practitioner. BIM Manager on Rail Baltica. Writing on construction, technology, and leadership.">
+  <meta name="twitter:image" content="https://janiskreics.com/janis-kreics-og.jpg">
+
+  <!-- Schema.org Person -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Jānis Kreics",
+    "url": "https://janiskreics.com",
+    "jobTitle": "BIM Manager, Entrepreneur",
+    "description": "Engineer, entrepreneur, and LEED AP practitioner specialising in architecture, digital construction, and building design.",
+    "sameAs": [
+      "https://www.linkedin.com/in/janis-kreics-leed-ap-2b0ba767/",
+      "https://x.com/kreics"
+    ]
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900;1,300;1,400;1,600;1,700&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900;1,300;1,700;1,900&amp;display=swap" rel="stylesheet">
   <style>
     :root {
       --bg:       #FFFFFF;
@@ -157,8 +197,7 @@
     }
     .nav-links { display: flex; gap: 2.25rem; }
     .nav-links a {
-      font-family: var(--f); font-size: clamp(.7rem, 0.8vw + 0.3rem, 1.08rem);
-      letter-spacing: .22em;
+      font-family: var(--f); font-size: 1.08rem; letter-spacing: .22em;
       text-transform: uppercase; font-weight: 500; color: var(--muted);
       transition: color .3s var(--ease);
     }
@@ -348,8 +387,8 @@
       transition: color .35s var(--ease);
     }
     .post-item-excerpt {
-      font-size: clamp(.85rem, 0.4vw + 0.65rem, .95rem); color: var(--muted); line-height: 1.78;
-      width: 100%; max-width: 950px; font-weight: 300;
+      font-size: .95rem; color: var(--muted); line-height: 1.78;
+      width: 950px; max-width: 100%; font-weight: 300;
       transition: color .35s var(--ease);
     }
     .post-item-meta { display: flex; align-items: center; gap: 1.25rem; margin-top: 1rem; flex-wrap: wrap; }
@@ -411,7 +450,7 @@
       padding: clamp(1.5rem, 3vw, 2.25rem); position: relative;
     }
     .cta-box-title {
-      font-family: var(--f); font-size: clamp(1rem, 0.6vw + 0.7rem, 1.2rem);
+      font-family: var(--f); font-size: 1.2rem;
       font-weight: 400; margin-bottom: .9rem; line-height: 1.25; letter-spacing: -.02em;
     }
     .cta-box-desc { font-size: .9rem; color: var(--muted); line-height: 1.75; margin-bottom: 1.5rem; font-weight: 300; }
@@ -452,7 +491,7 @@
     }
     @media (max-width: 740px) { .about-body { grid-template-columns: 1fr; } }
 
-    .bio-text { font-size: clamp(.9rem, 0.5vw + 0.7rem, 1.02rem); line-height: 1.88; font-weight: 300; }
+    .bio-text { font-size: 1.02rem; line-height: 1.88; font-weight: 300; }
     .bio-text p + p { margin-top: 1.3em; }
     .bio-text strong { font-weight: 600; }
 
@@ -464,7 +503,7 @@
     }
     .cred-row:first-child { border-top: 1px solid var(--border); }
     .cred-row:hover { padding-left: .5rem; background: var(--surface); }
-    .cred-row-title { font-family: var(--f); font-size: clamp(.88rem, 0.5vw + 0.6rem, 1rem); font-weight: 400; line-height: 1.3; letter-spacing: -.01em; }
+    .cred-row-title { font-family: var(--f); font-size: 1rem; font-weight: 400; line-height: 1.3; letter-spacing: -.01em; }
     .cred-row-sub { font-family: var(--f); font-size: .56rem; letter-spacing: .1em; font-weight: 500; color: var(--muted); }
 
     .tags-block { margin-top: 0; }
@@ -547,7 +586,7 @@
       transition: border-color .3s var(--ease);
     }
     .social-row-icon svg { width: 14px; height: 14px; fill: var(--muted); transition: fill .3s var(--ease); }
-    .social-row-name { font-family: var(--f); font-size: clamp(1rem, 1vw + 0.5rem, 1.3rem); font-weight: 300; letter-spacing: -.02em; transition: color .3s var(--ease); }
+    .social-row-name { font-family: var(--f); font-size: 1.3rem; font-weight: 300; letter-spacing: -.02em; transition: color .3s var(--ease); }
     .social-row-handle { font-family: var(--f); font-size: .56rem; letter-spacing: .07em; font-weight: 400; color: var(--muted); margin-top: .06rem; transition: color .3s var(--ease); }
     .social-row-arrow { color: var(--muted); font-size: 1rem; transition: color .3s var(--ease); }
 
@@ -632,7 +671,7 @@
       font-family: var(--f); font-size: .56rem; letter-spacing: .18em; font-weight: 500;
       color: var(--muted); margin-bottom: 2.5rem; text-transform: uppercase;
     }
-    .modal-body { font-size: clamp(.92rem, 0.5vw + 0.7rem, 1.05rem); line-height: 1.9; color: var(--muted); font-weight: 300; }
+    .modal-body { font-size: 1.05rem; line-height: 1.9; color: var(--muted); font-weight: 300; }
     .modal-body p + p { margin-top: 1.4em; }
     .modal-body h3 {
       font-family: var(--f); font-size: .94rem; font-weight: 600;
@@ -659,7 +698,7 @@
       letter-spacing: .16em; text-transform: uppercase; color: var(--text);
       opacity: .5; margin-bottom: .25rem; display: block;
     }
-    .stakeholder-val { font-size: clamp(.8rem, 0.4vw + 0.6rem, .88rem); line-height: 1.72; color: var(--muted); font-weight: 300; }
+    .stakeholder-val { font-size: .88rem; line-height: 1.72; color: var(--muted); font-weight: 300; }
     .modal-share {
       margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
       display: flex; align-items: center; gap: .65rem; flex-wrap: wrap;
@@ -674,6 +713,22 @@
     ::-webkit-scrollbar-track { background: var(--bg); }
     ::-webkit-scrollbar-thumb { background: var(--border); }
     ::-webkit-scrollbar-thumb:hover { background: var(--text); }
+
+    /* ── MOBILE JUMP LINK ── */
+    .mobile-jump { display: none; margin-top: 1.5rem; text-align: center; }
+    @media (max-width: 800px) { .mobile-jump { display: block; } }
+    .mobile-jump a {
+      display: inline-flex; align-items: center; gap: .5rem;
+      font-family: var(--f); font-size: .52rem; letter-spacing: .2em;
+      font-weight: 600; text-transform: uppercase;
+      color: rgba(255,255,255,.5);
+      border-bottom: 1px solid rgba(255,255,255,.15);
+      padding-bottom: .2rem;
+      transition: color .3s, border-color .3s;
+    }
+    .mobile-jump a:hover { color: #FFFFFF; border-color: rgba(255,255,255,.5); }
+    .mobile-jump a svg { transition: transform .3s; }
+    .mobile-jump a:hover svg { transform: translateY(3px); }
   </style>
 </head>
 <body>
@@ -744,6 +799,15 @@
         <div class="stat-n">B.Eng + MBA</div>
         <div class="stat-l">Academic Foundation</div>
       </div>
+    </div>
+
+    <div class="mobile-jump">
+      <a href="#blog">
+        Read my writing
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="6" y1="1" x2="6" y2="11"/><polyline points="2,7 6,11 10,7"/>
+        </svg>
+      </a>
     </div>
   </aside>
 
@@ -1054,7 +1118,6 @@
     if (e.target === this) closePost();
   });
 
-  /* ── Auto-open post from URL hash ── */
   if (window.location.hash === '#post-everyone-wants-successful-project') {
     document.getElementById('postModal').classList.add('open');
     document.body.style.overflow = 'hidden';
