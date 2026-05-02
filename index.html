@@ -40,7 +40,7 @@
       background: var(--bg);
       color: var(--text);
       font-family: var(--f);
-      font-size: 18px;
+      font-size: clamp(15px, 1.1vw + 10px, 18px);
       line-height: 1.7;
       font-weight: 300;
       -webkit-font-smoothing: antialiased;
@@ -157,7 +157,8 @@
     }
     .nav-links { display: flex; gap: 2.25rem; }
     .nav-links a {
-      font-family: var(--f); font-size: 1.08rem; letter-spacing: .22em;
+      font-family: var(--f); font-size: clamp(.7rem, 0.8vw + 0.3rem, 1.08rem);
+      letter-spacing: .22em;
       text-transform: uppercase; font-weight: 500; color: var(--muted);
       transition: color .3s var(--ease);
     }
@@ -347,8 +348,8 @@
       transition: color .35s var(--ease);
     }
     .post-item-excerpt {
-      font-size: .95rem; color: var(--muted); line-height: 1.78;
-      width: 950px; max-width: 100%; font-weight: 300;
+      font-size: clamp(.85rem, 0.4vw + 0.65rem, .95rem); color: var(--muted); line-height: 1.78;
+      width: 100%; max-width: 950px; font-weight: 300;
       transition: color .35s var(--ease);
     }
     .post-item-meta { display: flex; align-items: center; gap: 1.25rem; margin-top: 1rem; flex-wrap: wrap; }
@@ -410,7 +411,7 @@
       padding: clamp(1.5rem, 3vw, 2.25rem); position: relative;
     }
     .cta-box-title {
-      font-family: var(--f); font-size: 1.2rem;
+      font-family: var(--f); font-size: clamp(1rem, 0.6vw + 0.7rem, 1.2rem);
       font-weight: 400; margin-bottom: .9rem; line-height: 1.25; letter-spacing: -.02em;
     }
     .cta-box-desc { font-size: .9rem; color: var(--muted); line-height: 1.75; margin-bottom: 1.5rem; font-weight: 300; }
@@ -451,7 +452,7 @@
     }
     @media (max-width: 740px) { .about-body { grid-template-columns: 1fr; } }
 
-    .bio-text { font-size: 1.02rem; line-height: 1.88; font-weight: 300; }
+    .bio-text { font-size: clamp(.9rem, 0.5vw + 0.7rem, 1.02rem); line-height: 1.88; font-weight: 300; }
     .bio-text p + p { margin-top: 1.3em; }
     .bio-text strong { font-weight: 600; }
 
@@ -463,7 +464,7 @@
     }
     .cred-row:first-child { border-top: 1px solid var(--border); }
     .cred-row:hover { padding-left: .5rem; background: var(--surface); }
-    .cred-row-title { font-family: var(--f); font-size: 1rem; font-weight: 400; line-height: 1.3; letter-spacing: -.01em; }
+    .cred-row-title { font-family: var(--f); font-size: clamp(.88rem, 0.5vw + 0.6rem, 1rem); font-weight: 400; line-height: 1.3; letter-spacing: -.01em; }
     .cred-row-sub { font-family: var(--f); font-size: .56rem; letter-spacing: .1em; font-weight: 500; color: var(--muted); }
 
     .tags-block { margin-top: 0; }
@@ -546,7 +547,7 @@
       transition: border-color .3s var(--ease);
     }
     .social-row-icon svg { width: 14px; height: 14px; fill: var(--muted); transition: fill .3s var(--ease); }
-    .social-row-name { font-family: var(--f); font-size: 1.3rem; font-weight: 300; letter-spacing: -.02em; transition: color .3s var(--ease); }
+    .social-row-name { font-family: var(--f); font-size: clamp(1rem, 1vw + 0.5rem, 1.3rem); font-weight: 300; letter-spacing: -.02em; transition: color .3s var(--ease); }
     .social-row-handle { font-family: var(--f); font-size: .56rem; letter-spacing: .07em; font-weight: 400; color: var(--muted); margin-top: .06rem; transition: color .3s var(--ease); }
     .social-row-arrow { color: var(--muted); font-size: 1rem; transition: color .3s var(--ease); }
 
@@ -631,7 +632,7 @@
       font-family: var(--f); font-size: .56rem; letter-spacing: .18em; font-weight: 500;
       color: var(--muted); margin-bottom: 2.5rem; text-transform: uppercase;
     }
-    .modal-body { font-size: 1.05rem; line-height: 1.9; color: var(--muted); font-weight: 300; }
+    .modal-body { font-size: clamp(.92rem, 0.5vw + 0.7rem, 1.05rem); line-height: 1.9; color: var(--muted); font-weight: 300; }
     .modal-body p + p { margin-top: 1.4em; }
     .modal-body h3 {
       font-family: var(--f); font-size: .94rem; font-weight: 600;
@@ -658,7 +659,7 @@
       letter-spacing: .16em; text-transform: uppercase; color: var(--text);
       opacity: .5; margin-bottom: .25rem; display: block;
     }
-    .stakeholder-val { font-size: .88rem; line-height: 1.72; color: var(--muted); font-weight: 300; }
+    .stakeholder-val { font-size: clamp(.8rem, 0.4vw + 0.6rem, .88rem); line-height: 1.72; color: var(--muted); font-weight: 300; }
     .modal-share {
       margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
       display: flex; align-items: center; gap: .65rem; flex-wrap: wrap;
@@ -1042,22 +1043,30 @@
   function openPost() {
     document.getElementById('postModal').classList.add('open');
     document.body.style.overflow = 'hidden';
+    history.pushState(null, '', '#post-everyone-wants-successful-project');
   }
   function closePost() {
     document.getElementById('postModal').classList.remove('open');
     document.body.style.overflow = '';
+    history.pushState(null, '', '#blog');
   }
   document.getElementById('postModal').addEventListener('click', function(e) {
     if (e.target === this) closePost();
   });
 
+  /* ── Auto-open post from URL hash ── */
+  if (window.location.hash === '#post-everyone-wants-successful-project') {
+    document.getElementById('postModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
   /* ── Share ── */
   function shareLinkedIn() {
-    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(SITE_URL + '#blog'), '_blank', 'width=600,height=500');
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(SITE_URL + '#post-everyone-wants-successful-project'), '_blank', 'width=600,height=500');
   }
   function shareX() {
     const text = '"Everyone Wants a Successful Project. But Not the Same One." — In real estate development, three parties sit at the same table. But they are not playing the same game.';
-    window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text + ' ' + SITE_URL + '#blog'), '_blank', 'width=600,height=500');
+    window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text + ' ' + SITE_URL + '#post-everyone-wants-successful-project'), '_blank', 'width=600,height=500');
   }
 
   /* ── Expertise modal ── */
