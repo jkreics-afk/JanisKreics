@@ -3,50 +3,10 @@
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jānis Kreics — Construction &amp; Technology</title>
-
-  <!-- SEO -->
-  <meta name="description" content="Jānis Kreics is an engineer, entrepreneur, and LEED AP practitioner based in Latvia. BIM Manager on Rail Baltica. Writing on construction, technology, and leadership.">
-  <meta name="author" content="Jānis Kreics">
-  <link rel="canonical" href="https://janiskreics.com/">
-
-  <!-- Open Graph -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://janiskreics.com/">
-  <meta property="og:title" content="Jānis Kreics — Construction &amp; Technology">
-  <meta property="og:description" content="Engineer, entrepreneur, and LEED AP practitioner. BIM Manager on Rail Baltica. Writing on construction, technology, and leadership.">
-  <meta property="og:image" content="https://janiskreics.com/janis-kreics-og.jpg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:locale" content="en_GB">
-  <meta property="og:site_name" content="Jānis Kreics">
-
-  <!-- Twitter / X Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="@kreics">
-  <meta name="twitter:creator" content="@kreics">
-  <meta name="twitter:title" content="Jānis Kreics — Construction &amp; Technology">
-  <meta name="twitter:description" content="Engineer, entrepreneur, and LEED AP practitioner. BIM Manager on Rail Baltica. Writing on construction, technology, and leadership.">
-  <meta name="twitter:image" content="https://janiskreics.com/janis-kreics-og.jpg">
-
-  <!-- Schema.org Person -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Jānis Kreics",
-    "url": "https://janiskreics.com",
-    "jobTitle": "BIM Manager, Entrepreneur",
-    "description": "Engineer, entrepreneur, and LEED AP practitioner specialising in architecture, digital construction, and building design.",
-    "sameAs": [
-      "https://www.linkedin.com/in/janis-kreics-leed-ap-2b0ba767/",
-      "https://x.com/kreics"
-    ]
-  }
-  </script>
+  <title>Jānis Kreics - Construction &amp; Technology</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900;1,300;1,700;1,900&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900;1,300;1,400;1,600;1,700&amp;display=swap" rel="stylesheet">
   <style>
     :root {
       --bg:       #FFFFFF;
@@ -80,7 +40,7 @@
       background: var(--bg);
       color: var(--text);
       font-family: var(--f);
-      font-size: clamp(15px, 1.1vw + 10px, 18px);
+      font-size: 18px;
       line-height: 1.7;
       font-weight: 300;
       -webkit-font-smoothing: antialiased;
@@ -686,6 +646,44 @@
     }
     @media (max-width: 600px) { .stakeholder-grid { grid-template-columns: 1fr; } }
     .stakeholder-card { background: var(--surface); padding: 1.5rem; }
+    .modal-body p.lede {
+      font-family: var(--fh); font-size: 1.25rem; font-weight: 500;
+      line-height: 1.5; color: var(--text); letter-spacing: -.005em;
+      margin: .5rem 0 2rem;
+      padding-left: 1.1rem; border-left: 2px solid var(--text);
+    }
+    .stat-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--border);
+      margin: 2rem 0;
+    }
+    @media (max-width: 600px) { .stat-grid { grid-template-columns: 1fr; } }
+    .stat-card {
+      background: var(--surface); padding: 1.75rem 1.5rem;
+      display: flex; flex-direction: column; gap: .65rem;
+    }
+    .stat-num {
+      font-family: var(--fh); font-size: 2.4rem; font-weight: 700;
+      letter-spacing: -.02em; line-height: 1; color: var(--text);
+    }
+    .stat-label {
+      font-family: var(--f); font-size: .85rem; line-height: 1.45;
+      color: var(--muted);
+    }
+    .modal-body .ref-list,
+    .modal-body .q-list {
+      margin: 1rem 0 1.5rem; padding-left: 1.4rem;
+    }
+    .modal-body .ref-list li,
+    .modal-body .q-list li {
+      margin-bottom: .85rem; line-height: 1.6;
+    }
+    .modal-body .ref-list { list-style: none; padding-left: 0; }
+    .modal-body .ref-list li {
+      padding-left: 1rem; position: relative;
+      border-left: 1px solid var(--border);
+      font-size: .94rem;
+    }
     .stakeholder-label {
       font-family: var(--f); font-size: .7rem; font-weight: 600;
       letter-spacing: .2em; text-transform: uppercase; color: var(--text);
@@ -713,22 +711,6 @@
     ::-webkit-scrollbar-track { background: var(--bg); }
     ::-webkit-scrollbar-thumb { background: var(--border); }
     ::-webkit-scrollbar-thumb:hover { background: var(--text); }
-
-    /* ── MOBILE JUMP LINK ── */
-    .mobile-jump { display: none; margin-top: 1.5rem; text-align: center; }
-    @media (max-width: 800px) { .mobile-jump { display: block; } }
-    .mobile-jump a {
-      display: inline-flex; align-items: center; gap: .5rem;
-      font-family: var(--f); font-size: .52rem; letter-spacing: .2em;
-      font-weight: 600; text-transform: uppercase;
-      color: rgba(255,255,255,.5);
-      border-bottom: 1px solid rgba(255,255,255,.15);
-      padding-bottom: .2rem;
-      transition: color .3s, border-color .3s;
-    }
-    .mobile-jump a:hover { color: #FFFFFF; border-color: rgba(255,255,255,.5); }
-    .mobile-jump a svg { transition: transform .3s; }
-    .mobile-jump a:hover svg { transform: translateY(3px); }
   </style>
 </head>
 <body>
@@ -800,15 +782,6 @@
         <div class="stat-l">Academic Foundation</div>
       </div>
     </div>
-
-    <div class="mobile-jump">
-      <a href="#blog">
-        Read my writing
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="6" y1="1" x2="6" y2="11"/><polyline points="2,7 6,11 10,7"/>
-        </svg>
-      </a>
-    </div>
   </aside>
 
   <!-- RIGHT MAIN CONTENT: light, scrollable -->
@@ -825,7 +798,28 @@
         </div>
 
         <div class="post-list">
-          <div class="post-item fi fi-d1 on" onclick="openPost()">
+          <div class="post-item fi fi-d1 on" onclick="openPost('century-of-building')">
+            <div class="post-item-tags">
+              <span class="post-item-tag">Construction &amp; Real Estate</span>
+            </div>
+            <h3 class="post-item-title">A Century of Building: How Much Has Really Changed?</h3>
+            <p class="post-item-excerpt">We have gone from reinforced concrete to parametric models and AI-generated floor plans. But if you strip away the tools and look at how we actually deliver buildings, are we that much better?</p>
+            <div class="post-item-meta">
+              <span class="post-item-date">May 2026</span>
+              <span class="post-item-read">9 min read</span>
+              <span class="post-arrow">→</span>
+            </div>
+            <div class="post-item-share" onclick="event.stopPropagation()">
+              <button class="share-pill" onclick="shareLinkedIn('century-of-building')">
+                <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"></path><circle cx="4" cy="4" r="2"></circle></svg>LinkedIn
+              </button>
+              <button class="share-pill" onclick="shareX('century-of-building')">
+                <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>Post to X
+              </button>
+            </div>
+          </div>
+
+          <div class="post-item fi fi-d2 on" onclick="openPost('stakeholder-goals')">
             <div class="post-item-tags">
               <span class="post-item-tag">Opinion</span>
               <span class="post-item-tag">Construction &amp; Real Estate</span>
@@ -838,10 +832,10 @@
               <span class="post-arrow">→</span>
             </div>
             <div class="post-item-share" onclick="event.stopPropagation()">
-              <button class="share-pill" onclick="shareLinkedIn()">
+              <button class="share-pill" onclick="shareLinkedIn('stakeholder-goals')">
                 <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"></path><circle cx="4" cy="4" r="2"></circle></svg>LinkedIn
               </button>
-              <button class="share-pill" onclick="shareX()">
+              <button class="share-pill" onclick="shareX('stakeholder-goals')">
                 <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>Post to X
               </button>
             </div>
@@ -996,81 +990,10 @@
 <div class="post-modal" id="postModal">
   <div class="modal-inner">
     <button class="modal-close" onclick="closePost()" aria-label="Close">✕</button>
-    <div class="modal-eyebrow"><span class="eyebrow">Opinion · Construction &amp; Real Estate</span></div>
-    <h2 class="modal-title">Everyone Wants a Successful Project. But Not the Same One.</h2>
-    <div class="modal-date">April 2026 · 7 min read</div>
-    <div class="modal-body">
-      <p>In real estate development, three parties sit at the same table. They share the same timeline, the same building, and often the same meeting room. But they are not playing the same game.</p>
-      <p>Projects rarely collapse completely. In my experience, that is actually the exception. What happens far more often is quieter and, in a way, more interesting: the project gets delivered, the building goes up, and somewhere in the process one or two parties walk away feeling like they lost. Nobody talks about it publicly. But it happens on almost every project.</p>
-      <p>Why? Because the three core stakeholders in any real estate development (call them Stakeholder A, B, and C) come to the table with fundamentally different ideas of what "success" means. And since nobody puts that on the agenda in week one, the gap quietly drives decisions, creates tension, and shapes who ends the project satisfied and who does not.</p>
-      <p>Here is how each party thinks about the three things that matter most: time, budget, and quality. Then I want to look at where common ground actually exists, and where each party needs to be honest about what they are being asked to give up.</p>
-
-      <h3>The Three Players — Different Seats, Different Scorecards</h3>
-
-      <div class="stakeholder-grid">
-        <div class="stakeholder-card">
-          <span class="stakeholder-label">Stakeholder A</span>
-          <div class="stakeholder-row">
-            <span class="stakeholder-key">Time</span>
-            <div class="stakeholder-val">Delivery on schedule is everything. A delay is not just a construction problem, it is a financial event. Financing costs run. Market windows close. Commitments to future tenants or buyers are at risk.</div>
-          </div>
-          <div class="stakeholder-row">
-            <span class="stakeholder-key">Budget</span>
-            <div class="stakeholder-val">The budget was set based on a return model. Every euro over that number comes directly out of margin. The goal is not to be cheap, it is to not exceed the number that was already justified to someone above.</div>
-          </div>
-          <div class="stakeholder-row">
-            <span class="stakeholder-key">Quality</span>
-            <div class="stakeholder-val">Quality matters, but it is defined by the end user and the market position. Overbuilding is as much of a problem as underbuilding. The question is always: quality relative to what?</div>
-          </div>
-        </div>
-        <div class="stakeholder-card">
-          <span class="stakeholder-label">Stakeholder B</span>
-          <div class="stakeholder-row">
-            <span class="stakeholder-key">Time</span>
-            <div class="stakeholder-val">Enough time to do the work properly. Compressed timelines mean errors, redrawn details, and change orders downstream. A well-paced design phase saves everyone time in construction, but this argument is always harder to make than it should be.</div>
-          </div>
-          <div class="stakeholder-row">
-            <span class="stakeholder-key">Budget</span>
-            <div class="stakeholder-val">The fee is fixed early and rarely reflects what the project actually becomes. Scope creep, revision cycles, and last-minute value engineering all eat into it. The real goal is to protect the original agreement while still delivering something worth putting in a portfolio.</div>
-          </div>
-          <div class="stakeholder-row">
-            <span class="stakeholder-key">Quality</span>
-            <div class="stakeholder-val">This is where identity lives. Quality is not just functional, it is reputational. A cut that compromises the design is not a neutral business decision. It is a mark on something they signed.</div>
-          </div>
-        </div>
-        <div class="stakeholder-card">
-          <span class="stakeholder-label">Stakeholder C</span>
-          <div class="stakeholder-row">
-            <span class="stakeholder-key">Time</span>
-            <div class="stakeholder-val">Time is money in the most literal sense. Every week on site has a cost. The goal is to sequence work efficiently, minimize idle time, and avoid situations where incomplete design decisions stop progress on the ground.</div>
-          </div>
-          <div class="stakeholder-row">
-            <span class="stakeholder-key">Budget</span>
-            <div class="stakeholder-val">Margin protection. The tender price already had risk priced in. Anything that changes the scope, adds complexity, or requires rework is a direct hit. The goal is to deliver within the agreed envelope and recover where possible.</div>
-          </div>
-          <div class="stakeholder-row">
-            <span class="stakeholder-key">Quality</span>
-            <div class="stakeholder-val">Quality means compliance. Meeting the specification, passing inspections, and handing over a building the client accepts. Going beyond the spec is not a goal, it is a risk, because it might not be recognized or compensated.</div>
-          </div>
-        </div>
-      </div>
-
-      <h3>Common Ground — Where Alignment Actually Exists</h3>
-      <p>There is more common ground than it might seem. All three parties want the project to reach completion. Failure, real failure, where the building does not get built, is bad for everyone. Nobody wants that.</p>
-      <p>All three parties also benefit from clear information. Ambiguity is the shared enemy. Unclear drawings cause rework. Unclear scope causes disputes. Unclear expectations cause disappointed clients. Every party at the table has an interest in the information being correct and available when it is needed.</p>
-      <p>And perhaps most importantly: all three parties have their reputation tied to this project. A is associated with the asset. B's name is on the design. C delivered the building. Nobody wants a reference site they have to explain.</p>
-      <p>The problem is not that common ground does not exist. The problem is that nobody maps it out at the start, so when pressure builds, each party defaults to protecting their own scorecard instead of the shared one.</p>
-
-      <h3>The Hard Part — Where Compromise Actually Has to Happen</h3>
-      <p>This is where most conversations stop being comfortable. Compromise sounds reasonable in theory. In practice, it means someone gives something up, and that needs to be said clearly.</p>
-      <p><strong>Stakeholder A</strong> has to decide early what the actual priority order is. Time, budget, and quality are three variables. In any real project, you can optimize for two of them. The project that tries to hold all three rigid at once is the one that ends in disputes. A needs to communicate the real hierarchy, not the official one, and commit to it.</p>
-      <p><strong>Stakeholder B</strong> has to accept that not every design decision carries equal weight. Some elements are load-bearing for the project's identity and quality. Others are preferences. Knowing the difference, and saying it out loud, is what separates a consultant who is genuinely collaborative from one who is simply defending the drawings. The ability to distinguish between a design compromise and a design failure is a professional skill.</p>
-      <p><strong>Stakeholder C</strong> has to be transparent earlier. The contractor who surfaces a problem in week two of construction rather than week twelve is protecting everyone. There is a culture in construction where problems get managed quietly until they cannot be, and that culture is expensive. Being the party that raises the uncomfortable issue early is not a weakness. It is what earns trust on future projects.</p>
-
-      <h3>The Reveal — So, Who Is Who?</h3>
-      <p>You already have an opinion. Each stakeholder above maps to a specific role in the industry. Which of them is the Client / Developer? Which is the Designer / Consultant? Which is the Contractor?</p>
-      <p>And more interestingly, which stakeholder do you identify with most? Which one do you think causes the most friction when goals are never discussed openly?</p>
-    </div>
+    <div class="modal-eyebrow"><span class="eyebrow" id="modalEyebrow"></span></div>
+    <h2 class="modal-title" id="modalTitle"></h2>
+    <div class="modal-date" id="modalDate"></div>
+    <div class="modal-body" id="modalBody"></div>
     <div class="modal-share">
       <span class="modal-share-lbl">Share —</span>
       <button class="share-pill" onclick="shareLinkedIn()">
@@ -1084,6 +1007,165 @@
     </div>
   </div>
 </div>
+
+<!-- POST: stakeholder-goals -->
+<template id="post-stakeholder-goals">
+  <div data-eyebrow="Opinion · Construction &amp; Real Estate"
+       data-title="Everyone Wants a Successful Project. But Not the Same One."
+       data-date="April 2026 · 7 min read"></div>
+  <p>In real estate development, three parties sit at the same table. They share the same timeline, the same building, and often the same meeting room. But they are not playing the same game.</p>
+  <p>Projects rarely collapse completely. In my experience, that is actually the exception. What happens far more often is quieter and, in a way, more interesting: the project gets delivered, the building goes up, and somewhere in the process one or two parties walk away feeling like they lost. Nobody talks about it publicly. But it happens on almost every project.</p>
+  <p>Why? Because the three core stakeholders in any real estate development (call them Stakeholder A, B, and C) come to the table with fundamentally different ideas of what "success" means. And since nobody puts that on the agenda in week one, the gap quietly drives decisions, creates tension, and shapes who ends the project satisfied and who does not.</p>
+  <p>Here is how each party thinks about the three things that matter most: time, budget, and quality. Then I want to look at where common ground actually exists, and where each party needs to be honest about what they are being asked to give up.</p>
+
+  <h3>The Three Players — Different Seats, Different Scorecards</h3>
+
+  <div class="stakeholder-grid">
+    <div class="stakeholder-card">
+      <span class="stakeholder-label">Stakeholder A</span>
+      <div class="stakeholder-row">
+        <span class="stakeholder-key">Time</span>
+        <div class="stakeholder-val">Delivery on schedule is everything. A delay is not just a construction problem, it is a financial event. Financing costs run. Market windows close. Commitments to future tenants or buyers are at risk.</div>
+      </div>
+      <div class="stakeholder-row">
+        <span class="stakeholder-key">Budget</span>
+        <div class="stakeholder-val">The budget was set based on a return model. Every euro over that number comes directly out of margin. The goal is not to be cheap, it is to not exceed the number that was already justified to someone above.</div>
+      </div>
+      <div class="stakeholder-row">
+        <span class="stakeholder-key">Quality</span>
+        <div class="stakeholder-val">Quality matters, but it is defined by the end user and the market position. Overbuilding is as much of a problem as underbuilding. The question is always: quality relative to what?</div>
+      </div>
+    </div>
+    <div class="stakeholder-card">
+      <span class="stakeholder-label">Stakeholder B</span>
+      <div class="stakeholder-row">
+        <span class="stakeholder-key">Time</span>
+        <div class="stakeholder-val">Enough time to do the work properly. Compressed timelines mean errors, redrawn details, and change orders downstream. A well-paced design phase saves everyone time in construction, but this argument is always harder to make than it should be.</div>
+      </div>
+      <div class="stakeholder-row">
+        <span class="stakeholder-key">Budget</span>
+        <div class="stakeholder-val">The fee is fixed early and rarely reflects what the project actually becomes. Scope creep, revision cycles, and last-minute value engineering all eat into it. The real goal is to protect the original agreement while still delivering something worth putting in a portfolio.</div>
+      </div>
+      <div class="stakeholder-row">
+        <span class="stakeholder-key">Quality</span>
+        <div class="stakeholder-val">This is where identity lives. Quality is not just functional, it is reputational. A cut that compromises the design is not a neutral business decision. It is a mark on something they signed.</div>
+      </div>
+    </div>
+    <div class="stakeholder-card">
+      <span class="stakeholder-label">Stakeholder C</span>
+      <div class="stakeholder-row">
+        <span class="stakeholder-key">Time</span>
+        <div class="stakeholder-val">Time is money in the most literal sense. Every week on site has a cost. The goal is to sequence work efficiently, minimize idle time, and avoid situations where incomplete design decisions stop progress on the ground.</div>
+      </div>
+      <div class="stakeholder-row">
+        <span class="stakeholder-key">Budget</span>
+        <div class="stakeholder-val">Margin protection. The tender price already had risk priced in. Anything that changes the scope, adds complexity, or requires rework is a direct hit. The goal is to deliver within the agreed envelope and recover where possible.</div>
+      </div>
+      <div class="stakeholder-row">
+        <span class="stakeholder-key">Quality</span>
+        <div class="stakeholder-val">Quality means compliance. Meeting the specification, passing inspections, and handing over a building the client accepts. Going beyond the spec is not a goal, it is a risk, because it might not be recognized or compensated.</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Common Ground — Where Alignment Actually Exists</h3>
+  <p>There is more common ground than it might seem. All three parties want the project to reach completion. Failure, real failure, where the building does not get built, is bad for everyone. Nobody wants that.</p>
+  <p>All three parties also benefit from clear information. Ambiguity is the shared enemy. Unclear drawings cause rework. Unclear scope causes disputes. Unclear expectations cause disappointed clients. Every party at the table has an interest in the information being correct and available when it is needed.</p>
+  <p>And perhaps most importantly: all three parties have their reputation tied to this project. A is associated with the asset. B's name is on the design. C delivered the building. Nobody wants a reference site they have to explain.</p>
+  <p>The problem is not that common ground does not exist. The problem is that nobody maps it out at the start, so when pressure builds, each party defaults to protecting their own scorecard instead of the shared one.</p>
+
+  <h3>The Hard Part — Where Compromise Actually Has to Happen</h3>
+  <p>This is where most conversations stop being comfortable. Compromise sounds reasonable in theory. In practice, it means someone gives something up, and that needs to be said clearly.</p>
+  <p><strong>Stakeholder A</strong> has to decide early what the actual priority order is. Time, budget, and quality are three variables. In any real project, you can optimize for two of them. The project that tries to hold all three rigid at once is the one that ends in disputes. A needs to communicate the real hierarchy, not the official one, and commit to it.</p>
+  <p><strong>Stakeholder B</strong> has to accept that not every design decision carries equal weight. Some elements are load-bearing for the project's identity and quality. Others are preferences. Knowing the difference, and saying it out loud, is what separates a consultant who is genuinely collaborative from one who is simply defending the drawings. The ability to distinguish between a design compromise and a design failure is a professional skill.</p>
+  <p><strong>Stakeholder C</strong> has to be transparent earlier. The contractor who surfaces a problem in week two of construction rather than week twelve is protecting everyone. There is a culture in construction where problems get managed quietly until they cannot be, and that culture is expensive. Being the party that raises the uncomfortable issue early is not a weakness. It is what earns trust on future projects.</p>
+
+  <h3>The Reveal — So, Who Is Who?</h3>
+  <p>You already have an opinion. Each stakeholder above maps to a specific role in the industry. Which of them is the Client / Developer? Which is the Designer / Consultant? Which is the Contractor?</p>
+  <p>And more interestingly, which stakeholder do you identify with most? Which one do you think causes the most friction when goals are never discussed openly?</p>
+</template>
+
+<!-- POST: century-of-building -->
+<template id="post-century-of-building">
+  <div data-eyebrow="Construction &amp; Real Estate"
+       data-title="A Century of Building: How Much Has Really Changed?"
+       data-date="May 2026 · 9 min read"></div>
+  <p class="lede">We have gone from reinforced concrete to parametric models and AI-generated floor plans. But if you strip away the tools and look at how we actually deliver buildings, are we that much better?</p>
+  <p>Somewhere in Riga, there is a residential block built in the late 1960s. The design was not chosen, it was assigned from a central catalogue, replicated across hundreds of cities with no regard for place, climate, or the people who would live there. Panels came off a factory line. Approvals were not negotiated, they were decreed. The building went up in days. It was not beautiful, not safe by modern standards, and not built to last. But it met its quota. Seventy years later, I find myself reviewing BIM Execution Plans on a major infrastructure project, coordinating across disciplines, managing version conflicts, waiting on design approvals, and occasionally I wonder: what exactly did we solve?</p>
+  <p>The post-WWII mass housing era in Europe was harsh in its own way, aesthetically flat, socially coercive, and designed more for quotas than for people. But it had something the modern industry often lacks: a repeatable, predictable delivery machine. That tension between what we have gained and what we have not is what this post is about.</p>
+
+  <h3>PART I - THE POST-WAR BASELINE: SPEED WITHOUT QUALITY</h3>
+  <p>After 1945, European cities needed housing at a scale and pace that had no precedent. The response across the continent, whether in Western Europe or behind the Iron Curtain, was largely the same: prefabricated panel systems, simplified typologies, standardised components. In France they called it the <em>grands ensembles</em>. In the UK, tower blocks. In the Soviet bloc, the Khrushchyovka. Different politics, same industrial logic.</p>
+  <p>This was real estate development stripped to its mechanical core. The client, in most cases the state, had one goal: units delivered. Quality was subordinate. Maintenance was deferred. But the production system worked. You could trace a panel from factory to facade in weeks. The feedback loop was short and the variables were few.</p>
+  <p>The post-war model was not a failure of ambition. It was a success of delivery, with all the consequences that come from building fast and thinking later.</p>
+  <p>The private market that followed, particularly from the 1980s onwards, brought quality back into the equation. Mixed-use developments, heritage sensitivity, sustainability targets, community consultation. All necessary. But with each layer of legitimate complexity, something else crept in: fragmentation. The developer, the designer, the contractor, the specialist subcontractor, each with their own contract, their own timeline, their own definition of done.</p>
+
+  <h3>PART II - THE PRODUCTIVITY GAP: CONSTRUCTION VERSUS EVERYONE ELSE</h3>
+  <p>If you work in construction, you have probably felt this comparison before. If you do not, the numbers are worth sitting with.</p>
+
+  <div class="stat-grid">
+    <div class="stat-card">
+      <span class="stat-num">+10%</span>
+      <span class="stat-label">Construction productivity growth, 2000–2022</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num">+50%</span>
+      <span class="stat-label">Total economy productivity growth, same period</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num">+90%</span>
+      <span class="stat-label">Manufacturing productivity growth, same period</span>
+    </div>
+  </div>
+
+  <p>McKinsey has been tracking this since their landmark 2017 report <em>Reinventing Construction: A Route to Higher Productivity</em>, and the picture has not improved. Their 2024 follow-up, <em>Delivering on Construction Productivity</em>, confirms it: over two decades, construction added roughly 10% in economic value added per hour worked. Manufacturing added 90%. The total economy: 50%. These are not minor discrepancies. They represent a structural divergence that has compounded for a generation.</p>
+  <p>The car you drive today is assembled in a fraction of the time it took to build its equivalent in 1990. It has more features, tighter tolerances, and a longer expected lifespan. Meanwhile, the apartment block going up outside your office is being built by workers on scaffolding with hand tools and paper drawings, or in the better cases, tablets showing IFC models that are perpetually out of date.</p>
+  <p>Why? The answer is uncomfortable because it is not one thing. McKinsey's 2024 report identifies seven specific blockers. Among the most striking: construction companies historically spend less than 1% of revenue on IT, roughly a third of what is common in automotive and aerospace. According to ING Think's 2022 analysis <em>Lagging Productivity in EU Construction</em>, labour productivity in France and Austria has actually fallen more than 15% since 1995, while Belgium and the Netherlands managed a 20% increase, largely through early investment in digitalisation. The picture across Europe is not uniform, but the average is poor.</p>
+  <p>Every other major industry found a way to industrialise. Construction keeps reinventing the craft, project by project, site by site.</p>
+
+  <h3>PART III - MORE TOOLS, MORE BUREAUCRACY?</h3>
+  <p>Here is an uncomfortable question the industry rarely asks itself: when we introduce a new tool or process, does it actually make delivery better, or does it just add another layer of administration?</p>
+  <p>The honest answer is that the overhead wins more often than most people in the industry would like to admit. BIM was supposed to reduce coordination errors and compress timelines. In many cases it has. But it has also introduced its own overhead, BIM Execution Plans, clash detection workflows, model audit cycles, CDE access protocols. Each of these is defensible in isolation. Together, they can consume more management bandwidth than the paper-based coordination they replaced. The tool arrived. The bureaucracy came with it and stayed.</p>
+  <p>This is not an argument against new tools. It is an argument for discipline in how they are adopted. A new system earns its place in a workflow only when it demonstrably removes more friction than it creates. That test is rarely applied. The industry tends to adopt tools because a mandate requires it, because a client demands it, or because competitors appear to be using them, not because anyone has measured whether it shortens the delivery cycle or reduces cost. The result is an accumulating stack of platforms, standards, and reporting requirements that each made sense on the day they were introduced and now form a coordination burden of their own.</p>
+  <p>The discipline required is simple to state and hard to practice: new tools should replace something, not add to something. If a digital process sits on top of an analogue one rather than eliminating it, the net effect is negative. The productivity improvement comes from subtraction as much as from addition.</p>
+
+  <h3>PART IV - WHAT HAS GENUINELY IMPROVED</h3>
+  <p>The argument is not that nothing changed. It changed significantly. Just not in the dimension that matters most to clients, which is time and cost predictability.</p>
+  <p>Safety is unrecognisable compared to the post-war era. Environmental performance has advanced enormously. LEED, BREEAM, and Passivhaus certifications represent real engineering progress. The quality of materials, structural modelling, and fire engineering today would be difficult to explain to a 1960s site manager. And BIM, when used properly, gives projects a shared data environment that genuinely reduces coordination errors.</p>
+  <p>But here is an honest reading: most of these gains are about <em>what</em> we build, not how fast or efficiently we deliver it. Safety improved because regulation forced it. Sustainability improved because policy demanded it. BIM uptake in Europe has been driven significantly by public sector mandates, not by market demand for productivity. The industry rarely self-disrupts. It waits to be pushed.</p>
+
+  <h3>PART V - THE FUTURE I ACTUALLY BELIEVE IN</h3>
+  <p>Of the trends being discussed, modular construction, digital twins, regulatory reform, BIM mandates, the one that I think will matter most in the next twenty years is AI entering the design and planning layer. McKinsey's <em>The Next Normal in Construction</em> (2020) makes the case that the future of construction will look more like advanced manufacturing. I agree with the direction. But I think the transformation starts earlier in the process than most people assume.</p>
+  <p>The bottleneck in real estate development is rarely on site. It is in the feasibility stage, the design iteration, the planning submission, the permit cycle. A scheme that takes six months to get through planning and approval, and three months to build is not a construction problem. It is a pre-construction problem. And that is exactly where AI has the strongest near-term case: generative massing, automated compliance checking, drawing production, planning risk analysis.</p>
+  <p>But AI does not operate in a vacuum. The projects where it will deliver the greatest productivity gains are not bespoke, one-off commissions. They are the ones built on a foundation of standardisation, repeatable components, modular systems, defined typologies. Modular and prefabricated construction provides the stable input conditions that AI tools need to perform: consistent geometry, predictable specifications, reusable design logic. An AI that generates a floor plan for a custom, site-specific building is useful. An AI that optimises a modular housing scheme across fifty sites, with standardised components and a known cost model, is transformative. The two approaches reinforce each other in a way that neither achieves alone.</p>
+  <p>This is, in a sense, a return to the logic of the post-war era, but with the quality controls, sustainability ambitions, and design flexibility that the Khrushchyovka never had. Modular building today is not what it was in 1955. Volumetric construction can achieve passive-house performance, architectural variation, and structural precision that factory production in the mid-century could not approach. Pair that with AI-driven design optimisation and automated planning analysis, and you have a delivery model that is repeatable without being uniform.</p>
+  <p>I am not suggesting AI will replace architects or engineers in any meaningful near-term sense. But it will compress the cycle between concept and permitted scheme in ways the industry cannot currently imagine, because that cycle has been assumed to be slow for so long that no one questions it. The same way no one questioned why cars took months to configure and deliver until someone built a direct-to-consumer production line.</p>
+  <p>The deeper question, one I do not have a satisfying answer to, is whether the industry will adopt these tools on its own terms, or wait again to be compelled. My experience on one of the largest infrastructure projects in the region suggests that even on a project with genuine BIM mandates and sophisticated stakeholders, the gap between tool availability and tool adoption is still measured in years. And when tools do arrive, they often arrive alongside new administrative layers rather than in place of old ones. If that pattern does not break, the technology will arrive and the productivity improvement will not.</p>
+  <p>The tools are finally arriving. Whether the industry reaches for them, and whether it has the discipline to let them replace something, is a different question entirely.</p>
+
+  <h3>CLOSING THOUGHT - ONE HUNDRED YEARS, AND THE CONCRETE IS STILL WET</h3>
+  <p>Real estate development has changed enormously in a century. The materials, the modelling, the regulatory framework, the environmental ambition, all of it. But if you measure the industry by the metric that matters to every client who ever commissioned a building, delivered on time, within budget, to the agreed scope, the record is harder to celebrate.</p>
+  <p>We built faster in the 1950s. We built worse. We build better now. We build slower. And somewhere along the way, we added enough process, software, and reporting to keep entire teams occupied without anything being delivered faster. Somewhere in that exchange is a trade-off the industry has never fully reckoned with. The next chapter, I think, is about closing that gap. Not by going back, but by being honest that a gap exists, and that every new tool we introduce had better be closing it, not widening it.</p>
+
+  <h3>Further Reading</h3>
+  <ul class="ref-list">
+    <li>McKinsey (2024) - <em>Delivering on Construction Productivity Is No Longer Optional.</em> mckinsey.com</li>
+    <li>McKinsey (2017) - <em>Reinventing Construction: A Route to Higher Productivity.</em></li>
+    <li>ING Think (2022) - <em>Lagging Productivity Drives Up Building Costs in EU Countries.</em> think.ing.com</li>
+    <li>McKinsey (2020) - <em>The Next Normal in Construction.</em></li>
+    <li>Academic (2021) - <em>Productivity Development in Construction and Human Capital: A Literature Review.</em> arxiv.org/pdf/2104.00129</li>
+  </ul>
+
+  <h3>Questions for You, the Reader</h3>
+  <ol class="q-list">
+    <li>In your experience, does the productivity gap feel real on the projects you work on, or does the data not match what you see on the ground?</li>
+    <li>The post-war model delivered units fast through standardisation. Is there a version of that logic compatible with today's quality and sustainability demands, or are those goals in fundamental tension?</li>
+    <li>Every new tool brings its own administrative overhead. In your experience, does the benefit usually outweigh the bureaucracy, or is the overhead the part that sticks?</li>
+    <li>Modular and AI-assisted design are often discussed separately. Do you see them as complementary, or do you think one approach can deliver without the other?</li>
+    <li>If AI does compress the pre-construction cycle, who captures that value: the developer, the designer, or the client? And does it change who has power in the process?</li>
+    <li>Has any project you have been part of genuinely surprised you with how well it was delivered? What made the difference, and was it replicable?</li>
+  </ol>
+</template>
 
 <script>
   const SITE_URL = window.location.href.split('#')[0];
@@ -1103,33 +1185,88 @@
     }
   });
 
+  /* ── Posts registry ── */
+  const POSTS = {
+    'stakeholder-goals': {
+      title: 'Everyone Wants a Successful Project. But Not the Same One.',
+      excerpt: 'In real estate development, three parties sit at the same table. But they are not playing the same game.'
+    },
+    'century-of-building': {
+      title: 'A Century of Building: How Much Has Really Changed?',
+      excerpt: 'A hundred years of construction progress, weighed against the productivity gap that still defines the industry.'
+    }
+  };
+  let currentPostSlug = null;
+
   /* ── Article modal ── */
-  function openPost() {
+  function openPost(slug, opts) {
+    opts = opts || {};
+    if (!POSTS[slug]) return;
+    const tpl = document.getElementById('post-' + slug);
+    if (!tpl) return;
+    const frag = tpl.content.cloneNode(true);
+    const meta = frag.querySelector('[data-eyebrow]');
+    document.getElementById('modalEyebrow').innerHTML = meta.dataset.eyebrow || '';
+    document.getElementById('modalTitle').innerHTML = meta.dataset.title || '';
+    document.getElementById('modalDate').textContent = meta.dataset.date || '';
+    const body = document.getElementById('modalBody');
+    body.innerHTML = '';
+    // append everything except the meta div
+    Array.from(frag.childNodes).forEach(n => {
+      if (n.nodeType === 1 && n.hasAttribute && n.hasAttribute('data-eyebrow')) return;
+      body.appendChild(n);
+    });
+    body.scrollTop = 0;
+    document.getElementById('postModal').scrollTop = 0;
+    currentPostSlug = slug;
     document.getElementById('postModal').classList.add('open');
     document.body.style.overflow = 'hidden';
-    history.pushState(null, '', '#post-everyone-wants-successful-project');
+    if (!opts.skipHash) {
+      const newHash = '#post/' + slug;
+      if (location.hash !== newHash) history.pushState({ post: slug }, '', newHash);
+    }
   }
-  function closePost() {
+  function closePost(opts) {
+    opts = opts || {};
     document.getElementById('postModal').classList.remove('open');
     document.body.style.overflow = '';
-    history.pushState(null, '', '#blog');
+    currentPostSlug = null;
+    if (!opts.skipHash && location.hash.startsWith('#post/')) {
+      history.pushState({}, '', location.pathname + location.search + '#blog');
+    }
   }
   document.getElementById('postModal').addEventListener('click', function(e) {
     if (e.target === this) closePost();
   });
-
-  if (window.location.hash === '#post-everyone-wants-successful-project') {
-    document.getElementById('postModal').classList.add('open');
-    document.body.style.overflow = 'hidden';
+  // Hash routing — open the right post on load + when user navigates back/forward
+  function syncFromHash() {
+    const m = location.hash.match(/^#post\/([\w-]+)$/);
+    if (m && POSTS[m[1]]) {
+      openPost(m[1], { skipHash: true });
+    } else if (currentPostSlug) {
+      closePost({ skipHash: true });
+    }
   }
+  window.addEventListener('popstate', syncFromHash);
+  window.addEventListener('DOMContentLoaded', syncFromHash);
+  // Catch initial-state too (DOMContentLoaded may already have fired by here)
+  if (document.readyState !== 'loading') syncFromHash();
 
   /* ── Share ── */
-  function shareLinkedIn() {
-    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(SITE_URL + '#post-everyone-wants-successful-project'), '_blank', 'width=600,height=500');
+  function postUrl(slug) {
+    slug = slug || currentPostSlug;
+    return SITE_URL + (slug ? '#post/' + slug : '#blog');
   }
-  function shareX() {
-    const text = '"Everyone Wants a Successful Project. But Not the Same One." — In real estate development, three parties sit at the same table. But they are not playing the same game.';
-    window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text + ' ' + SITE_URL + '#post-everyone-wants-successful-project'), '_blank', 'width=600,height=500');
+  function shareLinkedIn(slug) {
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(postUrl(slug)), '_blank', 'width=600,height=500');
+  }
+  function shareX(slug) {
+    slug = slug || currentPostSlug;
+    const post = slug && POSTS[slug];
+    const text = post
+      ? '"' + post.title + '" — ' + post.excerpt
+      : 'Field notes from Jānis Kreics — construction, BIM, and the technology reshaping how we build.';
+    window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text + ' ' + postUrl(slug)), '_blank', 'width=600,height=500');
   }
 
   /* ── Expertise modal ── */
